@@ -8,10 +8,8 @@ import BtnVoltar from './components/BtnVoltar.vue';
 <template>
   <header>
     <div>
+      <BtnVoltar/>
       <h1>AUXIA</h1>
-      <div>
-      <InputPrompt/>
-    </div>
     </div>
   </header>
 
@@ -23,4 +21,7 @@ import BtnVoltar from './components/BtnVoltar.vue';
   <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped>
+
+
+</style>

@@ -1,4 +1,5 @@
 <script setup>
+import Button from 'primevue/button';
 defineProps({
   disabled: Boolean
 });
@@ -12,10 +13,6 @@ defineProps({
       <i class="pi pi-arrow-right"></i>
     </button>
 </template>
-
-<script setup>
-import Button from 'primevue/button';
-</script>
 
 <style scoped>
 .botao {
