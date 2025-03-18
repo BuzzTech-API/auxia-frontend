@@ -1,7 +1,16 @@
-<template>
-  
-    <Button class="botao" icon="pi pi-arrow-right"/>
+<script setup>
+defineProps({
+  disabled: Boolean
+});
+</script>
 
+<template>
+    <button class="botao"
+    :class="{'disabled': disabled}"
+    :disabled="disabled"
+    >
+      <i class="pi pi-arrow-right"></i>
+    </button>
 </template>
 
 <script setup>
@@ -26,5 +35,10 @@ import Button from 'primevue/button';
 
 .botao:hover {
   background-color: #4F4F4F;
+}
+
+.botao.disabled {
+  background-color: #A0A0A0;
+  cursor: not-allowed;
 }
 </style>

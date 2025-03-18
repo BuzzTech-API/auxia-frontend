@@ -1,14 +1,19 @@
 <script setup>
+import { ref, computed } from 'vue';
 import BtnPrompt from './BtnPrompt.vue';
+
+const inputText = ref('');
+const isButtonDisabled = computed(() => inputText.value.trim() === '');
 </script>
 
 <template>
     <div class="prompt">
        
         <input type="text" 
+        v-model="inputText"
         placeholder="Escreva seu Prompt Aqui. Exemplo: “Gostaria de Saber sobre Alzheimer.”  "></input>
        
-        <BtnPrompt/>
+        <BtnPrompt :disabled="isButtonDisabled"/>
     </div>
 </template>
 

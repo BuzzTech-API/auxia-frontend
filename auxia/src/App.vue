@@ -7,7 +7,12 @@ import BtnVoltar from './components/BtnVoltar.vue';
 
 <template>
   <header>
-
+    <div>
+      <h1>AUXIA</h1>
+      <div>
+      <InputPrompt/>
+    </div>
+    </div>
   </header>
 
   <BoxTextoInicial/>
@@ -18,6 +23,4 @@ import BtnVoltar from './components/BtnVoltar.vue';
   <RouterView />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
