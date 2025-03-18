@@ -1,13 +1,17 @@
 <template>
-    <button class="botao">
-      <i class="pi pi-arrow-right"></i>
-    </button>
+  
+    <Button class="botao" icon="pi pi-arrow-right"/>
+
 </template>
+
+<script setup>
+import Button from 'primevue/button';
+</script>
 
 <style scoped>
 .botao {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%; 
   display: flex;
   align-items: center;
