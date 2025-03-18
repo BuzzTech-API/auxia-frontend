@@ -1,4 +1,5 @@
 <script setup>
+import Button from 'primevue/button';
 defineProps({
   disabled: Boolean
 });
@@ -15,8 +16,8 @@ defineProps({
 
 <style scoped>
 .botao {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%; 
   display: flex;
   align-items: center;
