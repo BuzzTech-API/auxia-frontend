@@ -1,5 +1,14 @@
+<script setup>
+defineProps({
+  disabled: Boolean
+});
+</script>
+
 <template>
-    <button class="botao">
+    <button class="botao"
+    :class="{'disabled': disabled}"
+    :disabled="disabled"
+    >
       <i class="pi pi-arrow-right"></i>
     </button>
 </template>
@@ -22,5 +31,10 @@
 
 .botao:hover {
   background-color: #4F4F4F;
+}
+
+.botao.disabled {
+  background-color: #A0A0A0;
+  cursor: not-allowed;
 }
 </style>
