@@ -1,21 +1,39 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue';
 import BtnPrompt from './BtnPrompt.vue';
+import api from '@/services/api';
 
-const inputText = ref('');
-const isButtonDisabled = computed(() => inputText.value.trim() === '');
+const prompt = ref('');
+const isButtonDisabled = computed(() => prompt.value.trim() === '');
+
+async function enviarPergunta(){
+
+  try {
+    
+    const request = await api.post("/ai/generate", {prompt: prompt.value})
+    // console.log(prompt)
+    prompt.value = ""; 
+    
+  } catch (error) {
+    console.error("Erro ao enviar pergunta:", error);
+  }
+
+}
+
+
 </script>
 
 <template>
     <div class="prompt">
        
         <input type="text" 
-        v-model="inputText"
-        placeholder="Escreva seu Prompt Aqui. Exemplo: “Gostaria de Saber sobre Alzheimer.”  "></input>
+        v-model="prompt"
+        placeholder="Escreva seu Prompt Aqui. Exemplo: “Gostaria de Saber sobre Alzheimer.”  "/>
        
-        <BtnPrompt :disabled="isButtonDisabled"/>
+        <BtnPrompt :disabled="isButtonDisabled" @click="enviarPergunta"/>
     </div>
 </template>
+
 
 <style scoped>
 .prompt {

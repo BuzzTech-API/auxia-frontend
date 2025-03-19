@@ -1,14 +1,20 @@
 <script setup>
 import Button from 'primevue/button';
+import { defineProps, defineEmits } from 'vue';
+
 defineProps({
   disabled: Boolean
 });
+
+const emit = defineEmits();
+
 </script>
 
 <template>
     <button class="botao"
     :class="{'disabled': disabled}"
     :disabled="disabled"
+     @click="emit('click')"
     >
       <i class="pi pi-arrow-right"></i>
     </button>
