@@ -1,16 +1,17 @@
-<script setup>
-import Button from 'primevue/button';
+<script setup lang="ts">
 import { defineProps, defineEmits } from 'vue';
+
 
 defineProps({
   disabled: Boolean
 });
 
-const emit = defineEmits();
+const emit = defineEmits(["click"]);
 
 </script>
 
 <template>
+ 
     <button class="botao"
     :class="{'disabled': disabled}"
     :disabled="disabled"
@@ -18,6 +19,7 @@ const emit = defineEmits();
     >
       <i class="pi pi-arrow-right"></i>
     </button>
+   
 </template>
 
 <style scoped>

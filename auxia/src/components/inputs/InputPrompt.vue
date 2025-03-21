@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import BtnPrompt from './BtnPrompt.vue';
+import BtnPrompt from '@/components/buttons/BtnPrompt.vue';
 import api from '@/services/api';
 
 const prompt = ref('');
 const isButtonDisabled = computed(() => prompt.value.trim() === '');
+
+defineEmits(["click"]);
 
 async function enviarPergunta(){
 
@@ -19,6 +21,7 @@ async function enviarPergunta(){
   }
 
 }
+
 
 
 </script>
@@ -45,6 +48,7 @@ async function enviarPergunta(){
   border-radius: 15px;
   background-color: #D9D9D9;
   padding: 8px; 
+  
   
 }
 

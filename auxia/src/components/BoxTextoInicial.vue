@@ -3,7 +3,7 @@
 
         <h2>AUXIA</h2>
 
-        <p>Lorem ipsum eget gravida venenatis fringilla aenean aptent id, purus aliquet viverra urna metus suscipit ornare at, vehicula justo quam vitae eleifend euismod eu. tristique mollis eros laoreet fermentum venenatis elit suspendisse fringilla senectus tempor, euismod suscipit aliquet porttitor morbi nunc laoreet sociosqu nisl, venenatis per luctus consectetur curae fames ultricies risus suspendisse. eu ullamcorper nibh interdum dui leo iaculis, luctus varius vivamus tincidunt curabitur bibendum, adipiscing semper pharetra non turpis. varius dolor conubia sodales aliquam ut convallis quisque ut aptent rutrum, fringilla magna non rhoncus dictumst pharetra enim porta facilisis, curabitur cubilia fusce sem condimentum curae imperdiet consequat lectus. </p>
+        <p>O AUXIA - Auxiliary Al Training, permitirá que os usuários enviem prompts para múltiplos modelos de IA, comparem suas respostas, avaliem cada uma segundo critérios objetivos, escolham a melhor resposta e justifiquem suas decisões. Esse processo garantirá um aprendizado por reforço eficiente, possibilitando o aprimoramento contínuo dos modelos utilizados através dos dados persistidos de cada avaliação. </p>
 
     </div>
 
@@ -16,10 +16,15 @@
     /* gap: 10px;  */
     width: 100%; 
     max-width: 70%;
-    padding: 10px; 
+    padding: 30px; 
     justify-items: center;
     align-items: center;
     border-radius: 20px;
-}
+    text-align: center;
+  /* box-shadow: 3px 3px 9px 1px rgba(0,0,0,0.68);
+-webkit-box-shadow: 3px 3px 9px 1px rgba(0,0,0,0.68);
+-moz-box-shadow: 3px 3px 9px 1px rgba(0,0,0,0.68); */
+
+box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;}
 
 </style>
