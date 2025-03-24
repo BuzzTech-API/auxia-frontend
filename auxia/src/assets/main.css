@@ -7,14 +7,14 @@ body{
 #app {
   font-weight: normal;
 }
-
+/* 
 header{
   font-size: 2em;
   margin-bottom: 20px;
   font-weight: bold;
   padding: 10px;
   text-align: center;
-}
+} */
 
 input{
   background-color: #D9D9D9;
