@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import BoxTextoInicial from '@/components/BoxTextoInicial.vue';
 import InputPrompt from '@/components/inputs/InputPrompt.vue'; 
+import BoxRespostaIA from '@/components/BoxRespostaIA.vue'; 
 </script>
 
 <template>
   <div class="container">
     <div class="box">
-      <BoxTextoInicial />
+      <BoxRespostaIA/>
+      <!-- <BoxTextoInicial />  -->
     </div>
     <div class="input">
-      <InputPrompt />
+      <!-- <InputPrompt /> -->
     </div>
   </div>
 </template>
