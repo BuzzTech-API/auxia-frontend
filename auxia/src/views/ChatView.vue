@@ -1,17 +1,55 @@
 <script setup lang="ts">
-import BoxTextoInicial from '@/components/BoxTextoInicial.vue';
+import BoxTextoInicial from '@/components/boxes/BoxTextoInicial.vue';
 import InputPrompt from '@/components/inputs/InputPrompt.vue'; 
+import LoadingRespostas from '@/components/LoadingRespostas.vue';
+import router from '@/router';
+import api from '@/services/api';
+import { ref } from 'vue';
+
+
+const prompt = ref("");
+const carregando = ref(false);
+
+async function enviarPergunta() {
+ 
+  carregando.value = true;
+
+  try {
+    const request = await api.post("/ai/generate", { prompt: prompt.value });
+    console.log(request);
+    
+    setTimeout(() => {
+      carregando.value = false;
+      router.push({ name: 'lalala' });
+    }, 10);
+
+    prompt.value = ""; 
+
+  } catch (error) {
+    console.error("Erro ao enviar pergunta:", error);
+  }
+}
 </script>
 
 <template>
+<div v-if="carregando">
   <div class="container">
+    <LoadingRespostas/>
+  </div>
+</div>
+
+<div v-else>
+  <div class="container">
+
     <div class="box">
       <BoxTextoInicial />
     </div>
     <div class="input">
-      <InputPrompt />
+      <InputPrompt v-model="prompt" @click="enviarPergunta"/>
     </div>
+
   </div>
+</div>
 </template>
 
 <style scoped>

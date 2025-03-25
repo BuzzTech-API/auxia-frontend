@@ -1,40 +1,33 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, defineProps, defineEmits } from 'vue';
 import BtnPrompt from '@/components/buttons/BtnPrompt.vue';
-import api from '@/services/api';
 
-const prompt = ref('');
-const isButtonDisabled = computed(() => prompt.value.trim() === '');
+const props = defineProps<{
+  modelValue: string;
+}>();
 
-defineEmits(["click"]);
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: string): void;
+  (event: 'click', value: string): void;
+}>();
 
-async function enviarPergunta(){
+const isButtonDisabled = computed(() => props.modelValue.trim() === '');
 
-  try {
-    
-    const request = await api.post("/ai/generate", {prompt: prompt.value})
-    // console.log(prompt)
-    prompt.value = ""; 
-    
-  } catch (error) {
-    console.error("Erro ao enviar pergunta:", error);
-  }
-
-}
-
-
-
+const handleClick = () => {
+  emit('click', props.modelValue);
+};
 </script>
 
 <template>
-    <div class="prompt">
-       
-        <input type="text" 
-        v-model="prompt"
-        placeholder="Escreva seu Prompt Aqui. Exemplo: “Gostaria de Saber sobre Alzheimer.”  "/>
-       
-        <BtnPrompt :disabled="isButtonDisabled" @click="enviarPergunta"/>
-    </div>
+  <div class="prompt">
+    <input
+      type="text"
+      :value="modelValue"
+      @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      placeholder="Escreva seu Prompt Aqui. Exemplo: 'Gostaria de Saber sobre Alzheimer.'"
+    />
+    <BtnPrompt :disabled="isButtonDisabled" @click="handleClick"/>
+  </div>
 </template>
 
 

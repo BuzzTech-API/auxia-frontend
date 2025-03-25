@@ -6,6 +6,7 @@ defineProps({
   disabled: Boolean
 });
 
+
 const emit = defineEmits(["click"]);
 
 </script>
@@ -15,7 +16,7 @@ const emit = defineEmits(["click"]);
     <button class="botao"
     :class="{'disabled': disabled}"
     :disabled="disabled"
-     @click="emit('click')"
+    @click="emit('click')"
     >
       <i class="pi pi-arrow-right"></i>
     </button>
