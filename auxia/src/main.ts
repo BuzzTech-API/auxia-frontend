@@ -2,6 +2,8 @@ import './assets/main.css'
 import 'primeicons/primeicons.css'
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
+import ConfirmDialog from "primevue/confirmdialog";
+import ConfirmationService from "primevue/confirmationservice";
 
 
 import { createApp } from 'vue'
@@ -22,6 +24,10 @@ app.use(PrimeVue, {
     }
   }
 });
+
+
+app.use(ConfirmationService);
+app.component("ConfirmDialog", ConfirmDialog);
 
 app.mount('#app')
 
