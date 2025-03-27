@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue';
 
-
 defineProps({
   disabled: Boolean
 });
@@ -12,7 +11,7 @@ const emit = defineEmits(["click"]);
 
 <template>
   <div>
-    <button class="botao"
+    <button class="confirm-button"
     :class="{'disabled': disabled}"
     :disabled="disabled"
      @click="emit('click')">
@@ -23,38 +22,45 @@ const emit = defineEmits(["click"]);
 </template>
 
 <style scoped>
-.botao {
+.confirm-button {
+  margin-top: 1.5rem;
+  margin-left: auto;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  background-color: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 7px;
+  transition: background-color 0.3s;
+  padding-right: 20px;
   display: flex;
   justify-content: center;
   width: 160px;
   height: 45px;
-  border-radius: 12px; 
-  display: flex;
   align-items: center;
   justify-content: center;
-  background-color:  #D9D9D9;
   color: black;
   border: none;
-  padding-right: 20px;
 }
+
+.confirm-button:hover {
+  background-color: #7B7B7B;
+  transition: 300ms;
+  transition-delay: 50ms;
+}
+
+.confirm-button.disabled {
+  background-color: #A0A0A0;
+  cursor: not-allowed;
+
+}
+
 .texto {
   font-size: 15px;
 }
 
 .pi-arrow-right{
   font-size: 24px;
-}
-
-.botao:hover {
-  /*background-color: #4F4F4F;*/
-  transition: 300ms;
-  transition-delay: 50ms;
-  background-color: rgba(0,0,0,0)
-}
-
-.botao.disabled {
-  /*background-color: #A0A0A0;*/
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 </style>
