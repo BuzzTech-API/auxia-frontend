@@ -11,14 +11,14 @@
 
 <style scoped>
 .boxResposta{
-    width: 100%; 
-    max-width: 100%;
+    width: 32vw; 
+    max-width: 32vw;
     padding-top: 1px; 
     padding-left: 40px;
     padding-right: 35px;
     padding-bottom: 25px;
-    height: 450px;
-    max-height: 450px;
+    height: 74vh;
+    max-height: 74vh;
     overflow-y: auto;  
     overflow-x: hidden;
     justify-items: center;
