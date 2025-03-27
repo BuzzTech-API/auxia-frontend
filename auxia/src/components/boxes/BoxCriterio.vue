@@ -52,7 +52,8 @@ const justify = ref("")
 
 <style scoped>
 .card{
-  width: 36rem;
+  width: 32rem;
+  height: 25rem;
   margin: 1rem;
   border-radius: 1rem;
   box-shadow:2px 2px 2px 2px rgba(0, 0, 0, 0.1);
@@ -62,7 +63,7 @@ const justify = ref("")
 .inputGroup{
   display: flex;
   flex-wrap: wrap;
-  gap:4rem;
+  gap:3.5rem;
 }
 .radioDiv{
   display: flex;
@@ -72,6 +73,8 @@ const justify = ref("")
 }
 .textarea{
   background-color: #D9D9D9;
+  width: 29rem;
+  max-width: 30rem;
 }
 .cardtitle{
 margin-top: 0;
