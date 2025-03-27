@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BoxTextoInicial from '@/components/boxes/BoxTextoInicial.vue';
 import InputPrompt from '@/components/inputs/InputPrompt.vue'; 
+import BoxRespostaIA from '@/components/BoxRespostaIA.vue'; 
 import LoadingRespostas from '@/components/LoadingRespostas.vue';
 import router from '@/router';
 import api from '@/services/api';
@@ -42,9 +43,11 @@ async function enviarPergunta() {
   <div class="container">
 
     <div class="box">
-      <BoxTextoInicial />
+      <BoxRespostaIA/>
+      <!-- <BoxTextoInicial />  -->
     </div>
     <div class="input">
+
       <InputPrompt v-model="prompt" @click="enviarPergunta"/>
     </div>
 
