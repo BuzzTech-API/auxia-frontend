@@ -6,17 +6,19 @@ defineProps({
 });
 
 const emit = defineEmits(["click"]);
+
 </script>
 
 <template>
-  <button 
-    class="confirm-button" 
+  <div>
+    <button class="confirm-button"
     :class="{'disabled': disabled}"
     :disabled="disabled"
-    @click="emit('click')"
-  >
-    Confirmar Avaliação
-  </button>
+     @click="emit('click')">
+      <p class="texto"> Confirmar Avaliação </p>
+      <i class="pi pi-arrow-right"></i>
+    </button>
+  </div> 
 </template>
 
 <style scoped>
@@ -31,14 +33,34 @@ const emit = defineEmits(["click"]);
   cursor: pointer;
   border-radius: 7px;
   transition: background-color 0.3s;
+  padding-right: 20px;
+  display: flex;
+  justify-content: center;
+  width: 160px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  border: none;
 }
 
 .confirm-button:hover {
   background-color: #7B7B7B;
+  transition: 300ms;
+  transition-delay: 50ms;
 }
 
 .confirm-button.disabled {
   background-color: #A0A0A0;
   cursor: not-allowed;
+
+}
+
+.texto {
+  font-size: 15px;
+}
+
+.pi-arrow-right{
+  font-size: 24px;
 }
 </style>
