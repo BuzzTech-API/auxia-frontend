@@ -30,8 +30,10 @@
 }
 </style>
 
-<script lang="ts">
-export default {
-  props: ['llm', 'resposta'],
-}
+<script setup lang="ts">
+
+const props = defineProps<{
+    llm: string;
+    resposta: string;
+}>();
 </script>
