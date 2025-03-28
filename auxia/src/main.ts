@@ -1,6 +1,7 @@
 import './assets/main.css'
 import 'primeicons/primeicons.css'
 import PrimeVue from 'primevue/config';
+import ToastService from 'primevue/toastservice';
 import Aura from '@primeuix/themes/aura';
 import ConfirmDialog from "primevue/confirmdialog";
 import ConfirmationService from "primevue/confirmationservice";
@@ -24,6 +25,7 @@ app.use(PrimeVue, {
     }
   }
 });
+app.use(ToastService);
 
 
 app.use(ConfirmationService);
