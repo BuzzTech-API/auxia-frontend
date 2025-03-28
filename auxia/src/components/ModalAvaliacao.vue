@@ -1,3 +1,30 @@
+
+<script setup lang="ts">
+import { defineProps } from 'vue'
+import BoxResposta from '@/components/BoxRespostaModal.vue'
+import BoxAvaliacao from '@/components/boxes/BoxCriterio.vue'
+import BtnConfirmarAvaliacao from './buttons/BtnConfirmarAvaliacao.vue';
+import BtnVoltar from './buttons/BtnVoltar.vue';
+import {useAwnserOneStore } from '../stores/awnserOne.ts'
+const emit = defineEmits(['close']);
+
+
+const props = defineProps<{ isVisible: boolean }>();
+
+const respostaTexto = `Aqui vai a resposta completa do usuário...`;
+
+const awnserOne = useAwnserOneStore()
+
+
+const criterios = [
+  { numero: 1, descricao: 'Descrição do Critério 1 para o usuário' },
+  { numero: 2, descricao: 'Descrição do Critério 2 para o usuário' },
+  { numero: 3, descricao: 'Descrição do Critério 3 para o usuário' },
+];
+
+
+</script>
+
 <template>
     <div v-if="isVisible" class="modal-overlay">
         <div class="modal-container">
@@ -15,34 +42,11 @@
                         :criterioDescription="criterio.descricao" />
                 </div>
             </div>
-            <BtnConfirmarAvaliacao />
+            <BtnConfirmarAvaliacao :hasArrow="false"
+        :disabled="!awnserOne.allStandardIsJustifyAndPontuated()" />
         </div>
     </div>
 </template>
-
-<script setup lang="ts">
-import { defineProps } from 'vue'
-import BoxResposta from '@/components/BoxRespostaModal.vue'
-import BoxAvaliacao from '@/components/boxes/BoxCriterio.vue'
-import BtnConfirmarAvaliacao from './buttons/BtnConfirmarAvaliacao.vue';
-import BtnVoltar from './buttons/BtnVoltar.vue';
-const emit = defineEmits(['close']);
-
-
-const props = defineProps<{ isVisible: boolean }>();
-
-const respostaTexto = `Aqui vai a resposta completa do usuário...`;
-
-
-const criterios = [
-    { numero: 1, descricao: 'Descrição do Critério 1 para o usuário' },
-    { numero: 2, descricao: 'Descrição do Critério 2 para o usuário' },
-    { numero: 3, descricao: 'Descrição do Critério 3 para o usuário' },
-];
-
-
-</script>
-
 <style scoped>
 .voltar-button {
     margin-right: auto;
@@ -65,8 +69,9 @@ const criterios = [
 
 .modal-container {
     background: #D9D9D9;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 1rem;
+    height: 95%;
     width: 100%;
     max-width: 1100px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -79,7 +84,8 @@ const criterios = [
 .modal-title {
     font-size: 1.8rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 .modal-content {
@@ -94,22 +100,7 @@ const criterios = [
     width: 47rem;
     flex-direction: column;
     gap: 1.5rem;
-    max-height: 80vh;
+    max-height: 75vh;
     overflow-y: auto;
-}
-
-.confirm-button {
-    margin-top: 1.5rem;
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
-    background-color: white;
-    color: black;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.confirm-button:hover {
-    background-color: #4f4f4f;
 }
 </style>
