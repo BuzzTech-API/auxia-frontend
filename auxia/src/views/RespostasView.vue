@@ -18,6 +18,10 @@ const voltar = () => {
   router.go(-1);
 };
 
+const irParaPagina = () => {
+  router.push('/avaliacaoFinal'); 
+};
+
 
 const respostaSelecionada = ref<number>(0);
 const modalAberto = ref(false);
@@ -68,7 +72,7 @@ watch(respostaSelecionada, (newValue) => {
             </div>
             <div class="confirmar">
                 <BtnConfirmarAvaliacao :disabled="!(awnserOne.allStandardIsJustifyAndPontuated() &&
-                awnserTwo.allStandardIsJustifyAndPontuated())" :hasArrow="true" />
+                awnserTwo.allStandardIsJustifyAndPontuated())" :hasArrow="true"  @click="irParaPagina"/>
             </div>
         </div>
     </div>

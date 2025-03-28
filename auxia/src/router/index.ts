@@ -16,6 +16,11 @@ const router = createRouter({
       name: 'resposta',
       component: () => import('../views/RespostasView.vue'),
     },
+    {
+      path: '/avaliacaoFinal',
+      name: 'avaliacaoFinal',
+      component: () => import('../views/AvaliacaoFinal.vue'),
+    },
   ],
 })
 
