@@ -1,6 +1,6 @@
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { computed, defineProps } from 'vue'
 import BoxResposta from '@/components/BoxRespostaModal.vue'
 import BoxAvaliacao from '@/components/boxes/BoxCriterio.vue'
 import BtnConfirmarAvaliacao from './buttons/BtnConfirmarAvaliacao.vue';
@@ -12,10 +12,30 @@ const emit = defineEmits(['close']);
 
 const props = defineProps<{ isVisible: boolean, awnserNumber: number }>();
 
-const respostaTexto = `Aqui vai a resposta completa do usuário...`;
+// const respostaTexto = `Aqui vai a resposta completa do usuário...`;
 
 const awnserOne = useAwnserOneStore()
 const awnserTwo = useAwnserTwoStore()
+
+const respostaTexto = computed(() => {
+  if (props.awnserNumber === 1) {
+    return awnserOne.ans_llm_awnser;
+  } else if (props.awnserNumber === 2) {
+    return awnserTwo.ans_llm_awnser;
+  }
+  return ''; 
+});
+
+
+const nomeLLM = computed(() => {
+  if (props.awnserNumber === 1) {
+    return awnserOne.ans_llm_model; 
+  } else if (props.awnserNumber === 2) {
+    return awnserTwo.ans_llm_model;  
+  }
+  return ''; 
+});
+
 
 
 const criterios = [
@@ -34,27 +54,42 @@ const criterios = [
 <template>
   <div v-if="isVisible" class="modal-overlay">
     <div class="modal-container">
-      <BtnVoltar @click="emit('close')" class="voltar-button" />
 
-      <h2 class="modal-title">Resposta LL1</h2>
+      <div class="header">
+        <div>
+        <BtnVoltar @click="emit('close')" class="voltar-button" />
+        </div>
+
+        <div>
+          <h2 class="modal-title">{{ nomeLLM }}</h2>
+        </div>
+
+      </div>
 
       <div class="modal-content">
         <!-- Box de Respostas -->
-        <BoxResposta :resposta="respostaTexto" />
-
+          <BoxResposta :resposta="respostaTexto" />
+        
         <!-- Box de Criterio -->
         <div class="avaliacao-container">
           <BoxAvaliacao v-for="(criterio, index) in criterios" :key="index" :criterioNumber="criterio.numero"
             :criterioDescription="criterio.descricao" :criterioNome="criterio.criterioNome"
-            :awnserNumber="awnserNumber"  />
+            :awnserNumber="awnserNumber"/>
         </div>
       </div>
-      <BtnConfirmarAvaliacao :hasArrow="false"
-        :v-if="awnserNumber===1"
-        :disabled="!awnserOne.allStandardIsJustifyAndPontuated()" />
-      <BtnConfirmarAvaliacao :hasArrow="false"
-        :v-else-if="awnserNumber===2"
-        :disabled="!awnserTwo.allStandardIsJustifyAndPontuated()" />
+
+      <div class="btnConfirmaAvaliacao">
+        <BtnConfirmarAvaliacao :hasArrow="false"
+        v-if="awnserNumber===1"
+        :disabled="!awnserOne.allStandardIsJustifyAndPontuated()"
+        @click="emit('close')"/>
+
+        <BtnConfirmarAvaliacao :hasArrow="false"
+        v-else-if="awnserNumber===2"
+        :disabled="!awnserTwo.allStandardIsJustifyAndPontuated()" 
+        @click="emit('close')"/>
+      </div>
+
     </div>
   </div>
 </template>
@@ -88,22 +123,24 @@ const criterios = [
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 4%;
 }
 
-
-.modal-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 33%;
+ 
 }
+
 
 .modal-content {
   display: flex;
   width: 47rem;
   gap: 1.5rem;
   width: 100%;
+  overflow: hidden; 
 }
 
 .avaliacao-container {
@@ -113,5 +150,19 @@ const criterios = [
   gap: 1.5rem;
   max-height: 75vh;
   overflow-y: auto;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.btnConfirmaAvaliacao{
+  display: contents;
+  flex-direction: row;
+  justify-content: end;
+  align-items: end;
 }
 </style>

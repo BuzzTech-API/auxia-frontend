@@ -7,7 +7,7 @@
       </p>
       <div class="inputGroup">
         <div class="radioDiv">
-          <RadioButton v-model="criterioNote" inputId="note5" name="1" v-bind:value="1" />
+          <RadioButton v-model="criterioNote" inputId="note1" name="1" v-bind:value="1" />
           <label for="note1">1</label>
         </div>
         <div class="radioDiv">
@@ -53,8 +53,8 @@ const awnserOne = useAwnserOneStore()
 const awnserTwo = useAwnserTwoStore()
 
 
-const criterioNote = ref(awnserOne.getPotuationByNumber(props.criterioNumber))
-const justify = ref(awnserOne.getJustifyByNumber(props.criterioNumber));
+const criterioNote = ref(props.awnserNumber === 1 ? awnserOne.getPotuationByNumber(props.criterioNumber): awnserTwo.getPotuationByNumber(props.criterioNumber));
+const justify = ref(props.awnserNumber === 1 ? awnserOne.getJustifyByNumber(props.criterioNumber): awnserTwo.getJustifyByNumber(props.criterioNumber));
 
 watch(criterioNote, (newNote)=>{
   if (props.awnserNumber === 1) {

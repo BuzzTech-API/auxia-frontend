@@ -16,7 +16,7 @@ const props = defineProps<{resposta: string}>();
 <style scoped>
 .container{
   width: 36.5rem;
-  height: 28rem;
+  height: 40rem;
   background-color: #D9D9D9;
   padding: 1.5rem;
   overflow-y: auto;
