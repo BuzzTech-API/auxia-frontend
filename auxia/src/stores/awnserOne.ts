@@ -71,6 +71,40 @@ export const useAwnserOneStore = defineStore(`awnserOne`,{
         return false
       }
       return true
+    },
+    setPotuationByNumber(criterioNumber: number, potuation: number){
+    if (criterioNumber === 1) {
+     this.ans_relevancia_resposta_pontuation = potuation
+    }else if (criterioNumber === 2){
+    this.ans_coerencia_clareza_pontuation = potuation
+      }else if (criterioNumber === 3){
+    this.ans_exatidao_confiabilidade_pontuation = potuation
+      }else if (criterioNumber === 4){
+    this.ans_exposicao_justificativa_pontuation = potuation
+      }else if (criterioNumber === 5){
+    this.ans_seguiu_instrucoes_pontuation = potuation
+      }else if (criterioNumber === 6){
+    this.ans_idioma_pergunta_mesmo_resposta_pontuation = potuation
+      }else if (criterioNumber === 7){
+    this.ans_resposta_agressiva_ofensiva_pontuation = potuation
+      }
+    },
+    setJustifyByNumber(criterioNumber: number, justify: string){
+    if (criterioNumber === 1) {
+     this.ans_relevancia_resposta_justify = justify
+    }else if (criterioNumber === 2){
+    this.ans_coerencia_clareza_justify = justify
+      }else if (criterioNumber === 3){
+    this.ans_exatidao_confiabilidade_justify = justify
+      }else if (criterioNumber === 4){
+    this.ans_exposicao_justificativa_justify = justify
+      }else if (criterioNumber === 5){
+    this.ans_seguiu_instrucoes_justify = justify
+      }else if (criterioNumber === 6){
+    this.ans_idioma_pergunta_mesmo_resposta_justify = justify
+      }else if (criterioNumber === 7){
+    this.ans_resposta_agressiva_ofensiva_justify = justify
+      }
     }
   }
 })

@@ -1,9 +1,9 @@
 <template>
   <Card class="card">
-    <template #title><h3 class="cardtitle">Critério "{{criterioNumber}}"</h3></template>
+    <template #title><h3 class="cardtitle">Critério {{props.criterioNome}}</h3></template>
     <template #content>
       <p class="">
-        {{criterioDescription}}
+        {{props.criterioDescription}}
       </p>
       <div class="inputGroup">
         <div class="radioDiv">
@@ -23,13 +23,13 @@
           <label for="note4">4</label>
         </div>
         <div class="radioDiv">
-          <RadioButton v-model="criterioNote" inputId="note5" name="5" v-bind:value="5" />
+          <RadioButton  v-model="criterioNote" inputId="note5" name="5" v-bind:value="5" />
           <label for="note5">5</label>
         </div>
       </div>
       <div>
         <h4>Justificativa:</h4>
-        <Textarea class="textarea"  v-model="justify" rows="5" cols="49"/>
+        <Textarea class="textarea" v-model="justify"  rows="5" cols="49"/>
       </div>
     </template>
   </Card>
@@ -38,22 +38,36 @@
 import Card from 'primevue/card';
 import RadioButton from 'primevue/radiobutton';
 import Textarea from 'primevue/textarea';
-import { ref } from 'vue'
+import {useAwnserOneStore } from '../../stores/awnserOne.ts'
+import { ref, watch } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   criterioNumber: number,
+  criterioNome: string,
   criterioDescription: string,
+  awnserNumber: number,
 }>();
 
+const awnserOne = useAwnserOneStore()
+
+
 const criterioNote = ref(0)
-const justify = ref("")
+const justify = ref("");
+
+watch(criterioNote, (newNote)=>{
+  awnserOne.setPotuationByNumber(props.criterioNumber, newNote)
+})
+
+watch(justify, (newJustify)=>{
+  awnserOne.setJustifyByNumber(props.criterioNumber, newJustify)
+})
 
 </script>
 
 <style scoped>
 .card{
   width: 32rem;
-  height: 25rem;
+  min-height: 27rem;
   margin: 1rem;
   border-radius: 1rem;
   box-shadow:2px 2px 2px 2px rgba(0, 0, 0, 0.1);
