@@ -2,7 +2,8 @@
 import { defineProps, defineEmits } from 'vue';
 
 defineProps({
-  disabled: Boolean
+  disabled: Boolean,
+  hasArrow: Boolean
 });
 
 const emit = defineEmits(["click"]);
@@ -16,26 +17,26 @@ const emit = defineEmits(["click"]);
     :disabled="disabled"
      @click="emit('click')">
       <p class="texto"> Confirmar Avaliação </p>
-      <i class="pi pi-arrow-right"></i>
+      <i v-if="hasArrow" class="pi pi-arrow-right"></i>
     </button>
-  </div> 
+  </div>
 </template>
 
 <style scoped>
 .confirm-button {
-  margin-top: 1.5rem;
+  margin-top: 1.0rem;
   margin-left: auto;
   padding: 0.75rem 2rem;
   font-size: 1rem;
-  background-color: white;
+  background-color: #e9e9e9;
   color: black;
   border: none;
   cursor: pointer;
   border-radius: 7px;
   transition: background-color 0.3s;
-  padding-right: 20px;
   display: flex;
   justify-content: center;
+  gap: 0.5rem;
   width: 160px;
   height: 45px;
   align-items: center;

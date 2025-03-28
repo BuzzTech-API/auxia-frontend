@@ -1,8 +1,8 @@
 <template>
     <div>
         <h1>Lalala View</h1>
-        
-        <ModalComponent :isVisible="isModalVisible" @close="isModalVisible = false" />
+
+        <ModalComponent :isVisible="isModalVisible" :awnserNumber="1" @close="isModalVisible = false" />
         <button @click="isModalVisible = true">Abrir Modal</button>
             <p>Esta página será excluída posteriormente e substituída pela página de resposta. :)</p>
 
@@ -10,11 +10,11 @@
     Open Modal
     </button>
 
-  <ModalRespostaBackErro 
-    :open="isOpen" 
+  <ModalRespostaBackErro
+    :open="isOpen"
     @close="isOpen = false"
     message="Infelizmente houve um problema ao carregar suas respostas"
-    icon="pi pi-info-circle" 
+    icon="pi pi-info-circle"
   />
     </div>
 </template>
