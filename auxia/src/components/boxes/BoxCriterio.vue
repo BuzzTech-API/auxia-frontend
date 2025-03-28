@@ -51,8 +51,8 @@ const props = defineProps<{
 const awnserOne = useAwnserOneStore()
 
 
-const criterioNote = ref(0)
-const justify = ref("");
+const criterioNote = ref(awnserOne.getPotuationByNumber(props.criterioNumber))
+const justify = ref(awnserOne.getJustifyByNumber(props.criterioNumber));
 
 watch(criterioNote, (newNote)=>{
   awnserOne.setPotuationByNumber(props.criterioNumber, newNote)

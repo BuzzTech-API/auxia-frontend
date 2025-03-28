@@ -4,23 +4,23 @@
         <div class="inputGroup">
           <div class="radioDiv">
             <label for="opcao1">Prefere muito a resposta da LLM1</label>
-            <RadioButton v-model="preferencia" inputId="opcao1" name="nota" :value="1" />
+            <RadioButton v-model="preferencia" inputId="opcao1" name="nota" value="Prefere muito a resposta da LLM1" />
           </div>
           <div class="radioDiv">
             <label for="opcao2">Prefere a resposta da LLM1</label>
-            <RadioButton v-model="preferencia" inputId="opcao2" name="nota" :value="2" />
+            <RadioButton v-model="preferencia" inputId="opcao2" name="nota" value="Prefere a resposta da LLM1" />
           </div>
           <div class="radioDiv">
             <label for="opcao3">Sem preferência de resposta</label>
-            <RadioButton v-model="preferencia" inputId="opcao3" name="nota" :value="3" />
+            <RadioButton v-model="preferencia" inputId="opcao3" name="nota" value="Sem preferência de resposta" />
           </div>
           <div class="radioDiv">
             <label for="opcao4">Prefere a resposta da LLM2</label>
-            <RadioButton v-model="preferencia" inputId="opcao4" name="nota" :value="4" />
+            <RadioButton v-model="preferencia" inputId="opcao4" name="nota" value="Prefere a resposta da LLM2" />
           </div>
           <div class="radioDiv">
             <label for="opcao5">Prefere muito a resposta da LLM2</label>
-            <RadioButton v-model="preferencia" inputId="opcao5" name="nota" :value="5" />
+            <RadioButton v-model="preferencia" inputId="opcao5" name="nota" value="Prefere muito a resposta da LLM2" />
           </div>
         </div>
         <div class="justificativa">
@@ -30,24 +30,34 @@
       </template>
     </Card>
   </template>
-  
+
   <script setup lang="ts">
-  import Card from 'primevue/card';
+  import { useAwnserOneStore } from '@/stores/awnserOne';
+import Card from 'primevue/card';
   import RadioButton from 'primevue/radiobutton';
   import Textarea from 'primevue/textarea';
-  import { ref } from 'vue';
-  
-//   defineProps<{ 
+  import { ref, watch } from 'vue';
+
+  const awnserOne = useAwnserOneStore()
+
+//   defineProps<{
 //   preferencia: number;
 //   justify: string;
 //   }>();
 
 //   const emit = defineEmits(['update:preferencia', 'update:justify']);
-  
-  const preferencia = ref(0);
-  const justify = ref("");
+
+  const preferencia = ref(awnserOne.ans_prefered_answer);
+  const justify = ref(awnserOne.ans_prefered_answer_justify);
+
+  watch(preferencia, (newPreferencia) => {
+    awnserOne.ans_prefered_answer = newPreferencia
+  });
+  watch(justify, (newJustify) => {
+    awnserOne.ans_prefered_answer_justify = newJustify
+  });
   </script>
-  
+
   <style scoped>
   .card {
     width: 100%;
@@ -59,13 +69,13 @@
     background-color: #D9D9D9;
     text-align: center;
   }
-  
+
   .inputGroup {
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
   }
-  
+
   .radioDiv {
     display: flex;
     flex-direction: column;
@@ -74,15 +84,15 @@
     font-size: 1rem;
     max-width: 100px;
   }
-  
+
   .justificativa {
     margin-top: 1rem;
   }
-  
+
   .textarea {
     width: 100%;
     background-color: #ffffff;
     border-radius: 5px;
   }
   </style>
-  
+
