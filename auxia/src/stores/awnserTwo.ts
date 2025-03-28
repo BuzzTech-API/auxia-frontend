@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 
-export const useAwnserOneStore = defineStore(`awnserOne`,{
+export const useAwnserTwoStore = defineStore(`awnserTwo`,{
   state: ()=>{
     return{
       usr_id: "",

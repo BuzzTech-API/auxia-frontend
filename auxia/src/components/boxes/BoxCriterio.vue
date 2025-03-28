@@ -40,6 +40,7 @@ import RadioButton from 'primevue/radiobutton';
 import Textarea from 'primevue/textarea';
 import {useAwnserOneStore } from '../../stores/awnserOne.ts'
 import { ref, watch } from 'vue'
+import { useAwnserTwoStore } from '@/stores/awnserTwo.ts';
 
 const props = defineProps<{
   criterioNumber: number,
@@ -49,17 +50,26 @@ const props = defineProps<{
 }>();
 
 const awnserOne = useAwnserOneStore()
+const awnserTwo = useAwnserTwoStore()
 
 
 const criterioNote = ref(awnserOne.getPotuationByNumber(props.criterioNumber))
 const justify = ref(awnserOne.getJustifyByNumber(props.criterioNumber));
 
 watch(criterioNote, (newNote)=>{
+  if (props.awnserNumber === 1) {
   awnserOne.setPotuationByNumber(props.criterioNumber, newNote)
+  }else if (props.awnserNumber ===2) {
+  awnserTwo.setPotuationByNumber(props.criterioNumber, newNote)
+  }
 })
 
 watch(justify, (newJustify)=>{
-  awnserOne.setJustifyByNumber(props.criterioNumber, newJustify)
+  if (props.awnserNumber === 1) {
+    awnserOne.setJustifyByNumber(props.criterioNumber, newJustify)
+  }else if (props.awnserNumber ===2) {
+    awnserTwo.setJustifyByNumber(props.criterioNumber, newJustify)
+  }
 })
 
 </script>

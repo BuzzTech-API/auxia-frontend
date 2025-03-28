@@ -6,6 +6,7 @@ import BoxAvaliacao from '@/components/boxes/BoxCriterio.vue'
 import BtnConfirmarAvaliacao from './buttons/BtnConfirmarAvaliacao.vue';
 import BtnVoltar from './buttons/BtnVoltar.vue';
 import {useAwnserOneStore } from '../stores/awnserOne.ts'
+import { useAwnserTwoStore } from '@/stores/awnserTwo.ts';
 const emit = defineEmits(['close']);
 
 
@@ -14,6 +15,7 @@ const props = defineProps<{ isVisible: boolean, awnserNumber: number }>();
 const respostaTexto = `Aqui vai a resposta completa do usuário...`;
 
 const awnserOne = useAwnserOneStore()
+const awnserTwo = useAwnserTwoStore()
 
 
 const criterios = [
@@ -48,7 +50,11 @@ const criterios = [
         </div>
       </div>
       <BtnConfirmarAvaliacao :hasArrow="false"
+        :v-if="awnserNumber===1"
         :disabled="!awnserOne.allStandardIsJustifyAndPontuated()" />
+      <BtnConfirmarAvaliacao :hasArrow="false"
+        :v-else-if="awnserNumber===2"
+        :disabled="!awnserTwo.allStandardIsJustifyAndPontuated()" />
     </div>
   </div>
 </template>

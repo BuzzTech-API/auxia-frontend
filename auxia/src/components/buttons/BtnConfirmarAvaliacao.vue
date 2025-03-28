@@ -28,7 +28,7 @@ const emit = defineEmits(["click"]);
   margin-left: auto;
   padding: 0.75rem 2rem;
   font-size: 1rem;
-  background-color: white;
+  background-color: #e9e9e9;
   color: black;
   border: none;
   cursor: pointer;

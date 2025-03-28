@@ -2,6 +2,12 @@
 import BoxRespostaIA from '@/components/BoxRespostaIA.vue';
 import BtnVoltar from '@/components/buttons/BtnVoltar.vue';
 import BtnConfirmarAvaliacao from '@/components/buttons/BtnConfirmarAvaliacao.vue';
+import { useAwnserOneStore } from '@/stores/awnserOne';
+import { useAwnserTwoStore } from '@/stores/awnserTwo';
+
+
+const awnserOne = useAwnserOneStore()
+const awnserTwo = useAwnserTwoStore()
 </script>
 
 <template>
@@ -11,11 +17,12 @@ import BtnConfirmarAvaliacao from '@/components/buttons/BtnConfirmarAvaliacao.vu
             <BtnVoltar/>
             </div>
             <div class="respostas">
-                <BoxRespostaIA class="boxResposta1" llm="LLM 1" resposta="Resposta1"/> 
+                <BoxRespostaIA class="boxResposta1" llm="LLM 1" resposta="Resposta1"/>
                 <BoxRespostaIA class="boxResposta2" llm="LLM 2" resposta="Resposta2"/>
             </div>
             <div class="confirmar">
-                <BtnConfirmarAvaliacao/>
+                <BtnConfirmarAvaliacao :disabled="!(awnserOne.allStandardIsJustifyAndPontuated() &&
+                awnserTwo.allStandardIsJustifyAndPontuated())" :hasArrow="true" />
             </div>
         </div>
     </div>
@@ -26,7 +33,7 @@ import BtnConfirmarAvaliacao from '@/components/buttons/BtnConfirmarAvaliacao.vu
     display: flex;
     justify-content: center;
 }
-.respostasView{ 
+.respostasView{
     width: 70%;
 }
 .voltar{
@@ -34,11 +41,11 @@ import BtnConfirmarAvaliacao from '@/components/buttons/BtnConfirmarAvaliacao.vu
     padding-bottom: 15px;
 }
 .respostas{
-    display: flex;  
+    display: flex;
     width: 100%;
     justify-content: center;
-    align-items: center; 
-    gap: 80px;         
+    align-items: center;
+    gap: 80px;
 }
 .confirmar{
     display: flex;
