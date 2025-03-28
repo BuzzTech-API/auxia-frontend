@@ -7,10 +7,13 @@ import { useAwnserTwoStore } from '@/stores/awnserTwo';
 import { ref, watch } from 'vue';
 import ModalAvaliacao from '@/components/ModalAvaliacao.vue';
 import { useRouter } from 'vue-router';
+import { useToast } from 'primevue/usetoast';
+import Toast from 'primevue/toast';
 
 
 const awnserOne = useAwnserOneStore()
 const awnserTwo = useAwnserTwoStore()
+
 
 const router = useRouter();
 
@@ -43,10 +46,39 @@ watch(respostaSelecionada, (newValue) => {
 });
 
 
+
+const toast = useToast()
+
+// Aqui vai ficar o envio da resposta pro backend!
+// Coloque o toast de sucesso dentro to "try" para quando a requisição for bem sucedida
+// Coloque o toast de falha dentro do "catch" para quando a requisição for mal sucedida.
+// Se não for aqui a requisição manda mensagem pro Vitor Lima
+// Essa função está sendo chamada no botão de confirmar
+const handleConfirm = () => {
+
+    //Toast de Sucesso
+    toast.add({
+        severity: 'success',
+        summary: 'Sucesso!',
+        detail: 'Resposta enviada com sucesso!',
+        life: 3000
+    })
+
+    //Toast de falha 
+    toast.add({
+        severity: 'error',
+        summary: 'Falha!',
+        detail: 'Falha no envio da resposta!',
+        life: 3000
+    })
+
+}
 </script>
 
 <template>
     <div class="telaFull">
+        <Toast/>
+
         <div class="respostasView">
 
             <div class="header">
