@@ -1,20 +1,56 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
+import { defineEmits } from 'vue';
+import { useAwnserOneStore } from '@/stores/awnserOne';
+import { useAwnserTwoStore } from '@/stores/awnserTwo';
+import { ref, watch } from 'vue';
 
-defineProps({
-  disabled: Boolean,
-});
 
 const emit = defineEmits(["click"]);
+const awnserOne = useAwnserOneStore();
+const awnserTwo = useAwnserTwoStore();
+
+const isEmpty = ref(!(awnserOne.ans_prefered_answer.length > 0 &&
+  awnserOne.ans_prefered_answer_justify.length > 0 && awnserTwo.ans_prefered_answer.length > 0 &&
+  awnserTwo.ans_prefered_answer_justify.length > 0 ))
+
+const isIncoerente = ref(false)
+
+watch(awnserOne, () => {
+  isEmpty.value = !(awnserOne.ans_prefered_answer.length > 0 &&
+    awnserOne.ans_prefered_answer_justify.length > 0 && awnserTwo.ans_prefered_answer.length > 0 &&
+    awnserTwo.ans_prefered_answer_justify.length > 0 )
+  if (awnserOne.potuantionTotal > awnserTwo.potuantionTotal) {
+    if (awnserOne.ans_prefered_answer === "Prefere muito a resposta da LLM1" || awnserOne.ans_prefered_answer ===  "Prefere a resposta da LLM1") {
+      isIncoerente.value = false
+      return
+    }
+  }
+  if (awnserOne.potuantionTotal === awnserTwo.potuantionTotal) {
+    if (awnserOne.ans_prefered_answer === "Sem preferência de resposta") {
+      isIncoerente.value = false
+      return
+    }
+  }
+  if (awnserOne.potuantionTotal < awnserTwo.potuantionTotal) {
+    if (awnserOne.ans_prefered_answer === "Prefere muito a resposta da LLM2" || awnserOne.ans_prefered_answer ===  "Prefere a resposta da LLM2") {
+      isIncoerente.value = false
+      return
+    }
+  }
+  isIncoerente.value = true
+});
+
+
 
 </script>
 
 <template>
   <div>
     <button class="confirm-button"
-    :class="{'disabled': disabled}"
-    :disabled="disabled"
-     @click="emit('click')">
+      id="confirmation-button"
+      :class="{'disabled': isEmpty || isIncoerente}"
+      :disabled="isEmpty || isIncoerente"
+      @click="emit('click')">
       <p class="texto"> Confirmar Escolha </p>
     </button>
   </div>

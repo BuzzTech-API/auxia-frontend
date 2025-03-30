@@ -1,15 +1,13 @@
 <template>
-  <div class="container">
-    <p class="text">
-      {{props.resposta}}
-    </p>
-
-  </div>
+  <div class="container" v-html="respostaHTML">
+      </div>
 </template>
 
 
 <script setup lang="ts">
+import { marked } from "marked";
 const props = defineProps<{resposta: string}>();
+const respostaHTML = marked.parse(props.resposta);
 
 </script>
 

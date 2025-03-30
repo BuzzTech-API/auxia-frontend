@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <p class="text">
-      {{props.resposta}}
-    </p>
+    <div v-html="respostaHTML" />
 
   </div>
 </template>
@@ -11,6 +9,8 @@
 <script setup lang="ts">
 const props = defineProps<{resposta: string}>();
 
+import { marked } from "marked";
+const respostaHTML = marked.parse(props.resposta);
 </script>
 
 <style scoped>

@@ -33,12 +33,14 @@
 
   <script setup lang="ts">
   import { useAwnserOneStore } from '@/stores/awnserOne';
+import { useAwnserTwoStore } from '@/stores/awnserTwo';
 import Card from 'primevue/card';
   import RadioButton from 'primevue/radiobutton';
   import Textarea from 'primevue/textarea';
   import { ref, watch } from 'vue';
 
   const awnserOne = useAwnserOneStore()
+  const awnserTwo = useAwnserTwoStore();
 
 //   defineProps<{
 //   preferencia: number;
@@ -51,10 +53,14 @@ import Card from 'primevue/card';
   const justify = ref(awnserOne.ans_prefered_answer_justify);
 
   watch(preferencia, (newPreferencia) => {
+    console.log(newPreferencia)
     awnserOne.ans_prefered_answer = newPreferencia
+    awnserTwo.ans_prefered_answer = newPreferencia
   });
   watch(justify, (newJustify) => {
     awnserOne.ans_prefered_answer_justify = newJustify
+    awnserTwo.ans_prefered_answer_justify = newJustify
+
   });
   </script>
 

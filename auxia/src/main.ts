@@ -13,6 +13,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+import Tooltip from 'primevue/tooltip';
+
 const app = createApp(App)
 
 app.use(createPinia())
@@ -26,6 +28,8 @@ app.use(PrimeVue, {
   }
 });
 app.use(ToastService);
+app.directive('tooltip', Tooltip);
+
 
 
 app.use(ConfirmationService);
