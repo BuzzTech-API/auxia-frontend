@@ -5,14 +5,15 @@
           <i :class="icon" style="font-size: 2.5rem; color: gray;"></i>
         </div>
         <p class="texto">{{ message }}</p>
-        <!-- Será substituido pelo botão de tentar novamente -->
-        <button @click="closeModal">Tentar novamente</button>
+        <BtnRecarregar @click="closeModal"></BtnRecarregar>
+
       </div>
     </div>
   </template>
   
   <script setup lang="ts">
   import { defineProps, defineEmits } from 'vue';
+  import BtnRecarregar from './buttons/BtnRecarregar.vue';
   
   const props = defineProps({
     open: {
