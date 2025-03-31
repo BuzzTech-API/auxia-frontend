@@ -7,7 +7,7 @@ import api from '@/services/api';
 import { ref } from 'vue';
 import { useAwnserOneStore } from '@/stores/awnserOne';
 import { useAwnserTwoStore } from '@/stores/awnserTwo';
-
+import ModalRespostaBackErro from '@/components/ModalRespostaBackErro.vue';
 
 const prompt = ref("");
 const carregando = ref(false);
@@ -40,6 +40,20 @@ async function enviarPergunta() {
     console.error("Erro ao enviar pergunta:", error);
   }
 }
+
+// testanto modal: 
+// const isModalOpen = ref(false);
+
+// const openModal = () => {
+//   console.log("Opening Modal"); // Debug 
+//   isModalOpen.value = true;
+// };
+
+// const closeModal = () => {
+//   console.log("Closing Modal"); // Debug 
+//   isModalOpen.value = false;
+// };
+
 </script>
 
 <template>
@@ -56,9 +70,19 @@ async function enviarPergunta() {
       <BoxTextoInicial />
     </div>
     <div class="input">
-
       <InputPrompt v-model="prompt" @click="enviarPergunta"/>
     </div>
+
+    <!-- <div>
+    <button @click="openModal">Abrir Modal</button>
+    
+    <ModalRespostaBackErro
+      :open="isModalOpen"
+      message="Ocorreu um erro."
+      icon=""
+      @close="closeModal"
+    />
+  </div> -->
 
   </div>
 </div>
