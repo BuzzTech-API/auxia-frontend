@@ -1,11 +1,11 @@
 
 <script setup lang="ts">
 import { computed, defineProps } from 'vue'
-import BoxResposta from '@/components/BoxRespostaModal.vue'
+import BoxResposta from '@/components/boxes/BoxRespostaModal.vue'
 import BoxAvaliacao from '@/components/boxes/BoxCriterio.vue'
-import BtnConfirmarAvaliacao from './buttons/BtnConfirmarAvaliacao.vue';
-import BtnVoltar from './buttons/BtnVoltar.vue';
-import {useAwnserOneStore } from '../stores/awnserOne.ts'
+import BtnConfirmarAvaliacao from '../buttons/BtnConfirmarAvaliacao.vue';
+import BtnVoltar from '../buttons/BtnVoltar.vue';
+import {useAwnserOneStore } from '@/stores/awnserOne.ts'
 import { useAwnserTwoStore } from '@/stores/awnserTwo.ts';
 const emit = defineEmits(['close']);
 
