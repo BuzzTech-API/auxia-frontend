@@ -4,6 +4,7 @@ import BoxAvaliacaoJustificativaFinal from '@/components/boxes/BoxAvaliacaoJusti
 import BoxRespostaCriterioFinal from '@/components/boxes/BoxRespostaCriterioFinal.vue';
 import BtnConfirmarEscolha from '@/components/buttons/BtnConfirmarEscolha.vue';
 import BtnVoltar from '@/components/buttons/BtnVoltar.vue';
+import BtnVoltarModal from '@/components/buttons/BtnVoltarModal.vue';
 import { useAwnserOneStore } from '@/stores/awnserOne';
 import { useAwnserTwoStore } from '@/stores/awnserTwo';
 import { computed, ref } from 'vue';
@@ -30,14 +31,20 @@ function confirmarEscolha() {
   sendAwnsers();
 }
 
-const preferencia = computed(() => awnserOne.ans_prefered_answer)
+const preferencia = computed({
+  get: () => awnserOne.ans_prefered_answer,
+  set: (val) => {
+    awnserOne.ans_prefered_answer = val;
+    awnserTwo.ans_prefered_answer = val;
+  }
+});
 
 import { marked } from 'marked';
 
 const preferenciaResposta = computed(() => {
-  if (preferencia.value === 'LLM1') {
+  if (preferencia.value?.includes('LLM1')) {
     return awnserOne.ans_llm_awnser;
-  } else if (preferencia.value === 'LLM2') {
+  } else if (preferencia.value?.includes('LLM2')) {
     return awnserTwo.ans_llm_awnser;
   } else {
     return '';
@@ -139,8 +146,8 @@ async function sendAwnsers() {
     <p><strong>Justificativa:</strong> {{ justify }}</p>
 
     <template #footer>
-      <Button label="Cancelar" @click="showModal = false" />
-      <Button label="Confirmar" @click="confirmarEscolha" />
+      <BtnVoltarModal @click="showModal = false" class="btn-cancelar"/>
+      <BtnConfirmarEscolha @click="confirmarEscolha" class="btn-confirmar" />
     </template>
   </Dialog>
 </template>
@@ -226,7 +233,6 @@ border-radius: 10px;
 }
 
 .btn-confirmar {
-  background-color: #007bff;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -235,7 +241,6 @@ border-radius: 10px;
 }
 
 .btn-cancelar {
-  background-color: #6c757d;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 6px;
