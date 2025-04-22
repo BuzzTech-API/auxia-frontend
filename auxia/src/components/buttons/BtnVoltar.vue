@@ -16,6 +16,7 @@ import Button from 'primevue/button';
 .botao {
   margin-top: 1.0rem;
   margin-left: auto;
+  margin-right: 10px;
   padding: 0.2rem 1rem;
   font-size: 1rem;
   background-color: black;
@@ -27,12 +28,13 @@ import Button from 'primevue/button';
   display: flex;
   justify-content: center;
   /*gap: 0.7rem;*/
-  width: 140px;
+  width: 160px;
   height: 30px;
   align-items: center;
   justify-content: center;
   color: white;
   border: none;
+  white-space: nowrap;  
 }
 
 .botao:hover {
