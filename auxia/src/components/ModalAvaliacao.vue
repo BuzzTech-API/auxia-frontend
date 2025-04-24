@@ -75,6 +75,7 @@ const criterios = [
           <BoxAvaliacao v-for="(criterio, index) in criterios" :key="index" :criterioNumber="criterio.numero"
             :criterioDescription="criterio.descricao" :criterioNome="criterio.criterioNome"
             :awnserNumber="awnserNumber"/>
+
         </div>
       </div>
 
@@ -114,7 +115,7 @@ const criterios = [
 }
 
 .modal-container {
-  background: #D9D9D9;
+  background: #ffffff;
   padding: 1rem;
   border-radius: 1rem;
   height: 95%;
