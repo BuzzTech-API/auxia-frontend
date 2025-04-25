@@ -8,9 +8,11 @@ import { ref } from 'vue';
 import { useAwnserOneStore } from '@/stores/awnserOne';
 import { useAwnserTwoStore } from '@/stores/awnserTwo';
 import ModalRespostaBackErro from '@/components/ModalRespostaBackErro.vue';
+import BtnRecarregar from '@/components/buttons/BtnRecarregar.vue';
 
 const prompt = ref("");
 const carregando = ref(false);
+const timeout = ref(false);
 const awnserOne = useAwnserOneStore()
 const awnserTwo = useAwnserTwoStore()
 
@@ -19,7 +21,7 @@ async function enviarPergunta() {
   carregando.value = true;
 
   try {
-    const request = await api.post("/ai/generate", { prompt: prompt.value });
+    const request = await api.post("/ai/generate", { prompt: prompt.value }, { timeout: 20000 });
     awnserOne.ans_prompt = prompt.value
     awnserOne.ans_llm_awnser = request.data.response1
     awnserOne.ans_llm_model = request.data.modelLlm1
@@ -32,12 +34,14 @@ async function enviarPergunta() {
     setTimeout(() => {
       carregando.value = false;
       router.push({ name: 'resposta' });
-    }, 10);
+    },10);
 
     prompt.value = "";
 
   } catch (error) {
     console.error("Erro ao enviar pergunta:", error);
+    timeout.value= true;
+
   }
 }
 
@@ -57,9 +61,15 @@ async function enviarPergunta() {
 </script>
 
 <template>
-<div v-if="carregando">
+<div v-if="carregando && !timeout">
   <div class="container">
     <LoadingRespostas/>
+  </div>
+</div>
+<div v-else-if="carregando && timeout" class="aviso">
+  <div class="avisoConteudo">
+    <h3>Erro ao enviar sua resposta tente Novamente</h3>
+    <BtnRecarregar @click="enviarPergunta"/>
   </div>
 </div>
 
@@ -108,5 +118,29 @@ async function enviarPergunta() {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.aviso {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center;      
+  height: 100vh;            
+  position: absolute;       
+  top: 0;
+  left: 0;
+  width: 100%;             
+  background-color: #ffffff; 
+}
+
+.avisoConteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; 
+  padding: 20px;       
+  background-color: #d9d9d9; 
+  border-radius: 8px;   
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 </style>
