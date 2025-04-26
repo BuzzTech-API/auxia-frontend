@@ -3,17 +3,19 @@ import { defineEmits } from 'vue';
 import { useAwnserOneStore } from '@/stores/awnserOne';
 import { useAwnserTwoStore } from '@/stores/awnserTwo';
 import { ref, watch } from 'vue';
-
+import router from '@/router';
+import ModalRespostaIncoerente from '../modais/ModalRespostaIncoerente.vue';
 
 const emit = defineEmits(["click"]);
+
 const awnserOne = useAwnserOneStore();
 const awnserTwo = useAwnserTwoStore();
 
 const isEmpty = ref(!(awnserOne.ans_prefered_answer.length > 0 &&
   awnserOne.ans_prefered_answer_justify.length > 0 && awnserTwo.ans_prefered_answer.length > 0 &&
-  awnserTwo.ans_prefered_answer_justify.length > 0 ))
+  awnserTwo.ans_prefered_answer_justify.length > 0 ));
 
-const isIncoerente = ref(false)
+const isIncoerente = ref(false);
 
 watch(awnserOne, () => {
   isEmpty.value = !(awnserOne.ans_prefered_answer.length > 0 &&
@@ -21,25 +23,66 @@ watch(awnserOne, () => {
     awnserTwo.ans_prefered_answer_justify.length > 0 )  
   if (awnserOne.potuantionTotal > awnserTwo.potuantionTotal) {
     if (awnserOne.ans_prefered_answer === "Prefere muito a resposta da LLM1" || awnserOne.ans_prefered_answer ===  "Prefere a resposta da LLM1") {
-      isIncoerente.value = false
-      return
+      isIncoerente.value = false;
+      return;
     }
   }
+
   if (awnserOne.potuantionTotal === awnserTwo.potuantionTotal) {
     if (awnserOne.ans_prefered_answer === "Sem preferência de resposta") {
-      isIncoerente.value = false
-      return
+      isIncoerente.value = false;
+      return;
     }
   }
+
   if (awnserOne.potuantionTotal < awnserTwo.potuantionTotal) {
     if (awnserOne.ans_prefered_answer === "Prefere muito a resposta da LLM2" || awnserOne.ans_prefered_answer ===  "Prefere a resposta da LLM2") {
-      isIncoerente.value = false
-      return
+      isIncoerente.value = false;
+      return;
     }
   }
-  //isIncoerente.value = true
-}); 
 
+  isIncoerente.value = true;
+});
+
+const handleClick = () => {
+  if (!isEmpty.value && !isIncoerente.value) {
+    emit('click');
+  }
+};
+  //isIncoerente.value = true
+
+const visible = ref(false)
+//para modal
+
+const isOpen = ref(false);
+const openModal = () => {
+  isOpen.value = true;
+};
+
+
+async function sendAwnsers() { 
+  if (isIncoerente.value === true) {
+    isOpen.value = true;
+  }else{
+    const [responseOne , responseTwo] = await Promise.all([awnserOne.registerAwnser(),
+    awnserTwo.registerAwnser()])
+  if (responseOne && responseTwo) {
+    awnserOne.$reset()
+    awnserTwo.$reset()
+    router.replace("/")
+  }else{
+    visible.value = true
+  }
+
+  }
+  
+
+}
+
+const close = () => {
+  isOpen.value = false;
+};
 
 
 </script>
@@ -48,12 +91,20 @@ watch(awnserOne, () => {
   <div>
     <button class="confirm-button"
       id="confirmation-button"
-      :class="{'disabled': isEmpty || isIncoerente}"
+      :class="{ 'disabled': isEmpty || isIncoerente }"
       :disabled="isEmpty || isIncoerente"
-      @click="emit('click')">
+      @click="handleClick">
       <p class="texto"> Confirmar Escolha </p>
     </button>
   </div>
+
+  <ModalRespostaIncoerente :open="isOpen"
+  @click="close" 
+  titulo="ATENÇÃO" 
+  message="Sua resposta está incoerrente com sua avaliação, deseja prosseguir mesmo assim?"
+  
+  />
+
 </template>
 
 <style scoped>

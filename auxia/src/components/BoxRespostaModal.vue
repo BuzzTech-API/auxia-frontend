@@ -17,7 +17,7 @@ const respostaHTML = marked.parse(props.resposta);
 .container{
   width: 36.5rem;
   height: 28rem;
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 1.5rem;
   overflow-y: auto;
 }
