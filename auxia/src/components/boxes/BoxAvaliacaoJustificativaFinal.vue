@@ -4,28 +4,28 @@
         <div class="inputGroup">
           <div class="radioDiv">
             <label for="opcao1">Prefere muito a resposta da LLM1</label>
-            <RadioButton v-model="preferencia" inputId="opcao1" name="nota" value="Prefere muito a resposta da LLM1" />
+            <RadioButton v-model="preferencia" inputId="opcao1" name="nota" value="Prefere muito a resposta da LLM1" :class="{ 'p-invalid': !preferencia }"/>
           </div>
           <div class="radioDiv">
             <label for="opcao2">Prefere a resposta da LLM1</label>
-            <RadioButton v-model="preferencia" inputId="opcao2" name="nota" value="Prefere a resposta da LLM1" />
+            <RadioButton v-model="preferencia" inputId="opcao2" name="nota" value="Prefere a resposta da LLM1" :class="{ 'p-invalid': !preferencia }"/>
           </div>
           <div class="radioDiv">
             <label for="opcao3">Sem preferência de resposta</label>
-            <RadioButton v-model="preferencia" inputId="opcao3" name="nota" value="Sem preferência de resposta" />
+            <RadioButton v-model="preferencia" inputId="opcao3" name="nota" value="Sem preferência de resposta" :class="{ 'p-invalid': !preferencia }"/>
           </div>
           <div class="radioDiv">
             <label for="opcao4">Prefere a resposta da LLM2</label>
-            <RadioButton v-model="preferencia" inputId="opcao4" name="nota" value="Prefere a resposta da LLM2" />
+            <RadioButton v-model="preferencia" inputId="opcao4" name="nota" value="Prefere a resposta da LLM2" :class="{ 'p-invalid': !preferencia }"/>
           </div>
           <div class="radioDiv">
             <label for="opcao5">Prefere muito a resposta da LLM2</label>
-            <RadioButton v-model="preferencia" inputId="opcao5" name="nota" value="Prefere muito a resposta da LLM2" />
+            <RadioButton v-model="preferencia" inputId="opcao5" name="nota" value="Prefere muito a resposta da LLM2" :class="{ 'p-invalid': !preferencia }"/>
           </div>
         </div>
         <div class="justificativa">
           <h3>Justificativa</h3>
-          <Textarea class="textarea" v-model="justify" rows="3" />
+          <Textarea class="textarea" v-model="justify" rows="3" :invalid="!justify.trim()" placeholder="Escreva sua justificaviva aqui. Ex: A resposta 1 foi melhor pois...."/>
         </div>
       </template>
     </Card>
@@ -33,14 +33,16 @@
 
   <script setup lang="ts">
   import { useAwnserOneStore } from '@/stores/awnserOne';
-import { useAwnserTwoStore } from '@/stores/awnserTwo';
-import Card from 'primevue/card';
+  import { useAwnserTwoStore } from '@/stores/awnserTwo';
+  import Card from 'primevue/card';
   import RadioButton from 'primevue/radiobutton';
   import Textarea from 'primevue/textarea';
   import { ref, watch } from 'vue';
 
   const awnserOne = useAwnserOneStore()
   const awnserTwo = useAwnserTwoStore();
+
+ //const value = ref(null);
 
 //   defineProps<{
 //   preferencia: number;
@@ -62,6 +64,8 @@ import Card from 'primevue/card';
     awnserTwo.ans_prefered_answer_justify = newJustify
 
   });
+
+
   </script>
 
   <style scoped>
@@ -100,5 +104,10 @@ import Card from 'primevue/card';
     background-color: #ffffff;
     border-radius: 5px;
   }
+
+  .p-radiobutton.p-invalid .p-radiobutton-box {
+  border: 2px solid red !important;
+}
+
   </style>
 

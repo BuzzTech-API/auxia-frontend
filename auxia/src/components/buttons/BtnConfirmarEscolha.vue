@@ -3,6 +3,8 @@ import { defineEmits } from 'vue';
 import { useAwnserOneStore } from '@/stores/awnserOne';
 import { useAwnserTwoStore } from '@/stores/awnserTwo';
 import { ref, watch } from 'vue';
+import router from '@/router';
+import ModalRespostaIncoerente from '../modais/ModalRespostaIncoerente.vue';
 
 const emit = defineEmits(["click"]);
 
@@ -18,8 +20,7 @@ const isIncoerente = ref(false);
 watch(awnserOne, () => {
   isEmpty.value = !(awnserOne.ans_prefered_answer.length > 0 &&
     awnserOne.ans_prefered_answer_justify.length > 0 && awnserTwo.ans_prefered_answer.length > 0 &&
-    awnserTwo.ans_prefered_answer_justify.length > 0 );
-
+    awnserTwo.ans_prefered_answer_justify.length > 0 )  
   if (awnserOne.potuantionTotal > awnserTwo.potuantionTotal) {
     if (awnserOne.ans_prefered_answer === "Prefere muito a resposta da LLM1" || awnserOne.ans_prefered_answer ===  "Prefere a resposta da LLM1") {
       isIncoerente.value = false;
@@ -49,6 +50,41 @@ const handleClick = () => {
     emit('click');
   }
 };
+  //isIncoerente.value = true
+
+const visible = ref(false)
+//para modal
+
+const isOpen = ref(false);
+const openModal = () => {
+  isOpen.value = true;
+};
+
+
+async function sendAwnsers() { 
+  if (isIncoerente.value === true) {
+    isOpen.value = true;
+  }else{
+    const [responseOne , responseTwo] = await Promise.all([awnserOne.registerAwnser(),
+    awnserTwo.registerAwnser()])
+  if (responseOne && responseTwo) {
+    awnserOne.$reset()
+    awnserTwo.$reset()
+    router.replace("/")
+  }else{
+    visible.value = true
+  }
+
+  }
+  
+
+}
+
+const close = () => {
+  isOpen.value = false;
+};
+
+
 </script>
 
 <template>
@@ -61,6 +97,14 @@ const handleClick = () => {
       <p class="texto"> Confirmar Escolha </p>
     </button>
   </div>
+
+  <ModalRespostaIncoerente :open="isOpen"
+  @click="close" 
+  titulo="ATENÇÃO" 
+  message="Sua resposta está incoerrente com sua avaliação, deseja prosseguir mesmo assim?"
+  
+  />
+
 </template>
 
 <style scoped>
