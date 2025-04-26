@@ -3,6 +3,8 @@ import { defineEmits } from 'vue';
 import { useAwnserOneStore } from '@/stores/awnserOne';
 import { useAwnserTwoStore } from '@/stores/awnserTwo';
 import { ref, watch } from 'vue';
+import router from '@/router';
+import ModalRespostaIncoerente from '../modais/ModalRespostaIncoerente.vue';
 
 
 const emit = defineEmits(["click"]);
@@ -40,6 +42,37 @@ watch(awnserOne, () => {
   //isIncoerente.value = true
 }); 
 
+const visible = ref(false)
+//para modal
+
+const isOpen = ref(false);
+const openModal = () => {
+  isOpen.value = true;
+};
+
+
+async function sendAwnsers() { 
+  if (isIncoerente.value === true) {
+    isOpen.value = true;
+  }else{
+    const [responseOne , responseTwo] = await Promise.all([awnserOne.registerAwnser(),
+    awnserTwo.registerAwnser()])
+  if (responseOne && responseTwo) {
+    awnserOne.$reset()
+    awnserTwo.$reset()
+    router.replace("/")
+  }else{
+    visible.value = true
+  }
+
+  }
+  
+
+}
+
+const close = () => {
+  isOpen.value = false;
+};
 
 
 </script>
@@ -48,12 +81,20 @@ watch(awnserOne, () => {
   <div>
     <button class="confirm-button"
       id="confirmation-button"
-      :class="{'disabled': isEmpty || isIncoerente}"
-      :disabled="isEmpty || isIncoerente"
-      @click="emit('click')">
+      :class="{'disabled': isEmpty }"
+      :disabled="isEmpty "
+      @click="sendAwnsers()">
       <p class="texto"> Confirmar Escolha </p>
     </button>
   </div>
+
+  <ModalRespostaIncoerente :open="isOpen"
+  @click="close" 
+  titulo="ATENÇÃO" 
+  message="Sua resposta está incoerrente com sua avaliação, deseja prosseguir mesmo assim?"
+  
+  />
+
 </template>
 
 <style scoped>

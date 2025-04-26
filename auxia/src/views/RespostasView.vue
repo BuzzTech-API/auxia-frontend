@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import BoxRespostaIA from '@/components/BoxRespostaIA.vue';
+import BoxRespostaIA from '@/components/boxes/BoxRespostaIA.vue';
 import BtnVoltar from '@/components/buttons/BtnVoltar.vue';
 import BtnConfirmarAvaliacao from '@/components/buttons/BtnConfirmarAvaliacao.vue';
 import { useAwnserOneStore } from '@/stores/awnserOne';
 import { useAwnserTwoStore } from '@/stores/awnserTwo';
 import { ref, watch } from 'vue';
-import ModalAvaliacao from '@/components/ModalAvaliacao.vue';
+import ModalAvaliacao from '@/components/modais/ModalAvaliacao.vue';
 import { useRouter } from 'vue-router';
 import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';

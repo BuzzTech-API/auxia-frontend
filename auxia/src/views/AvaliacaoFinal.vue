@@ -18,18 +18,7 @@ const voltar = () => {
 const visible = ref(false)
 const awnserOne = useAwnserOneStore();
 const awnserTwo = useAwnserTwoStore();
-async function sendAwnsers() {
-  const [responseOne , responseTwo] = await Promise.all([awnserOne.registerAwnser(),
-    awnserTwo.registerAwnser()])
-  if (responseOne && responseTwo) {
-    awnserOne.$reset()
-    awnserTwo.$reset()
-    router.replace("/")
-  }else{
-    visible.value = true
-  }
 
-}
 </script>
 
 
@@ -84,7 +73,7 @@ async function sendAwnsers() {
 
     <div class="rodape">
       <BoxAvaliacaoJustificativaFinal/>
-      <BtnConfirmarEscolha @click="sendAwnsers()"  />
+      <BtnConfirmarEscolha />
     </div>
   </div>
 
