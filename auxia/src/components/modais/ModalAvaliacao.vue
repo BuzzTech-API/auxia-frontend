@@ -1,11 +1,10 @@
-
 <script setup lang="ts">
 import { computed, defineProps } from 'vue'
 import BoxResposta from '@/components/boxes/BoxRespostaModal.vue'
 import BoxAvaliacao from '@/components/boxes/BoxCriterio.vue'
 import BtnConfirmarAvaliacao from '../buttons/BtnConfirmarAvaliacao.vue';
 import BtnVoltar from '../buttons/BtnVoltar.vue';
-import {useAwnserOneStore } from '@/stores/awnserOne.ts'
+import { useAwnserOneStore } from '@/stores/awnserOne.ts'
 import { useAwnserTwoStore } from '@/stores/awnserTwo.ts';
 const emit = defineEmits(['close']);
 
@@ -23,29 +22,18 @@ const respostaTexto = computed(() => {
   } else if (props.awnserNumber === 2) {
     return awnserTwo.ans_llm_awnser;
   }
-  return ''; 
+  return '';
 });
-
-
-const nomeLLM = computed(() => {
-  if (props.awnserNumber === 1) {
-    return awnserOne.ans_llm_model; 
-  } else if (props.awnserNumber === 2) {
-    return awnserTwo.ans_llm_model;  
-  }
-  return ''; 
-});
-
 
 
 const criterios = [
-  { numero: 1, awnserNumber: props.awnserNumber, descricao: 'A resposta atende à intenção do usuário e está diretamente relacionada ao prompt fornecido?', criterioNome: 'Relevância da Resposta'  },
-  { numero: 2, awnserNumber: props.awnserNumber, descricao: 'A resposta é bem estruturada, gramaticalmente correta e de fácil compreensão?', criterioNome: 'Coerência e Clareza'  },
-  { numero: 3, awnserNumber: props.awnserNumber, descricao: 'As informações apresentadas são corretas e baseadas em fontes confiáveis?', criterioNome: 'Exatidão e Confiabilidade (Veracidade da Resposta)'  },
-  { numero: 4, awnserNumber: props.awnserNumber, descricao: 'A resposta fornece explicações ou justificativas adequadas para embasar seu conteúdo?', criterioNome: 'Exposição e Justificativa'  },
-  { numero: 5, awnserNumber: props.awnserNumber, descricao: 'O modelo seguiu exatamente as instruções fornecidas no prompt? Se houve alguma falha, qual foi?', criterioNome: 'Seguiu as Instruções?'  },
-  { numero: 6, awnserNumber: props.awnserNumber, descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterioNome: 'Idioma da Resposta é o Mesmo da Pergunta'  },
-  { numero: 7, awnserNumber: props.awnserNumber, descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterioNome: 'Resposta Agressiva ou Ofensiva?'  },
+  { numero: 1, awnserNumber: props.awnserNumber, descricao: 'A resposta atende à intenção do usuário e está diretamente relacionada ao prompt fornecido?', criterioNome: 'Relevância da Resposta' },
+  { numero: 2, awnserNumber: props.awnserNumber, descricao: 'A resposta é bem estruturada, gramaticalmente correta e de fácil compreensão?', criterioNome: 'Coerência e Clareza' },
+  { numero: 3, awnserNumber: props.awnserNumber, descricao: 'As informações apresentadas são corretas e baseadas em fontes confiáveis?', criterioNome: 'Exatidão e Confiabilidade (Veracidade da Resposta)' },
+  { numero: 4, awnserNumber: props.awnserNumber, descricao: 'A resposta fornece explicações ou justificativas adequadas para embasar seu conteúdo?', criterioNome: 'Exposição e Justificativa' },
+  { numero: 5, awnserNumber: props.awnserNumber, descricao: 'O modelo seguiu exatamente as instruções fornecidas no prompt? Se houve alguma falha, qual foi?', criterioNome: 'Seguiu as Instruções?' },
+  { numero: 6, awnserNumber: props.awnserNumber, descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterioNome: 'Idioma da Resposta é o Mesmo da Pergunta' },
+  { numero: 7, awnserNumber: props.awnserNumber, descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterioNome: 'Resposta Agressiva ou Ofensiva?' },
 ];
 
 
@@ -57,38 +45,34 @@ const criterios = [
 
       <div class="header">
         <div>
-        <BtnVoltar @click="emit('close')" class="voltar-button" />
+          <BtnVoltar @click="emit('close')" class="voltar-button" />
         </div>
 
         <div>
-          <h2 class="modal-title">{{ nomeLLM }}</h2>
+          <h2 class="modal-title">Resposta {{ props.awnserNumber }}</h2>
         </div>
 
       </div>
 
       <div class="modal-content">
         <!-- Box de Respostas -->
-          <BoxResposta :resposta="respostaTexto" />
-        
+        <BoxResposta :resposta="respostaTexto" />
+
         <!-- Box de Criterio -->
         <div class="avaliacao-container">
           <BoxAvaliacao v-for="(criterio, index) in criterios" :key="index" :criterioNumber="criterio.numero"
             :criterioDescription="criterio.descricao" :criterioNome="criterio.criterioNome"
-            :awnserNumber="awnserNumber"/>
+            :awnserNumber="awnserNumber" />
 
         </div>
       </div>
 
       <div class="btnConfirmaAvaliacao">
-        <BtnConfirmarAvaliacao :hasArrow="false"
-        v-if="awnserNumber===1"
-        :disabled="!awnserOne.allStandardIsJustifyAndPontuated()"
-        @click="emit('close')"/>
+        <BtnConfirmarAvaliacao :hasArrow="false" v-if="awnserNumber === 1"
+          :disabled="!awnserOne.allStandardIsJustifyAndPontuated()" @click="emit('close')" />
 
-        <BtnConfirmarAvaliacao :hasArrow="false"
-        v-else-if="awnserNumber===2"
-        :disabled="!awnserTwo.allStandardIsJustifyAndPontuated()" 
-        @click="emit('close')"/>
+        <BtnConfirmarAvaliacao :hasArrow="false" v-else-if="awnserNumber === 2"
+          :disabled="!awnserTwo.allStandardIsJustifyAndPontuated()" @click="emit('close')" />
       </div>
 
     </div>
@@ -127,12 +111,12 @@ const criterios = [
   gap: 4%;
 }
 
-.header{
+.header {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   gap: 33%;
- 
+
 }
 
 
@@ -141,7 +125,7 @@ const criterios = [
   width: 47rem;
   gap: 1.5rem;
   width: 100%;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .avaliacao-container {
@@ -160,7 +144,7 @@ const criterios = [
   margin-top: 0.5rem;
 }
 
-.btnConfirmaAvaliacao{
+.btnConfirmaAvaliacao {
   display: contents;
   flex-direction: row;
   justify-content: end;
