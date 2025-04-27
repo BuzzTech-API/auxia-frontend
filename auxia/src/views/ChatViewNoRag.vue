@@ -23,7 +23,7 @@ async function enviarPergunta() {
   carregando.value = true;
 
   try {
-    const request = await api.post("/ai/generate", { prompt: prompt.value }, { timeout: 30000 });
+    const request = await api.post("/ai/generatenorag", { prompt: prompt.value }, { timeout: 40000 });
     awnserOne.ans_prompt = prompt.value
     awnserOne.ans_llm_awnser = request.data.response1
     awnserOne.ans_llm_model = request.data.modelLlm1
@@ -31,13 +31,14 @@ async function enviarPergunta() {
     awnserTwo.ans_llm_awnser = request.data.response2
     awnserTwo.ans_llm_model = request.data.modelLlm2
 
+
+
     toast.add({
       severity: 'success',
       summary: 'Sucesso!',
-      detail: 'Resposta gerada com sucesso!',
+      detail: 'Respostas gerada com sucesso!',
       life: 3000
     })
-
     setTimeout(() => {
       carregando.value = false;
       router.push({ name: 'resposta' });
@@ -46,22 +47,35 @@ async function enviarPergunta() {
     prompt.value = "";
 
   } catch (error) {
+    console.error("Erro ao enviar pergunta:", error);
     toast.add({
       severity: 'error',
       summary: 'Falha!',
       detail: 'Falha no envio da pergunta!',
       life: 3000
     })
-    console.error("Erro ao enviar pergunta:", error);
     timeout.value = true;
 
   }
 }
 
+// testanto modal:
+// const isModalOpen = ref(false);
+
+// const openModal = () => {
+//   console.log("Opening Modal"); // Debug
+//   isModalOpen.value = true;
+// };
+
+// const closeModal = () => {
+//   console.log("Closing Modal"); // Debug
+//   isModalOpen.value = false;
+// };
+
 </script>
 
 <template>
-  <Toast position="top-center" />
+  <Toast position="center" />
   <div v-if="carregando && !timeout">
     <div class="container">
       <LoadingRespostas />
@@ -84,6 +98,16 @@ async function enviarPergunta() {
         <InputPrompt v-model="prompt" @click="enviarPergunta" />
       </div>
 
+      <!-- <div>
+    <button @click="openModal">Abrir Modal</button>
+
+    <ModalRespostaBackErro
+      :open="isModalOpen"
+      message="Ocorreu um erro."
+      icon=""
+      @close="closeModal"
+    />
+  </div> -->
 
     </div>
   </div>

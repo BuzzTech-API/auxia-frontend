@@ -12,6 +12,11 @@ const router = createRouter({
       component: () => import('../views/ChatView.vue'),
     },
     {
+      path: '/norag',
+      name: 'norag',
+      component: () => import('../views/ChatViewNoRag.vue'),
+    },
+    {
       path: '/resposta',
       name: 'resposta',
       component: () => import('../views/RespostasView.vue'),
