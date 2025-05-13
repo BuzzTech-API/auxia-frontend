@@ -16,7 +16,7 @@ const respostaHTML = marked.parse(props.resposta);
 <template>
   <div class="card">
     <div>
-      <h2>Respota {{ awnserNumber }}</h2>
+      <h2>Resposta {{ awnserNumber }}</h2>
     </div>
 
     <div>
