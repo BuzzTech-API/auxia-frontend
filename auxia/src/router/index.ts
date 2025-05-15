@@ -47,6 +47,10 @@ const router = createRouter({
       name: 'lalala',
       component: () => import('../views/Lalala.vue'),
     },
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LoginView.vue')
+    }
   ],
 })
 
