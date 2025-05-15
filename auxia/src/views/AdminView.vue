@@ -1,5 +1,8 @@
 <template>
   <div class="admin-container">
+    <div class="header">
+      <MenuUser />
+    </div>
     <h1 class="title">Painel Administrativo</h1>
 
     <div class="admin-panel">
@@ -7,20 +10,20 @@
 
         <div class="search-section">
 
-            <InputText type="text" v-model="value" placeholder="Pesquisar usuário" />
-            <Button label="" icon="pi pi-search" iconPos="top" />
+          <InputText type="text" v-model="value" placeholder="Pesquisar usuário" />
+          <Button label="" icon="pi pi-search" iconPos="top" />
 
         </div>
         <select v-model="filter" class="filter-select">
-        <option value="">Todos</option>
-        <option value="admin">Administradores</option>
-        <option value="comum">Usuários Comuns</option>
-        <option value="ativo">Ativos</option>
-        <option value="inativo">Inativos</option>
+          <option value="">Todos</option>
+          <option value="admin">Administradores</option>
+          <option value="comum">Usuários Comuns</option>
+          <option value="ativo">Ativos</option>
+          <option value="inativo">Inativos</option>
         </select>
 
         <button class="create-button" @click="handleCreateUser">
-        Novo Usuário
+          Novo Usuário
         </button>
       </div>
 
@@ -35,6 +38,7 @@ import { ref } from 'vue'
 import UserList from '../components/list/UserList.vue'
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
+import MenuUser from '@/components/menu/MenuUser.vue';
 
 const searchQuery = ref('')
 const filter = ref('')
@@ -54,6 +58,11 @@ const handleCreateUser = () => {
   min-height: 100vh;
   background-color: #585858;
   padding: 1.5rem;
+}
+
+.header {
+  width: 100%;
+  padding-left: 4rem;
 }
 
 .admin-panel {

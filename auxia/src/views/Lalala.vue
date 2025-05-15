@@ -1,26 +1,25 @@
 <template>
-    <div>
-        <h1>Lalala View</h1>
+  <div>
+    <h1>Lalala View</h1>
 
-        <ModalGenerico :open="isOpen"
-        @close="isOpen = false" titulo="ATENÇÃO" message="Sua resposta está incoerrente com sua avaliação, deseja prosseguir mesmo assim?"
-        />
+    <ModalGenerico :open="isOpen" @close="isOpen = false" titulo="ATENÇÃO"
+      message="Sua resposta está incoerrente com sua avaliação, deseja prosseguir mesmo assim?" />
 
-        <!-- <ModalComponent :isVisible="isModalVisible" :awnserNumber="1" @close="isModalVisible = false" />
+    <!-- <ModalComponent :isVisible="isModalVisible" :awnserNumber="1" @close="isModalVisible = false" />
         <button @click="isModalVisible = true">Abrir Modal</button>
             <p>Esta página será excluída posteriormente e substituída pela página de resposta. :)</p> -->
 
     <button @click="openModal">
-    Open Modal
+      Open Modal
     </button>
 
-  <!-- <ModalRespostaBackErro
+    <!-- <ModalRespostaBackErro
     :open="isOpen"
     @close="isOpen = false"
     message="Infelizmente houve um problema ao carregar suas respostas"
     icon="pi pi-info-circle"
   /> -->
-    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

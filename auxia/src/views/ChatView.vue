@@ -10,6 +10,7 @@ import { useAwnserTwoStore } from '@/stores/awnserTwo';
 import BtnRecarregar from '@/components/buttons/BtnRecarregar.vue';
 import { useToast } from 'primevue';
 import Toast from 'primevue/toast';
+import MenuUser from '@/components/menu/MenuUser.vue';
 
 const prompt = ref("");
 const carregando = ref(false);
@@ -77,6 +78,9 @@ async function enviarPergunta() {
   <div v-else>
     <div class="container">
 
+      <div class="header">
+        <MenuUser />
+      </div>
       <div class="box">
         <BoxTextoInicial />
       </div>
@@ -97,6 +101,11 @@ async function enviarPergunta() {
   align-items: center;
   height: 100vh;
   position: relative;
+}
+
+.header {
+  width: 100%;
+  padding-left: 4rem;
 }
 
 .box {
