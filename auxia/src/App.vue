@@ -9,4 +9,9 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <style scoped>
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 </style>
+

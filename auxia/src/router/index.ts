@@ -31,6 +31,11 @@ const router = createRouter({
       name: 'lalala',
       component: () => import('../views/Lalala.vue'),
     },
+    {
+      path: '/AdminView',
+      name: 'AdminView',
+      component: () => import('../views/AdminView.vue'),
+    },
   ],
 })
 
