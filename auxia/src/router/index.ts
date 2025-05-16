@@ -27,14 +27,19 @@ const router = createRouter({
       component: () => import('../views/AvaliacaoFinal.vue'),
     },
     {
-      path: '/lalala',
-      name: 'lalala',
-      component: () => import('../views/Lalala.vue'),
-    },
-    {
       path: '/AdminView',
       name: 'AdminView',
       component: () => import('../views/AdminView.vue'),
+    },
+    {
+      path: '/cadastroUsuario',
+      name: 'AdminView',
+      component: () => import('../views/CadastroUsuario.vue'),
+    },
+    {
+      path: '/lalala',
+      name: 'lalala',
+      component: () => import('../views/Lalala.vue'),
     },
   ],
 })

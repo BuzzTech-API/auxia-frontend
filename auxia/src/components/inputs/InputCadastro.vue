@@ -56,32 +56,44 @@ const campoInvalido = computed(() => {
         <i :class="iconeSenha"></i>
       </button>
     </div>
-    
+     
   </div>
   <small v-if="campoInvalido" class="mensagem">Campo obrigatório</small>
+ 
 </template>
 
 <style scoped>
 .container{
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 95%;
     gap: 0.75rem;
+    
+    
+}
+
+label{
+  color: white;
+  font-weight: bold;
 }
 
 .input {
   position: relative;
+  
 }
 
 .input input {
   width: 100%;
   padding-right: 2.5rem; 
   box-sizing: border-box;
+  background-color: #DFDFDF;
 }
 
 .mensagem {
   color: red;
-  margin-left: 4px;
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+  margin-top: 0.2rem;
 }
 
 .btn-senha {
