@@ -1,7 +1,8 @@
 /* @import './base.css'; */
 
-body{
+body {
   margin: 0px;
+  background-color: #585858;
   font-family: 'Roboto', sans-serif;
 
 }
@@ -9,7 +10,23 @@ body{
 #app {
   font-weight: normal;
 }
-/* 
+
+.p-menu-overlay {
+  background: #363636;
+  border: none;
+}
+
+.p-menu-list {
+  background: #363636;
+  border: none;
+}
+
+.p-menu {
+  background: #363636 !important;
+  border: none !important;
+}
+
+/*
 header{
   font-size: 2em;
   margin-bottom: 20px;
@@ -18,12 +35,11 @@ header{
   text-align: center;
 } */
 
-input{
+input {
   background-color: #D9D9D9;
   outline: none;
 }
 
-.boxCinza{
+.boxCinza {
   background-color: #D9D9D9;
 }
-
