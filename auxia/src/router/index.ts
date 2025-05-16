@@ -29,11 +29,6 @@ const router = createRouter({
       component: () => import('../views/AvaliacaoFinal.vue'),
     },
     {
-      path: '/lalala',
-      name: 'lalala',
-      component: () => import('../views/Lalala.vue'),
-    },
-    {
       path: '/AdminView',
       name: 'AdminView',
       component: () => import('../views/AdminView.vue'),
@@ -43,6 +38,15 @@ const router = createRouter({
       name: 'login',
       component: () => import('../views/LoginView.vue')
     }
+      path: '/cadastroUsuario',
+      name: 'AdminView',
+      component: () => import('../views/CadastroUsuario.vue'),
+    },
+    {
+      path: '/lalala',
+      name: 'lalala',
+      component: () => import('../views/Lalala.vue'),
+    },
   ],
 })
 
