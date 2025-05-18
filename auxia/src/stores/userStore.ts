@@ -42,6 +42,9 @@ export const useUserStore = defineStore('user', {
       if (request.status === 200) {
         localStorage.setItem("token", request.data.access_token)
         await this.getMe()
+      } else if (request.status === 401) {
+        throw "Crendintials Invalid";
+
       }
     },
   }

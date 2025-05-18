@@ -1,122 +1,71 @@
-import api from '@/services/api';
+// src/router/index.ts
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/stores/userStore'
+import { storeToRefs } from 'pinia'
+import api from '@/services/api'
+import { createPinia } from 'pinia'
 
-
-
-
+const pinia = createPinia() // Cria manualmente uma instância para uso fora do setup
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-
-    {
-      path: '/',
-      name: 'home',
-      component: () => import('../views/ChatView.vue'),
-    },
-    {
-      path: '/norag',
-      name: 'norag',
-      component: () => import('../views/ChatViewNoRag.vue'),
-    },
-    {
-      path: '/resposta',
-      name: 'resposta',
-      component: () => import('../views/RespostasView.vue'),
-    },
-    {
-      path: '/avaliacaoFinal',
-      name: 'avaliacaoFinal',
-      component: () => import('../views/AvaliacaoFinal.vue'),
-    },
-    {
-      path: '/AdminView',
-      name: 'AdminView',
-      component: () => import('../views/AdminView.vue'),
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/LoginView.vue')
-    }
-      path: '/cadastroUsuario',
-      name: 'AdminView',
-      component: () => import('../views/CadastroUsuario.vue'),
-    },
-    {
-      path: '/lalala',
-      name: 'lalala',
-      component: () => import('../views/Lalala.vue'),
-    },
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/LoginView.vue')
-    }
-  ],
+    { path: '/', name: 'home', component: () => import('../views/ChatView.vue') },
+    { path: '/norag', name: 'norag', component: () => import('../views/ChatViewNoRag.vue') },
+    { path: '/resposta', name: 'resposta', component: () => import('../views/RespostasView.vue') },
+    { path: '/avaliacaoFinal', name: 'avaliacaoFinal', component: () => import('../views/AvaliacaoFinal.vue') },
+    { path: '/AdminView', name: 'AdminView', component: () => import('../views/AdminView.vue') },
+    { path: '/login', name: 'login', component: () => import('../views/LoginView.vue') },
+    { path: '/cadastroUsuario', name: 'CadastroUsuario', component: () => import('../views/CadastroUsuario.vue') },
+    { path: '/lalala', name: 'lalala', component: () => import('../views/Lalala.vue') },
+  ]
 })
 
-async function isTokenValid() {
-  const token = localStorage.getItem('token');
-  // Aqui você pode adicionar lógica de expiração ou validação JWT
-  if (token) {
-    const me = await api.get("/user/me/", {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    })
-    if (me.status === 200) {
-      return true
-    }
-  }
+function removeToken() {
   localStorage.removeItem('token')
-  return false
 }
 
-async function isAdminastrator(): Promise<boolean> {
-  const token = localStorage.getItem('token');
-  // Aqui você pode adicionar lógica de expiração ou validação JWT
-  if (token) {
-    const me = await api.get("/user/me/", {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    })
-    if (me.status === 200) {
-      return me.data.usr_is_adm
-    }
+// getMe com integração à store global
+async function fetchUserAndSyncStore() {
+  const token = localStorage.getItem('token')
+  if (!token) {
+    removeToken()
+    return null
   }
-  localStorage.removeItem('token')
-  return false
-}
 
+  try {
+    const response = await api.get("/user/me/", {
+      headers: { Authorization: "Bearer " + token }
+    })
+
+    const store = useUserStore(pinia)
+    store.usr_email = response.data.usr_email
+    store.usr_name = response.data.usr_name
+    store.usr_is_adm = response.data.usr_is_adm
+    store.usr_is_active = response.data.usr_is_active
+
+    return response.data
+  } catch (error) {
+    removeToken()
+    return null
+  }
+}
 
 router.beforeEach(async (to, from, next) => {
-  const isAuthenticated = await isTokenValid();
-  const isAdm = await isAdminastrator()
+  const user = await fetchUserAndSyncStore()
 
-  // Se o usuário NÃO está autenticado
-  if (!isAuthenticated) {
-    // Qualquer rota que não seja login deve ir para login
-    if (to.path !== '/login') {
-      return next('/login');
-    }
-    return next(); // Permite ir para login
+  if (!user) {
+    if (to.path !== '/login') return next('/login')
+    return next()
   }
 
-  // Se o usuário ESTÁ autenticado
-  if (isAuthenticated) {
-    // Evita que vá para login se já estiver logado
-    if (to.path === '/login') {
-      return next('/');
-    }
+  if (to.path === '/login') return next('/')
 
-    // Se tentar acessar rota de admin e não for admin
-    if (to.path === '/AdminView' && !isAdm) {
-      return next('/'); // ou para uma rota "acesso negado"
-    }
+  if (to.path === '/AdminView' && !user.usr_is_adm) {
+    return next('/')
   }
 
-  // Se passou por tudo, permite a navegação
-  next();
-});
+  return next()
+})
 
 export default router
+
