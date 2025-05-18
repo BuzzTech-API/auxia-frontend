@@ -63,7 +63,7 @@ async function logar() {
 .container {
   display: flex;
   gap: 3rem;
-
+  background: #363636;
   flex-direction: column;
   color: #FFF;
   align-items: center;
