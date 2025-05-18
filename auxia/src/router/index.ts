@@ -42,7 +42,7 @@ async function fetchUserAndSyncStore() {
     store.usr_name = response.data.usr_name
     store.usr_is_adm = response.data.usr_is_adm
     store.usr_is_active = response.data.usr_is_active
-
+    
     return response.data
   } catch (error) {
     removeToken()
@@ -65,6 +65,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   return next()
+
 })
 
 export default router
