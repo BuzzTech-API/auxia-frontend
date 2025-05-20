@@ -28,7 +28,7 @@
       </div>
 
       <!-- Lista de usuários -->
-      <UserList @delete="handleDeleteUser"/>
+      <UserList />
     </div>
   </div>
 </template>
@@ -39,30 +39,9 @@ import UserList from '../components/list/UserList.vue'
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import MenuUser from '@/components/menu/MenuUser.vue';
-import { useToast } from 'primevue';
 
 const searchQuery = ref('')
 const filter = ref('')
-
-const toast = useToast();
-const handleDeleteUser = (payload: { success: boolean; email: string; error?: unknown }) => {
-  try { 
-    toast.add({
-        severity: 'success',
-        summary: 'Sucesso!',
-        detail: 'Usuário excluido com sucesso!',
-        life: 3000
-      })
-
-  } catch (error) {
-    toast.add({
-      severity: 'error',
-      summary: 'Falha!',
-      detail: 'Falha ao excluir usuário!',
-      life: 3000
-    })
-  }
-}
 
 const handleSearch = () => {
   console.log('Pesquisar por:', searchQuery.value, 'Filtro:', filter.value)

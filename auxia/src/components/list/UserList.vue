@@ -32,7 +32,7 @@ interface User {
 }
 
 const emit = defineEmits<{
-  (e: 'delete', payload: { success: boolean, email: string, error?: unknown }): void
+  (e: 'delete', user: any): void
   (e: 'edit', user: any): void
 }>()
 
@@ -43,8 +43,6 @@ onMounted(() => {
   
   // Inserir usuários falsos para testar
   /*userStore.usrs = [
-    { name: 'Vitor Lima', email: 'lima@auxia.com', type: 'admin', status: 'ativo' },
-  { name: 'Ivan Germano', email: 'germano@auxia.com', type: 'comum', status: 'inativo' },
   { name: 'Vitor Lima', email: 'lima@auxia.com', type: 'admin', status: 'ativo' },
   { name: 'Ivan Germano', email: 'germano@auxia.com', type: 'comum', status: 'inativo' }
   ]*/
@@ -56,8 +54,8 @@ const handleEdit = (user: any) => {
   emit('edit', user)
 }
 
-const handleDelete = (payload: { success: boolean, email: string, error?: unknown }) => {
-  emit('delete', payload)
+const handleDelete = (user: any) => {
+  emit('delete', user)
 }
 </script>
 
