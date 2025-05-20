@@ -7,8 +7,8 @@ export const useUserStore = defineStore('user', {
       usr_email: "",
       usr_name: "",
       usr_is_adm: false,
-      usr_is_active: true
-
+      usr_is_active: true,
+      usrs: [] as any[]
     }
   },
 
@@ -47,6 +47,45 @@ export const useUserStore = defineStore('user', {
 
       }
     },
+    async getAll() {
+      const token = localStorage.getItem('token');
+      const all = await api.get("/user", {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+      if (all.status === 200) {
+        this.usrs = all.data.map((u: any) => ({
+        name: u.usr_name,
+        email: u.usr_email,
+        type: u.usr_is_adm ? 'admin' : 'comum',
+        status: u.usr_is_active ? true : false
+      }))
+      }
+    },
+    async deleteByEmail(email: string) {
+      const token = localStorage.getItem('token');
+      const del = await api.delete(`/user/${email}`, {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+      if (del.status === 200) {
+        this.getAll();
+      }
+    },
+    
+    //Simular resposta da requisição para testar fluxo de atualizar a lista ao deletar usuário
+    /*async deleteByEmail(email: string) {
+      // Simulando atraso e sucesso como se fosse uma chamada real
+      return new Promise<void>((resolve) => {
+        setTimeout(() => {
+          // Remove o usuário da lista local como se tivesse sido deletado
+          this.usrs = this.usrs.filter(u => u.email !== email);
+          resolve();
+        }, 500); // tempo simulado de resposta da API
+      });
+    },*/
   }
 
 })

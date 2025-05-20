@@ -29,6 +29,7 @@
 <script lang="ts" setup>
 import { ref, computed, defineProps, defineEmits } from 'vue'
 import Dialog from 'primevue/dialog'
+import { useUserStore } from '@/stores/userStore'
 
 interface User {
   name: string
@@ -39,15 +40,22 @@ interface User {
 
 const props = defineProps<{ user: User }>()
 const emit = defineEmits<{
-  (e: 'delete', user: User): void
+  (e: 'delete', payload: {success: boolean, email: string, error?: unknown }): void
   (e: 'edit', user: User): void
 }>()
 
 const showModal = ref(false)
 
-const confirmDelete = () => {
-  emit('delete', props.user)
+const userStore = useUserStore();
+
+const confirmDelete = async () => {
   showModal.value = false
+  try {
+    await userStore.deleteByEmail(props.user.email)
+    emit('delete', { success: true, email: props.user.email })
+  } catch (error) {
+    emit('delete', { success: false, email: props.user.email, error })
+  }
 }
 
 const statusClass = computed(() =>
