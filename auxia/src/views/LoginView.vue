@@ -1,7 +1,7 @@
 <template>
   <Toast position="top-center" />
   <div class="main">
-    <img class="logo" src="/LOGO.png" />
+    <img class="logo" src="/logo2.png" />
 
     <div class="container">
       <h1 class="headerText">LOGIN</h1>

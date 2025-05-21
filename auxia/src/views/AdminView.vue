@@ -1,8 +1,8 @@
 <template>
+  <div class="header">
+    <MenuUser />
+  </div>
   <div class="admin-container">
-    <div class="header">
-      <MenuUser />
-    </div>
     <h1 class="title">Painel Administrativo</h1>
 
     <div class="admin-panel">
@@ -62,7 +62,6 @@ const handleCreateUser = () => {
 
 .header {
   width: 100%;
-  padding-left: 4rem;
 }
 
 .admin-panel {
