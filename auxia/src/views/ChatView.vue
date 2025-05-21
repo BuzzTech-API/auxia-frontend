@@ -11,6 +11,7 @@ import BtnRecarregar from '@/components/buttons/BtnRecarregar.vue';
 import { useToast } from 'primevue';
 import Toast from 'primevue/toast';
 import MenuUser from '@/components/menu/MenuUser.vue';
+import StepperLine from '@/components/menu/StepperLine.vue';
 
 const prompt = ref("");
 const carregando = ref(false);
@@ -80,7 +81,9 @@ async function enviarPergunta() {
     <div v-else>
       <div class="container2">
 
-
+        <div>
+          <StepperLine currentStep="1"/>
+        </div>
         <div class="box">
           <BoxTextoInicial />
         </div>
@@ -98,7 +101,8 @@ async function enviarPergunta() {
 .container2 {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap: 125px;
+  padding-top: 20px;
   align-items: center;
   width: 100%;
   height: 55rem;

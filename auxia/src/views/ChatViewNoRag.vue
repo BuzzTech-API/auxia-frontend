@@ -10,6 +10,8 @@ import { useAwnserTwoStore } from '@/stores/awnserTwo';
 import BtnRecarregar from '@/components/buttons/BtnRecarregar.vue';
 import { useToast } from 'primevue';
 import Toast from 'primevue/toast';
+import MenuUser from '@/components/menu/MenuUser.vue';
+import StepperLine from '@/components/menu/StepperLine.vue';
 
 const prompt = ref("");
 const carregando = ref(false);
@@ -75,63 +77,62 @@ async function enviarPergunta() {
 </script>
 
 <template>
-  <Toast position="center" />
-  <div v-if="carregando && !timeout">
-    <div class="container">
-      <LoadingRespostas />
-    </div>
-  </div>
-  <div v-else-if="carregando && timeout" class="aviso">
-    <div class="avisoConteudo">
-      <h3>Erro ao enviar sua resposta tente Novamente</h3>
-      <BtnRecarregar @click="enviarPergunta" />
-    </div>
-  </div>
-
-  <div v-else>
-    <div class="container">
-
-      <div class="box">
-        <BoxTextoInicial />
+  <div class="flex flex-col w-full">
+    <MenuUser />
+    <Toast position="top-center" />
+    <div v-if="carregando && !timeout">
+      <div class="container1">
+        <LoadingRespostas />
       </div>
-      <div class="input">
-        <InputPrompt v-model="prompt" @click="enviarPergunta" />
+    </div>
+    <div v-else-if="carregando && timeout" class="aviso">
+      <div class="avisoConteudo">
+        <h3>Erro ao enviar sua resposta tente Novamente</h3>
+        <BtnRecarregar @click="enviarPergunta" />
       </div>
+    </div>
 
-      <!-- <div>
-    <button @click="openModal">Abrir Modal</button>
+    <div v-else>
+      <div class="container1">
 
-    <ModalRespostaBackErro
-      :open="isModalOpen"
-      message="Ocorreu um erro."
-      icon=""
-      @close="closeModal"
-    />
-  </div> -->
+        <div>
+          <StepperLine currentStep="1"/>
+        </div>
+        <div class="box">
+          <BoxTextoInicial />
+        </div>
+        <div class="input">
+          <InputPrompt v-model="prompt" @click="enviarPergunta" />
+        </div>
 
+
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.container {
+.container1 {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap: 125px;
+  padding-top: 20px;
   align-items: center;
-  height: 100vh;
-  position: relative;
+  width: 100%;
+  height: 55rem;
 }
+
 
 .box {
   display: flex;
+  width: 100%;
   justify-content: center;
 }
 
 .input {
-  bottom: 20px;
-  width: 100%;
   display: flex;
+  padding-bottom: 20px;
+  width: 100%;
   justify-content: center;
 }
 
