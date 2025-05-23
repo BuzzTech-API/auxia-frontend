@@ -38,6 +38,7 @@ export const useAwnserOneStore = defineStore("answerOne", {
 
   actions: {
     async registerAnswer() {
+      const token = localStorage.getItem("token")
       try {
         const payload = {
           usr_email: this.usr_email,
@@ -60,7 +61,11 @@ export const useAwnserOneStore = defineStore("answerOne", {
           ans_prefered_answer_justify: this.ans_prefered_answer_justify,
         };
 
-        const res = await api.post("/answer", payload, { timeout: 10000 });
+        const res = await api.post("/answer", payload, {
+          headers: {
+            Authorization: "Bearer " + token
+          }, timeout: 10000
+        });
         return res.status === 201;
       } catch {
         return false;

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import BoxCriterioNotaFinal from "@/components/boxes/BoxCriterioNotaFinal.vue";
-import BoxRespostaCriterioFinal from "@/components/boxes/BoxCriterioNotaFinal.vue";
 import { marked } from "marked";
 
 const props = defineProps<{

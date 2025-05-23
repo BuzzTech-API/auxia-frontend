@@ -56,7 +56,7 @@
 
   watch(preferencia, (newPreferencia) => {
     console.log(newPreferencia)
-    awnserOne.ans_prefered_answer = newPreferencia
+    awnserOne.ans_prefered_answer= newPreferencia
     awnserTwo.ans_prefered_answer = newPreferencia
   });
   watch(justify, (newJustify) => {

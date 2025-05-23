@@ -27,10 +27,10 @@ async function enviarPergunta() {
   try {
     const request = await api.post("/ai/generate", { prompt: prompt.value }, { timeout: 30000 });
     awnserOne.ans_prompt = prompt.value
-    awnserOne.ans_llm_awnser = request.data.response1
+    awnserOne.ans_llm_answer = request.data.response1
     awnserOne.ans_llm_model = request.data.modelLlm1
     awnserTwo.ans_prompt = prompt.value
-    awnserTwo.ans_llm_awnser = request.data.response2
+    awnserTwo.ans_llm_answer = request.data.response2
     awnserTwo.ans_llm_model = request.data.modelLlm2
 
     toast.add({

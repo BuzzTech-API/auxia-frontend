@@ -130,9 +130,9 @@ const justify = ref(props.awnserNumber === 1 ? awnserOne.getJustifyByNumber(prop
 
 watch(criterioNote, (newNote)=>{
   if (props.awnserNumber === 1) {
-  awnserOne.getPontuationByNumber(props.criterioNumber, newNote)
+  awnserOne.setPontuationByNumber(props.criterioNumber, newNote)
   }else if (props.awnserNumber ===2) {
-  awnserTwo.getPontuationByNumber(props.criterioNumber, newNote)
+  awnserTwo.setPontuationByNumber(props.criterioNumber, newNote)
   }
 })
 

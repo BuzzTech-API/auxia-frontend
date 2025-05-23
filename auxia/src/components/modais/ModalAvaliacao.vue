@@ -18,9 +18,9 @@ const awnserTwo = useAwnserTwoStore()
 
 const respostaTexto = computed(() => {
   if (props.awnserNumber === 1) {
-    return awnserOne.ans_llm_awnser;
+    return awnserOne.ans_llm_answer;
   } else if (props.awnserNumber === 2) {
-    return awnserTwo.ans_llm_awnser;
+    return awnserTwo.ans_llm_answer;
   }
   return '';
 });
