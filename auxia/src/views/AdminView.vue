@@ -96,8 +96,9 @@ import InputText from 'primevue/inputtext';
 import MenuUser from '@/components/menu/MenuUser.vue';
 import Drawer from 'primevue/sidebar'
 import Dropdown from 'primevue/dropdown';
-
-
+import axios from 'axios';
+import api from '@/services/api';
+import { useToast } from 'primevue/usetoast';
 
 
 // drawer
@@ -105,6 +106,7 @@ const name = ref('')
 const email = ref('')
 const password = ref('')
 const tipoUsuario = ref("")
+const toast = useToast();
 
 const nameError = computed(() => name.value.trim().length < 3)
 const emailError = computed(() => !/^\S+@\S+\.\S+$/.test(email.value))
@@ -138,18 +140,96 @@ const filter = ref('')
 
 const handleSearch = () => {
   console.log('Pesquisar por:', searchQuery.value, 'Filtro:', filter.value)
-  // Aqui você pode emitir um evento ou aplicar os filtros à lista
-}
-
-const handleCreateUser = () => {
-  console.log('Criar novo usuário')
+  
 }
 
 
-const handleNovoUsuario = (dados: any) => {
-  console.log('Usuário a ser criado:', dados)
-  // enviar via API
-}
+
+const handleNovoUsuario = async () => {
+  try {
+    // Pega o token do localStorage
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      toast.add({
+        severity: 'error',
+        summary: 'Erro',
+        detail: 'Usuário não autenticado.',
+        life: 3000
+      });
+      return;
+    }
+    
+    const response = await api.get('/user', {
+      params: { email: email.value },
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    const usuariosEncontrados = response.data;
+
+    const emailExiste = usuariosEncontrados.some(
+      (usuario) => usuario.usr_email.toLowerCase() === email.value.toLowerCase()
+    );
+
+    if (emailExiste) {
+      toast.add({
+        severity: 'warn',
+        summary: 'Erro',
+        detail: 'Email já está cadastrado!',
+        life: 3000
+      });
+      return;
+    }
+
+    const novoUsuario = {
+      usr_name: name.value,
+      usr_email: email.value,
+      usr_password: password.value,
+      usr_is_adm: tipoUsuario.value === 'administrador',
+      usr_is_active: true
+    };
+
+    console.log('novo usuario', novoUsuario);
+
+    await api.post('/user', novoUsuario, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    toast.add({
+      severity: 'success',
+      summary: 'Sucesso',
+      detail: 'Usuário cadastrado com sucesso!',
+      life: 3000
+    });
+
+    drawerVisible.value = false;
+    name.value = '';
+    email.value = '';
+    password.value = '';
+    tipoUsuario.value = '';
+
+  } catch (error: any) {
+    console.error('Erro ao cadastrar usuário:', error);
+    toast.add({
+      severity: 'error',
+      summary: 'Erro',
+      detail: error.response?.data?.detail || 'Erro ao cadastrar usuário.',
+      life: 3000
+    });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 <style scoped>
