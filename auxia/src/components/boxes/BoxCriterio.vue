@@ -1,7 +1,7 @@
 <template>
    <!-- <Card class="card">
     <template #title>
-      
+
       <i
           :class="[
             'ml-2 pi',
@@ -91,9 +91,9 @@
       </div>
     </AccordionContent>
   </AccordionPanel>
-</Accordion>  
+</Accordion>
 
- 
+
 
 
 
@@ -125,14 +125,14 @@ const isRespondido = computed(() => {
 });
 
 
-const criterioNote = ref(props.awnserNumber === 1 ? awnserOne.getPotuationByNumber(props.criterioNumber): awnserTwo.getPotuationByNumber(props.criterioNumber));
+const criterioNote = ref(props.awnserNumber === 1 ? awnserOne.getPontuationByNumber(props.criterioNumber): awnserTwo.getPontuationByNumber(props.criterioNumber));
 const justify = ref(props.awnserNumber === 1 ? awnserOne.getJustifyByNumber(props.criterioNumber): awnserTwo.getJustifyByNumber(props.criterioNumber));
 
 watch(criterioNote, (newNote)=>{
   if (props.awnserNumber === 1) {
-  awnserOne.setPotuationByNumber(props.criterioNumber, newNote)
+  awnserOne.getPontuationByNumber(props.criterioNumber, newNote)
   }else if (props.awnserNumber ===2) {
-  awnserTwo.setPotuationByNumber(props.criterioNumber, newNote)
+  awnserTwo.getPontuationByNumber(props.criterioNumber, newNote)
   }
 })
 
@@ -193,7 +193,7 @@ margin-bottom: 0;
   --p-accordion-content-border-color: #D9D9D9;
   --p-accordion-content-border-width: 1px;
   border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px; 
+  border-bottom-right-radius: 8px;
 }
 
 
