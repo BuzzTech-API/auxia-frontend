@@ -62,61 +62,59 @@ async function enviarPergunta() {
 </script>
 
 <template>
-  <Toast position="top-center" />
-  <div v-if="carregando && !timeout">
-    <div class="container">
-      <LoadingRespostas />
+  <div class="flex flex-col w-full">
+    <MenuUser />
+    <Toast position="top-center" />
+    <div v-if="carregando && !timeout">
+      <div class="container2">
+        <LoadingRespostas />
+      </div>
     </div>
-  </div>
-  <div v-else-if="carregando && timeout" class="aviso">
-    <div class="avisoConteudo">
-      <h3>Erro ao enviar sua resposta tente Novamente</h3>
-      <BtnRecarregar @click="enviarPergunta" />
+    <div v-else-if="carregando && timeout" class="aviso">
+      <div class="avisoConteudo">
+        <h3>Erro ao enviar sua resposta tente Novamente</h3>
+        <BtnRecarregar @click="enviarPergunta" />
+      </div>
     </div>
-  </div>
 
-  <div v-else>
-    <div class="container">
+    <div v-else>
+      <div class="container2">
 
-      <div class="header">
-        <MenuUser />
+
+        <div class="box">
+          <BoxTextoInicial />
+        </div>
+        <div class="input">
+          <InputPrompt v-model="prompt" @click="enviarPergunta" />
+        </div>
+
+
       </div>
-      <div class="box">
-        <BoxTextoInicial />
-      </div>
-      <div class="input">
-        <InputPrompt v-model="prompt" @click="enviarPergunta" />
-      </div>
-
-
     </div>
   </div>
 </template>
 
 <style scoped>
-.container {
+.container2 {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 100vh;
-  position: relative;
+  width: 100%;
+  height: 55rem;
 }
 
-.header {
-  width: 100%;
-  padding-left: 4rem;
-}
 
 .box {
   display: flex;
+  width: 100%;
   justify-content: center;
 }
 
 .input {
-  bottom: 20px;
-  width: 100%;
   display: flex;
+  padding-bottom: 20px;
+  width: 100%;
   justify-content: center;
 }
 

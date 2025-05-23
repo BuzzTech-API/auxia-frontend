@@ -7,10 +7,12 @@ const props = defineProps<{
   modelValue: string;
   tipoInput: string;
   idInput: string;
+  mensagemErro: string;
 }>();
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void;
+  (event: 'blur'): void;
 }>();
 
 const mostrarSenha = ref(false);
@@ -28,7 +30,7 @@ const iconeSenha = computed(() =>
 const tocado = ref(false); // indica se o campo já foi tocado
 
 const campoInvalido = computed(() => {
-  return tocado.value && props.modelValue.trim() === '';
+  return tocado.value && props.mensagemErro !== '';
 });
 </script>
 
@@ -44,7 +46,7 @@ const campoInvalido = computed(() => {
         :type="tipoVisivel"
         @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
         :class="{ 'input-error': campoInvalido }"
-        @blur="tocado = true"
+        @blur="() => { tocado = true; emit('blur') }"
       />
 
       <button
@@ -58,7 +60,7 @@ const campoInvalido = computed(() => {
     </div>
      
   </div>
-  <small v-if="campoInvalido" class="mensagem">Campo obrigatório</small>
+  <small v-if="campoInvalido" class="mensagem"> {{ mensagemErro }} </small>
  
 </template>
 
