@@ -1,7 +1,6 @@
 // src/router/index.ts
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
-import { storeToRefs } from 'pinia'
 import api from '@/services/api'
 import { createPinia } from 'pinia'
 
@@ -9,11 +8,11 @@ const pinia = createPinia() // Cria manualmente uma instância para uso fora do 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', name: 'home', component: () => import('../views/ChatView.vue') },
+    { path: '/', name: 'Chat', component: () => import('../views/ChatView.vue') },
     { path: '/norag', name: 'norag', component: () => import('../views/ChatViewNoRag.vue') },
     { path: '/resposta', name: 'resposta', component: () => import('../views/RespostasView.vue') },
     { path: '/avaliacaoFinal', name: 'avaliacaoFinal', component: () => import('../views/AvaliacaoFinal.vue') },
-    { path: '/AdminView', name: 'AdminView', component: () => import('../views/AdminView.vue') },
+    { path: '/AdminView', name: 'Painel Administrativo', component: () => import('../views/AdminView.vue') },
     { path: '/login', name: 'login', component: () => import('../views/LoginView.vue') },
     { path: '/cadastroUsuario', name: 'CadastroUsuario', component: () => import('../views/CadastroUsuario.vue') },
     { path: '/lalala', name: 'lalala', component: () => import('../views/Lalala.vue') },
@@ -42,7 +41,7 @@ async function fetchUserAndSyncStore() {
     store.usr_name = response.data.usr_name
     store.usr_is_adm = response.data.usr_is_adm
     store.usr_is_active = response.data.usr_is_active
-    
+
     return response.data
   } catch (error) {
     removeToken()

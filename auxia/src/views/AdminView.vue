@@ -1,8 +1,8 @@
 <template>
+  <div class="header">
+    <MenuUser />
+  </div>
   <div class="admin-container">
-    <div class="header">
-      <MenuUser />
-    </div>
     <h1 class="title">Painel Administrativo</h1>
 
     <div class="admin-panel">
@@ -22,7 +22,7 @@
           <option value="inativo">Inativos</option>
         </select>
 
-        <button class="create-button" @click="handleCreateUser">
+        <button class="create-button"  @click="showDrawer">
           Novo Usuário
         </button>
       </div>
@@ -31,14 +31,107 @@
       <UserList />
     </div>
   </div>
+
+  <!-- Drawer para cadastro de novo usuário -->
+
+   <Drawer v-model:visible="drawerVisible" class="!w-[36rem] !bg-[#42424B] !text-white !border-none">
+  <template #header>
+    <div class="flex items-center gap-2">
+      <h2 class="font-bold text-2xl">Cadastro de Usuário</h2>
+    </div>
+  </template>
+
+  <div class="flex flex-col p-4 gap-4">
+    <label for="name">Nome</label>
+    <InputText id="name" v-model="name" type="text" />
+    <small v-if="nameError" class="text-red-400">
+      Nome é obrigatório e deve ter ao menos 3 caracteres.
+    </small>
+
+    <label for="email">Email</label>
+    <InputText id="email" v-model="email" type="email" />
+    <small v-if="emailError" class="text-red-400">
+      Email é obrigatório e deve ser válido.
+    </small>
+
+    <label for="password">Senha Inicial</label>
+    <InputText id="password" v-model="password" type="password" />
+    <small v-if="passwordError" class="text-red-400">
+      A senha deve ter no mínimo 8 caracteres, incluir ao menos um número e um caractere especial.
+    </small>
+
+    <label for="tipo">Tipo de Usuário</label>
+    <Dropdown
+      id="tipo"
+      v-model="tipoUsuario"
+      :options="tipoUsuarioOptions"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Selecione o tipo"
+      class="w-full"
+    />
+  </div>
+
+  <template #footer>
+    <div class="flex items-end gap-4">
+      <Button
+        label="Cadastrar"
+        class="flex w-40 ml-auto !border-none !font-bold !bg-[#9800E0]"
+        :disabled="!isFormValid"
+        @click="handleNovoUsuario"
+      />
+    </div>
+  </template>
+</Drawer> 
+
+
+
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import UserList from '../components/list/UserList.vue'
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import MenuUser from '@/components/menu/MenuUser.vue';
+import Drawer from 'primevue/sidebar'
+import Dropdown from 'primevue/dropdown';
+
+
+
+
+// drawer
+const name = ref('')
+const email = ref('')
+const password = ref('')
+const tipoUsuario = ref("")
+
+const nameError = computed(() => name.value.trim().length < 3)
+const emailError = computed(() => !/^\S+@\S+\.\S+$/.test(email.value))
+const passwordError = computed(() =>
+  !/^(?=.*[0-9])(?=.*[\W_]).{8,}$/.test(password.value)
+)
+
+const isFormValid = computed(() =>
+  !nameError.value &&
+  !emailError.value &&
+  !passwordError.value &&
+  tipoUsuario.value
+)
+
+const tipoUsuarioOptions = [
+  { label: 'Administrador', value: 'administrador' },
+  { label: 'Comum', value: 'comum' }
+]
+
+
+const drawerVisible = ref(false)
+
+const showDrawer = () => {
+  drawerVisible.value = true
+}
+//-----------------------
+
 
 const searchQuery = ref('')
 const filter = ref('')
@@ -51,6 +144,12 @@ const handleSearch = () => {
 const handleCreateUser = () => {
   console.log('Criar novo usuário')
 }
+
+
+const handleNovoUsuario = (dados: any) => {
+  console.log('Usuário a ser criado:', dados)
+  // enviar via API
+}
 </script>
 
 <style scoped>
@@ -62,7 +161,6 @@ const handleCreateUser = () => {
 
 .header {
   width: 100%;
-  padding-left: 4rem;
 }
 
 .admin-panel {

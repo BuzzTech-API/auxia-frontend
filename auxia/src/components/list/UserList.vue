@@ -19,8 +19,10 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted, computed } from 'vue'
 import ListItem from './ListItem.vue'
 import { ref } from 'vue'
+import { useUserStore } from '@/stores/userStore'
 
 interface User {
   name: string
@@ -29,20 +31,31 @@ interface User {
   status: 'ativo' | 'inativo'
 }
 
-// Lista hardcoded de exemplo (substituir pelo fetch do backend)
-const users = ref<User[]>([
-  { name: 'Vitor Lima', email: 'lima@auxia.com', type: 'admin', status: 'ativo' },
-  { name: 'Ivan Germano', email: 'germano@auxia.com', type: 'comum', status: 'inativo' },
-  { name: 'Vitor Lima', email: 'lima@auxia.com', type: 'admin', status: 'ativo' },
-  { name: 'Ivan Germano', email: 'germano@auxia.com', type: 'comum', status: 'inativo' },
-])
+const emit = defineEmits<{
+  (e: 'delete', user: any): void
+  (e: 'edit', user: any): void
+}>()
 
-const handleEdit = (user: User) => {
-  console.log('Editar usuário:', user)
+const userStore = useUserStore();
+
+onMounted(() => {
+  userStore.getAll(); 
+  
+  // Inserir usuários falsos para testar
+  /*userStore.usrs = [
+  { name: 'Vitor Lima', email: 'lima@auxia.com', type: 'admin', status: 'ativo' },
+  { name: 'Ivan Germano', email: 'germano@auxia.com', type: 'comum', status: 'inativo' }
+  ]*/
+})
+
+const users = computed(() => userStore.usrs)
+
+const handleEdit = (user: any) => {
+  emit('edit', user)
 }
 
-const handleDelete = (user: User) => {
-  console.log('Excluir usuário:', user)
+const handleDelete = (user: any) => {
+  emit('delete', user)
 }
 </script>
 
