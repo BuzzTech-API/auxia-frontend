@@ -99,7 +99,7 @@ export const useUserStore = defineStore('user', {
       if (del.status === 200) {
         this.getAll();
       }
-    },
+    }
     
     //Simular resposta da requisição para testar fluxo de atualizar a lista ao deletar usuário
     /*async deleteByEmail(email: string) {
@@ -112,5 +112,4 @@ export const useUserStore = defineStore('user', {
         }, 500); // tempo simulado de resposta da API
       });
     },*/
-  }
-
+  }})
