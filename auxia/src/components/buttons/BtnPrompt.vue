@@ -31,7 +31,7 @@ const emit = defineEmits(["click"]);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color:  black;
+  background-color:  #9800E0;
   color: white;
   border: none;
   font-size: 24px;

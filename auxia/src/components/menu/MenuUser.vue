@@ -3,14 +3,14 @@
   <div class="w-full mt-0 h-[6rem] bg-[#363636] text-white
            shadow-[4px_4px_rgba(54,54,54,0.75)] flex !justify-between items-center px-12 z-50">
     <!-- SLOT “START” -->
-    <div class="flex">
+    <div>
       <RouterLink to="/">
         <img src="/logo2.png" class="h-20 cursor-pointer" alt="Logo" />
       </RouterLink>
     </div>
 
-    <div>
-      <h1 class="font-bold text-4xl">{{ routeName }}</h1>
+    <div class="tituloBox">
+      <h1>{{ routeName }}</h1>
     </div>
 
     <!-- ITEMS -->
@@ -118,8 +118,13 @@ watchEffect(() => {
 })
 
 const routeName = computed(() => {
-  const name = router.currentRoute.value.name
-  return typeof name === 'string' ? name : undefined
+  let name = router.currentRoute.value.name
+  if (name == "norag") {
+    name = "Chat"
+    return typeof name === 'string' ? name : undefined
+  } else {
+    return typeof name === 'string' ? name : undefined
+  }
 })
 
 // validações
@@ -242,5 +247,10 @@ function hasSubmenu(item: MenuItem) {
 .text-red-400 {
   color: #f87171;
   font-size: 0.875rem;
+}
+.tituloBox {
+  font-size: 40px;
+  font-weight: bold;
+  margin-left: 10%;
 }
 </style>
