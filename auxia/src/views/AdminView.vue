@@ -99,6 +99,7 @@ import Dropdown from 'primevue/dropdown';
 import axios from 'axios';
 import api from '@/services/api';
 import { useToast } from 'primevue/usetoast';
+import { useUserStore } from '@/stores/userStore';
 
 
 // drawer
@@ -217,6 +218,9 @@ const handleNovoUsuario = async () => {
       life: 3000
     });
   }
+
+  const userStore = useUserStore()
+  userStore.getAll()
 };
 
 

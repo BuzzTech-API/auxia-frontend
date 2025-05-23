@@ -21,7 +21,6 @@
 <script lang="ts" setup>
 import { onMounted, computed } from 'vue'
 import ListItem from './ListItem.vue'
-import { ref } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 
 interface User {
@@ -40,12 +39,6 @@ const userStore = useUserStore();
 
 onMounted(() => {
   userStore.getAll(); 
-  
-  // Inserir usuários falsos para testar
-  /*userStore.usrs = [
-  { name: 'Vitor Lima', email: 'lima@auxia.com', type: 'admin', status: 'ativo' },
-  { name: 'Ivan Germano', email: 'germano@auxia.com', type: 'comum', status: 'inativo' }
-  ]*/
 })
 
 const users = computed(() => userStore.usrs)
