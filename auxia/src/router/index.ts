@@ -12,6 +12,7 @@ const router = createRouter({
     { path: '/norag', name: 'norag', component: () => import('../views/ChatViewNoRag.vue') },
     { path: '/resposta', name: 'resposta', component: () => import('../views/RespostasView.vue') },
     { path: '/avaliacaoFinal', name: 'avaliacaoFinal', component: () => import('../views/AvaliacaoFinal.vue') },
+    { path: '/conclusao', name: 'Conclusão', component: () => import('../views/Conclusao.vue') },
     { path: '/AdminView', name: 'Painel Administrativo', component: () => import('../views/AdminView.vue') },
     { path: '/login', name: 'login', component: () => import('../views/LoginView.vue') },
     { path: '/cadastroUsuario', name: 'CadastroUsuario', component: () => import('../views/CadastroUsuario.vue') },
