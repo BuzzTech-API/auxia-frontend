@@ -1,6 +1,8 @@
 import api from '@/services/api';
 import { defineStore } from 'pinia';
 
+
+
 export const useUserStore = defineStore('user', {
   state: () => {
     return {
@@ -12,6 +14,7 @@ export const useUserStore = defineStore('user', {
     }
   },
 
+  
 
   actions: {
     async getMe() {
@@ -82,11 +85,12 @@ export const useUserStore = defineStore('user', {
       })
       if (all.status === 200) {
         this.usrs = all.data.map((u: any) => ({
-        name: u.usr_name,
-        email: u.usr_email,
-        type: u.usr_is_adm ? 'admin' : 'comum',
-        status: u.usr_is_active ? true : false
-      }))
+          name: u.usr_name,
+          email: u.usr_email,
+          type: u.usr_is_adm ? 'admin' : 'comum',
+          status: u.usr_is_active ? 'ativo' : 'inativo'
+        }))
+
       }
     },
     async deleteByEmail(email: string) {

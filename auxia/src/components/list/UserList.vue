@@ -19,44 +19,33 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, computed } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 import ListItem from './ListItem.vue'
-import { useUserStore } from '@/stores/userStore'
 
 interface User {
   name: string
   email: string
-  type: string
+  type: 'admin' | 'comum'
   status: 'ativo' | 'inativo'
 }
 
+const props = defineProps<{ users: User[] }>()
+
 const emit = defineEmits<{
-  (e: 'delete', user: any): void
-  (e: 'edit', user: any): void
+  (e: 'delete', user: User): void
+  (e: 'edit', user: User): void
 }>()
 
-const userStore = useUserStore();
-
-onMounted(() => {
-  userStore.getAll(); 
-})
-
-const users = computed(() => userStore.usrs)
-
-const handleEdit = (user: any) => {
+const handleEdit = (user: User) => {
   emit('edit', user)
 }
 
-const handleDelete = (user: any) => {
+const handleDelete = (user: User) => {
   emit('delete', user)
 }
 </script>
 
 <style scoped>
-html {
-  font-family: Roboto;
-}
-
 .user-list-container {
   width: 100%;
   margin: 2rem auto 0 auto;
