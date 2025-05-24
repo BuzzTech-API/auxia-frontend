@@ -133,7 +133,7 @@ const close = () => {
   <div>
     <button class="confirm-button" id="confirmation-button" :class="{ 'disabled': isEmpty }" :disabled="isEmpty"
       @click="handleClick">
-      <p class="texto"> Confirmar Escolha </p>
+      <p class="texto"> Salvar Feedback </p>
     </button>
   </div>
 
@@ -172,29 +172,29 @@ const close = () => {
   margin-left: -1rem;
   padding: 0.5rem 2rem;
   font-size: 1rem;
-  background-color: #d9d9d9;
-  color: black;
+  background-color: #01CF68;
+  color: rgb(255, 255, 255);
   border: none;
   cursor: pointer;
   border-radius: 7px;
   transition: background-color 0.3s;
   display: flex;
-  width: 160px;
+  width: 200px;
   height: 45px;
   align-items: center;
   justify-content: center;
-  color: black;
+  color: rgb(255, 255, 255);
   border: none;
 }
 
 .confirm-button:hover {
-  background-color: #7B7B7B;
+  background-color: #019B50;
   transition: 300ms;
   transition-delay: 50ms;
 }
 
 .confirm-button.disabled {
-  background-color: #A0A0A0;
+  background-color: #A3D7C3;
   cursor: not-allowed;
 
 }

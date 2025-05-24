@@ -2,39 +2,32 @@
   <div>
     <Button class="botao">
       <i class="pi pi-arrow-left"></i>
-      <p class="texto"> Voltar Etapa </p>
     </Button>
   </div>
 </template>
 
 <script setup lang="ts">
 import Button from 'primevue/button';
-
 </script>
 
 <style scoped>
 .botao {
-  margin-top: 1.0rem;
+  margin-top: 1rem;
   margin-left: auto;
   margin-right: 10px;
-  padding: 0.2rem 1rem;
-  font-size: 1rem;
+  width: 40px; /* largura e altura iguais para deixar redondo */
+  height: 40px;
+  padding: 0; /* remove excesso */
+  font-size: 1.2rem; /* tamanho do ícone */
   background-color: black;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: 50%; /* deixa redondo */
   transition: background-color 0.3s;
   display: flex;
-  justify-content: center;
-  /*gap: 0.7rem;*/
-  width: 160px;
-  height: 30px;
   align-items: center;
   justify-content: center;
-  color: white;
-  border: none;
-  white-space: nowrap;  
 }
 
 .botao:hover {

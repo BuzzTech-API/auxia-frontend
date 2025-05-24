@@ -1,69 +1,70 @@
 <template>
-
-    <div class="container">
-        <div class="criterio">
-            <h4>{{criterio}}</h4>
-            <p>{{ descricao }}</p>
-        </div>
-
-        <hr>
-
-        <div class="nota">
-            <p> Nota:</p>
-            <p>{{nota}}</p>
-        </div>
+  <div class="container">
+    <div class="criterio">
+      <p class="nomeCriterio">{{ criterio }}</p>
+      <p>{{ descricao }}</p>
     </div>
 
+    <div class="nota">
+      <p class="nota-label">Nota</p>
+      <p class="nota-valor">{{ nota }}</p>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 defineProps<{
-    criterio : string;
-    descricao: string;
-    nota: number
-
+  criterio: string;
+  descricao: string;
+  nota: number;
 }>();
-
 </script>
 
 <style scoped>
 .container {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
-  color: black;
-  width: 293px;
-  height: auto;
-  padding: 0.8rem;
-  border-radius: 1rem;
-  box-shadow: -3px 8px 10px -9px rgba(66, 68, 90, 1);
+  background-color: #585858; /* cor similar ao fundo desejado */
+  color: white;
+  width: 42.3rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-right: 1rem;
 }
 
 .criterio {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
 }
 
-hr{
-    margin-right: 1rem;
-    margin-left: 1rem;
-    width:  auto;
-    height: 10rem;
+.nomeCriterio{
+    size: 20px;
 
 }
 
-.nota{
-    display: flex;
-    flex-direction: row;
-    align-items: start;
-    justify-items: center;
-    text-align: center;
-    gap: 0.7rem;
+.nota {
+  background-color: #2a2a2a; /* caixa escura */
+  padding: 0.5rem 1rem;
+  border-radius: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.4);
 }
 
+.nota-label {
+  font-weight: bold;
+  font-size: 0.75rem;
+}
 
+.nota-valor {
+  font-size: 1rem;
+  font-weight: bold;
+}
 </style>
