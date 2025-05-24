@@ -24,41 +24,38 @@ const emit = defineEmits(["click"]);
 
 <style scoped>
 .confirm-button {
-  margin-top: 1.0rem;
-  margin-left: auto;
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  background-color: #e9e9e9;
-  color: black;
+  background-color: #9800E0;
   border: none;
   cursor: pointer;
   border-radius: 7px;
   transition: background-color 0.3s;
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
   width: 160px;
   height: 45px;
   align-items: center;
-  justify-content: center;
-  color: black;
-  border: none;
 }
 
 .confirm-button:hover {
-  background-color: #7B7B7B;
+  background-color: #AD00FF;
   transition: 300ms;
   transition-delay: 50ms;
 }
 
 .confirm-button.disabled {
-  background-color: #A0A0A0;
+  background-color: #835C96;
   cursor: not-allowed;
+}
 
+.confirm-button.active {
+background-color: #7000A6;
 }
 
 .texto {
   font-size: 15px;
+  color: white;
+  width: 100%;
+  font-weight: bold;
 }
 
 .pi-arrow-right{

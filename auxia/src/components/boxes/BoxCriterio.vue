@@ -60,7 +60,7 @@
       <h3 class="cardtitle">Critério {{props.criterioNome}}</h3>
     </AccordionHeader>
     <AccordionContent class="acordionContent">
-      <p class="">
+      <p class="desc">
         {{props.criterioDescription}}
       </p>
       <div class="inputGroup">
@@ -155,11 +155,17 @@ watch(justify, (newJustify)=>{
   box-shadow:2px 2px 2px 2px rgba(0, 0, 0, 0.1);
   padding: 0.2rem;
 }
-
+.desc {
+  display: flex;
+  justify-content: center;
+}
 .inputGroup{
   display: flex;
   flex-wrap: wrap;
   gap:3.5rem;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  justify-content: center;
 }
 .radioDiv{
   display: flex;
@@ -168,29 +174,33 @@ watch(justify, (newJustify)=>{
   gap: 0.2rem;
 }
 .textarea{
-  background-color: #ffffff;
-  width: 29rem;
-  max-width: 30rem;
+  background-color: #7B7B7B;
+  width: 39vw;
+  border-color: black;
+  color: white;
 }
 .cardtitle{
 margin-top: 0;
 margin-bottom: 0;
+color: white;
+padding-right: 2vw;
 }
 
 .acordionHeader{
-  background-color: #D9D9D9;
-  --p-accordion-header-background: #D9D9D9;
-  --p-accordion-header-hover-background: #D9D9D9;
-  --p-accordion-header-active-background: #D9D9D9;
-  --p-accordion-header-active-hover-background: #D9D9D9;
-  --p-accordion-header-focus-ring-color: #d9d9d9;
+  background-color: #363636;
+  --p-accordion-header-background: #363636;
+  --p-accordion-header-hover-background: #363636;
+  --p-accordion-header-active-background: #363636;
+  --p-accordion-header-active-hover-background: #363636;
+  --p-accordion-header-focus-ring-color: #363636;
+  gap: 1rem;
 }
 
 .acordionContent{
-  background-color: #D9D9D9;
-  --p-accordion-content-background: #D9D9D9;
-  --p-accordion-content-color:  inherit;
-  --p-accordion-content-border-color: #D9D9D9;
+  background-color: #363636;
+  --p-accordion-content-background: #363636;
+  --p-accordion-content-color:  white;
+  --p-accordion-content-border-color: #363636;
   --p-accordion-content-border-width: 1px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
