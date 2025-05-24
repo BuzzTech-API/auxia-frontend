@@ -11,7 +11,7 @@ import MenuUser from '@/components/menu/MenuUser.vue';
 import StepperLine from '@/components/menu/StepperLine.vue';
 
 const awnserOne = useAwnserOneStore()
-const respostaTexto = computed(() => awnserOne.ans_llm_awnser)
+const respostaTexto = computed(() => awnserOne.ans_llm_answer)
 
 const router = useRouter();
 
