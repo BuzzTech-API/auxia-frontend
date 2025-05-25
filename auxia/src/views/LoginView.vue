@@ -43,7 +43,6 @@ async function logar() {
   isLoading.value = true
   try {
     await userStore.login(email.value, password.value)
-    router.replace('/')
   } catch (err) {
     toast.add({
       severity: 'error',
@@ -54,6 +53,7 @@ async function logar() {
     // opcional: focar o campo de email ou senha após erro
     emailField.value?.focus()
   } finally {
+    router.replace('/')
     isLoading.value = false
   }
 }

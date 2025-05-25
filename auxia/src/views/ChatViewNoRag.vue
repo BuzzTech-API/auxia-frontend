@@ -27,10 +27,10 @@ async function enviarPergunta() {
   try {
     const request = await api.post("/ai/generatenorag", { prompt: prompt.value }, { timeout: 40000 });
     awnserOne.ans_prompt = prompt.value
-    awnserOne.ans_llm_awnser = request.data.response1
+    awnserOne.ans_llm_answer = request.data.response1
     awnserOne.ans_llm_model = request.data.modelLlm1
     awnserTwo.ans_prompt = prompt.value
-    awnserTwo.ans_llm_awnser = request.data.response2
+    awnserTwo.ans_llm_answer = request.data.response2
     awnserTwo.ans_llm_model = request.data.modelLlm2
 
 
@@ -43,7 +43,7 @@ async function enviarPergunta() {
     })
     setTimeout(() => {
       carregando.value = false;
-      router.push({ name: 'resposta' });
+      router.push({ name: 'Resposta 1' });
     }, 3000);
 
     prompt.value = "";
@@ -60,19 +60,6 @@ async function enviarPergunta() {
 
   }
 }
-
-// testanto modal:
-// const isModalOpen = ref(false);
-
-// const openModal = () => {
-//   console.log("Opening Modal"); // Debug
-//   isModalOpen.value = true;
-// };
-
-// const closeModal = () => {
-//   console.log("Closing Modal"); // Debug
-//   isModalOpen.value = false;
-// };
 
 </script>
 
@@ -96,7 +83,7 @@ async function enviarPergunta() {
       <div class="container1">
 
         <div>
-          <StepperLine currentStep="1"/>
+          <StepperLine :currentStep="1"/>
         </div>
         <div class="box">
           <BoxTextoInicial />

@@ -160,7 +160,7 @@ const filteredUsers = computed(() => {
 // Cadastro de novo usuário
 const handleNovoUsuario = async () => {
   try {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('access_token')
 
     if (!token) {
       toast.add({

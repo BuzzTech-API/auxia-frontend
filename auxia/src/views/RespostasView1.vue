@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import BoxResposta from '@/components/boxes/BoxRespostaModal.vue'
 import BoxAvaliacao from '@/components/boxes/BoxCriterio.vue'
 import BtnConfirmarAvaliacao from '@/components/buttons/BtnConfirmarAvaliacao.vue';
 import BtnVoltar from '@/components/buttons/BtnVoltar.vue';
@@ -24,13 +23,12 @@ const irParaPagina = () => {
 };
 
 const criterios = [
-  { numero: 1, awnserNumber: 1, descricao: 'A resposta atende à intenção do usuário e está diretamente relacionada ao prompt fornecido?', criterioNome: 'Relevância da Resposta' },
+  { numero: 1, awnserNumber: 1, descricao: 'A resposta está diretamente relacionada à intenção do usuário? O modelo compreendeu corretamente as instruções do prompt e respondeu de forma pertinente, sem fugir do tema ou omitir comandos importantes?', criterioNome: 'Aderência ao Prompt' },
   { numero: 2, awnserNumber: 1, descricao: 'A resposta é bem estruturada, gramaticalmente correta e de fácil compreensão?', criterioNome: 'Coerência e Clareza' },
   { numero: 3, awnserNumber: 1, descricao: 'As informações apresentadas são corretas e baseadas em fontes confiáveis?', criterioNome: 'Exatidão e Confiabilidade (Veracidade da Resposta)' },
   { numero: 4, awnserNumber: 1, descricao: 'A resposta fornece explicações ou justificativas adequadas para embasar seu conteúdo?', criterioNome: 'Exposição e Justificativa' },
-  { numero: 5, awnserNumber: 1, descricao: 'O modelo seguiu exatamente as instruções fornecidas no prompt? Se houve alguma falha, qual foi?', criterioNome: 'Seguiu as Instruções?' },
-  { numero: 6, awnserNumber: 1, descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterioNome: 'Idioma da Resposta é o Mesmo da Pergunta' },
-  { numero: 7, awnserNumber: 1, descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterioNome: 'Resposta Agressiva ou Ofensiva?' },
+  { numero: 5, awnserNumber: 1, descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterioNome: 'Idioma da Resposta é o Mesmo da Pergunta' },
+  { numero: 6, awnserNumber: 1, descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterioNome: 'Resposta Agressiva ou Ofensiva?' },
 ];
 
 const isReadyToSubmit = computed(() => awnserOne.allStandardIsJustifyAndPontuated())
@@ -43,11 +41,11 @@ const isReadyToSubmit = computed(() => awnserOne.allStandardIsJustifyAndPontuate
   <div class="page-container">
     <div class="header">
       <BtnVoltar class="voltar-button" @click="voltar"/>
-      <StepperLine currentStep="2"/>
+      <StepperLine :currentStep="2"/>
     </div>
     <div class="content">
         <div class="resposta">
-            <BoxRespostaIA class="boxResposta1" :llm="1" :resposta="respostaTexto" />
+            <BoxRespostaIA  :llm="1" :resposta="respostaTexto" />
             <!-- <BoxResposta :resposta="respostaTexto" /> -->
         </div>
         <div class="resp">
@@ -106,7 +104,6 @@ const isReadyToSubmit = computed(() => awnserOne.allStandardIsJustifyAndPontuate
   justify-content: center;
   align-items: center;
   gap: 80px;
-  cursor: pointer;
 }
 .title {
   font-size: 2.3rem;

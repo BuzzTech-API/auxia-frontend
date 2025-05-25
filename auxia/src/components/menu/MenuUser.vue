@@ -93,6 +93,7 @@ import { useToast } from 'primevue/usetoast'
 import InputText from 'primevue/inputtext'
 import type { MenuItem } from 'primevue/menuitem'
 import { RouterLink } from 'vue-router'
+import api from '@/services/api'
 
 
 const userStore = useUserStore()
@@ -119,10 +120,14 @@ watchEffect(() => {
 
 const routeName = computed(() => {
   let name = router.currentRoute.value.name
-  if (name == "norag") {
+  if (name === "norag") {
     name = "Chat"
     return typeof name === 'string' ? name : undefined
-  } else {
+  }else if( name === "rag"){
+    name = "Chat"
+    return typeof name === 'string' ? name : undefined
+  }
+  else {
     return typeof name === 'string' ? name : undefined
   }
 })
@@ -230,8 +235,23 @@ watchEffect(() => {
       icon: 'pi pi-sign-out',
       visible: true,
       command: async () => {
-        localStorage.removeItem('token')
-        await router.replace('/login')
+        localStorage.removeItem('access_token')
+        try {
+          const refresh_token = localStorage.getItem('refresh_token')
+          const form = new URLSearchParams()
+          if (refresh_token) {
+            form.append("refresh_token", refresh_token)
+            await api.post('/oauth/revoke', form, )
+            localStorage.removeItem('refresh_token')
+          }
+
+        } catch (error) {
+
+        }finally{
+          userStore.$reset()
+          return await router.replace({name:'login'})
+        }
+
       },
     },
   ]

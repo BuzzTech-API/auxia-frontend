@@ -45,8 +45,8 @@
   </Card>   -->
 
 
-  <Accordion :activeIndex="0" >
-    <AccordionPanel value="painel1">
+  <Accordion  :activeIndex="0" >
+    <AccordionPanel class="!border-transparent" value="painel1">
     <AccordionHeader class="acordionHeader">
       <i
           :class="[
@@ -99,7 +99,6 @@
 
 </template>
 <script setup lang="ts">
-import Card from 'primevue/card';
 import RadioButton from 'primevue/radiobutton';
 import Textarea from 'primevue/textarea';
 import {useAwnserOneStore } from '../../stores/awnserOne.ts'
@@ -161,8 +160,7 @@ watch(justify, (newJustify)=>{
 }
 .inputGroup{
   display: flex;
-  flex-wrap: wrap;
-  gap:3.5rem;
+  gap:3.0rem;
   margin-top: 15px;
   margin-bottom: 15px;
   justify-content: center;
