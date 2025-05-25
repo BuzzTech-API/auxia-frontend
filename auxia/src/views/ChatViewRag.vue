@@ -2,6 +2,7 @@
 import BoxTextoInicial from '@/components/boxes/BoxTextoInicial.vue';
 import InputPrompt from '@/components/inputs/InputPrompt.vue';
 import LoadingRespostas from '@/components/LoadingRespostas.vue';
+import router from '@/router';
 import api from '@/services/api';
 import { ref } from 'vue';
 import { useAwnserOneStore } from '@/stores/awnserOne';
@@ -11,7 +12,6 @@ import { useToast } from 'primevue';
 import Toast from 'primevue/toast';
 import MenuUser from '@/components/menu/MenuUser.vue';
 import StepperLine from '@/components/menu/StepperLine.vue';
-import { useRouter } from 'vue-router';
 
 const prompt = ref("");
 const carregando = ref(false);
@@ -19,14 +19,13 @@ const timeout = ref(false);
 const awnserOne = useAwnserOneStore()
 const awnserTwo = useAwnserTwoStore()
 const toast = useToast()
-const router = useRouter()
 
 async function enviarPergunta() {
 
   carregando.value = true;
 
   try {
-    const request = await api.post("/ai/generate", { prompt: prompt.value }, { timeout: 30000 });
+    const request = await api.post("/ai/generaterag", { prompt: prompt.value }, { timeout: 40000 });
     awnserOne.ans_prompt = prompt.value
     awnserOne.ans_llm_answer = request.data.response1
     awnserOne.ans_llm_model = request.data.modelLlm1
@@ -34,13 +33,14 @@ async function enviarPergunta() {
     awnserTwo.ans_llm_answer = request.data.response2
     awnserTwo.ans_llm_model = request.data.modelLlm2
 
+
+
     toast.add({
       severity: 'success',
       summary: 'Sucesso!',
-      detail: 'Resposta gerada com sucesso!',
+      detail: 'Respostas gerada com sucesso!',
       life: 3000
     })
-
     setTimeout(() => {
       carregando.value = false;
       router.push({ name: 'Resposta 1' });
@@ -49,13 +49,13 @@ async function enviarPergunta() {
     prompt.value = "";
 
   } catch (error) {
+    console.error("Erro ao enviar pergunta:", error);
     toast.add({
       severity: 'error',
       summary: 'Falha!',
       detail: 'Falha no envio da pergunta!',
       life: 3000
     })
-    console.error("Erro ao enviar pergunta:", error);
     timeout.value = true;
 
   }
@@ -68,7 +68,7 @@ async function enviarPergunta() {
     <MenuUser />
     <Toast position="top-center" />
     <div v-if="carregando && !timeout">
-      <div class="container2">
+      <div class="container1">
         <LoadingRespostas />
       </div>
     </div>
@@ -80,7 +80,7 @@ async function enviarPergunta() {
     </div>
 
     <div v-else>
-      <div class="container2">
+      <div class="container1">
 
         <div>
           <StepperLine :currentStep="1"/>
@@ -99,7 +99,7 @@ async function enviarPergunta() {
 </template>
 
 <style scoped>
-.container2 {
+.container1 {
   display: flex;
   flex-direction: column;
   gap: 125px;

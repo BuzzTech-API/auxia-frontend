@@ -120,10 +120,14 @@ watchEffect(() => {
 
 const routeName = computed(() => {
   let name = router.currentRoute.value.name
-  if (name == "norag") {
+  if (name === "norag") {
     name = "Chat"
     return typeof name === 'string' ? name : undefined
-  } else {
+  }else if( name === "rag"){
+    name = "Chat"
+    return typeof name === 'string' ? name : undefined
+  }
+  else {
     return typeof name === 'string' ? name : undefined
   }
 })

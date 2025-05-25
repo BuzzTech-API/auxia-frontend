@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import api from '@/services/api';
-import { ref } from 'vue';
-import { useToast } from 'primevue';
 import MenuUser from '@/components/menu/MenuUser.vue';
 import StepperLine from '@/components/menu/StepperLine.vue';
 import { useRouter } from 'vue-router'
@@ -16,15 +13,15 @@ const router = useRouter()
         <div>
             <div class="container1">
                 <div>
-                    <StepperLine currentStep="5" />
+                    <StepperLine :currentStep="5" />
                 </div>
 
                 <!-- Texto principal -->
                 <div class="agradecimento">
                     <h2>
-                        Agradecemos por sua avaliação! Sua opinião é essencial para aprimorarmos 
-                        continuamente a qualidade das respostas geradas. Trabalhamos para oferecer uma experiência cada vez mais 
-                        precisa, útil e personalizada e seu feedback faz toda a diferença nesse processo. 
+                        Agradecemos por sua avaliação! Sua opinião é essencial para aprimorarmos
+                        continuamente a qualidade das respostas geradas. Trabalhamos para oferecer uma experiência cada vez mais
+                        precisa, útil e personalizada e seu feedback faz toda a diferença nesse processo.
                         Obrigado por contribuir com a evolução da nossa solução.
                     </h2>
                 </div>
@@ -51,7 +48,7 @@ const router = useRouter()
 .container1 {
     display: flex;
     flex-direction: column;
-    gap: 60px; 
+    gap: 60px;
     padding-top: 20px;
     align-items: center;
     width: 100%;
@@ -60,36 +57,36 @@ const router = useRouter()
 
 .agradecimento {
     text-align: center;
-    max-width: 64rem; 
-    margin-top: 0.25rem; 
-    padding-left: 1rem; 
+    max-width: 64rem;
+    margin-top: 0.25rem;
+    padding-left: 1rem;
     padding-right: 1rem;
 }
 
 .agradecimento h2 {
     color: white;
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
     font-weight: 600;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin-bottom: 1.5rem; 
-    line-height: 1.375; 
+    margin-bottom: 1.5rem;
+    line-height: 1.375;
 }
 
 .btn-container {
-    margin-top: 1.25rem; 
+    margin-top: 1.25rem;
 }
 
 .btn-novo-chat {
     background-color: #6B6B6B;
     color: white;
     transition: background-color 0.3s;
-    padding: 4rem 4.75rem; 
-    border-radius: 1rem; 
+    padding: 4rem 4.75rem;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.25); 
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.25);
 }
 
 .btn-novo-chat:hover {
@@ -97,13 +94,13 @@ const router = useRouter()
 }
 
 .btn-novo-chat span {
-    font-size: 1.875rem; 
-    font-weight: 500; 
+    font-size: 1.875rem;
+    font-weight: 500;
 }
 
 .icone {
-    width: 7rem; 
-    height: 6rem; 
-    color: #22c55e; 
+    width: 7rem;
+    height: 6rem;
+    color: #22c55e;
 }
 </style>

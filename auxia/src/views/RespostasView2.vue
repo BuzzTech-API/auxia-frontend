@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import BoxResposta from '@/components/boxes/BoxRespostaModal.vue'
 import BoxAvaliacao from '@/components/boxes/BoxCriterio.vue'
 import BtnConfirmarAvaliacao from '@/components/buttons/BtnConfirmarAvaliacao.vue';
 import BtnVoltar from '@/components/buttons/BtnVoltar.vue';
@@ -20,7 +19,7 @@ const voltar = () => {
 };
 
 const irParaPagina = () => {
-  router.push('/avaliacaoFinal');
+  router.push({name : 'Avaliação Final'});
 };
 
 const criterios = [
@@ -42,11 +41,11 @@ const isReadyToSubmit = computed(() => awnserTwo.allStandardIsJustifyAndPontuate
   <div class="page-container">
     <div class="header">
       <BtnVoltar class="voltar-button" @click="voltar"/>
-      <StepperLine currentStep="3"/>
+      <StepperLine :currentStep="3"/>
     </div>
     <div class="content">
         <div class="resposta">
-            <BoxRespostaIA class="boxResposta2" :llm="2" :resposta="respostaTexto" />
+            <BoxRespostaIA :llm="2" :resposta="respostaTexto" />
             <!-- <BoxResposta :resposta="respostaTexto" /> -->
         </div>
         <div class="resp">
@@ -105,7 +104,6 @@ const isReadyToSubmit = computed(() => awnserTwo.allStandardIsJustifyAndPontuate
   justify-content: center;
   align-items: center;
   gap: 80px;
-  cursor: pointer;
 }
 .title {
   font-size: 2.3rem;
