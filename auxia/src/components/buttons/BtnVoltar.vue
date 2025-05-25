@@ -8,7 +8,6 @@
 
 <script setup lang="ts">
 import Button from 'primevue/button';
-
 </script>
 
 <style scoped>
@@ -18,7 +17,7 @@ import Button from 'primevue/button';
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: 50%; /* deixa redondo */
   transition: background-color 0.3s;
   display: flex;
   justify-content: center;
