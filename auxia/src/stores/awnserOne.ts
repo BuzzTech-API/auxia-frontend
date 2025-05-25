@@ -38,7 +38,7 @@ export const useAwnserOneStore = defineStore("answerOne", {
 
   actions: {
     async registerAnswer() {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("access_token")
       try {
         const payload = {
           usr_email: this.usr_email,
@@ -66,7 +66,12 @@ export const useAwnserOneStore = defineStore("answerOne", {
             Authorization: "Bearer " + token
           }, timeout: 10000
         });
-        return res.status === 201;
+
+        if (res.status === 201) {
+
+          return true
+        }
+        return
       } catch {
         return false;
       }

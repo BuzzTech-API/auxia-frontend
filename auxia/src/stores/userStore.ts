@@ -1,5 +1,6 @@
 import api from '@/services/api';
 import { defineStore } from 'pinia';
+import { useRouter } from 'vue-router';
 
 
 
@@ -14,11 +15,11 @@ export const useUserStore = defineStore('user', {
     }
   },
 
-  
+
 
   actions: {
     async getMe() {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('access_token');
       const me = await api.get('/user/me/', {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -31,22 +32,46 @@ export const useUserStore = defineStore('user', {
     },
 
     async login(email: string, password: string) {
-      localStorage.removeItem('token');
-      const request = await api.post(
-        '/token',
-        { username: email, password },
-        { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
-      );
-      if (request.status === 200) {
-        localStorage.setItem('token', request.data.access_token);
-        await this.getMe();
-      } else if (request.status === 401) {
-        throw new Error('Credenciais inválidas');
-      }
-    },
+      // limpa qualquer token anterior
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('refresh_token')
 
+      // monta o body x-www-form-urlencoded
+      const form = new URLSearchParams()
+      form.append('grant_type', 'password')
+      form.append('username', email)
+      form.append('password', password)
+
+
+      try {
+        const response = await api.post(
+          '/oauth/token',
+          form,
+          { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+        )
+
+        // armazena tokens
+        localStorage.setItem('access_token', response.data.access_token)
+        localStorage.setItem('refresh_token', response.data.refresh_token)
+
+
+        return
+      } catch (err: any) {
+        // se veio um invalid_grant do backend, mostra erro amigável
+        const errorCode = err.response?.data?.error
+        if (errorCode === 'invalid_grant') {
+          throw new Error('Email ou senha inválidos.')
+        }
+        // repassa qualquer outro erro
+        throw err
+      } finally {
+        await this.getMe()
+      }
+
+
+    },
     async updateProfile(name?: string, newPassword?: string) {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('access_token');
       // Monta o payload apenas com os campos não vazios
       const payload: Record<string, unknown> = {};
       if (name?.trim()) {
@@ -75,9 +100,9 @@ export const useUserStore = defineStore('user', {
 
       return res;
     },
-    
+
     async getAll() {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('access_token');
       const all = await api.get("/user", {
         headers: {
           Authorization: "Bearer " + token
@@ -94,7 +119,7 @@ export const useUserStore = defineStore('user', {
       }
     },
     async deleteByEmail(email: string) {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('access_token');
       const del = await api.delete(`/user/${email}`, {
         headers: {
           Authorization: "Bearer " + token
@@ -104,7 +129,7 @@ export const useUserStore = defineStore('user', {
         this.getAll();
       }
     }
-    
+
     //Simular resposta da requisição para testar fluxo de atualizar a lista ao deletar usuário
     /*async deleteByEmail(email: string) {
       // Simulando atraso e sucesso como se fosse uma chamada real
@@ -116,4 +141,5 @@ export const useUserStore = defineStore('user', {
         }, 500); // tempo simulado de resposta da API
       });
     },*/
-  }})
+  }
+})

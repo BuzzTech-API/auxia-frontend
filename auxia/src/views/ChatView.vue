@@ -2,7 +2,6 @@
 import BoxTextoInicial from '@/components/boxes/BoxTextoInicial.vue';
 import InputPrompt from '@/components/inputs/InputPrompt.vue';
 import LoadingRespostas from '@/components/LoadingRespostas.vue';
-import router from '@/router';
 import api from '@/services/api';
 import { ref } from 'vue';
 import { useAwnserOneStore } from '@/stores/awnserOne';
@@ -12,6 +11,7 @@ import { useToast } from 'primevue';
 import Toast from 'primevue/toast';
 import MenuUser from '@/components/menu/MenuUser.vue';
 import StepperLine from '@/components/menu/StepperLine.vue';
+import { useRouter } from 'vue-router';
 
 const prompt = ref("");
 const carregando = ref(false);
@@ -19,6 +19,7 @@ const timeout = ref(false);
 const awnserOne = useAwnserOneStore()
 const awnserTwo = useAwnserTwoStore()
 const toast = useToast()
+const router = useRouter()
 
 async function enviarPergunta() {
 

@@ -16,7 +16,7 @@ import router from './router'
 import Tooltip from 'primevue/tooltip';
 
 const app = createApp(App)
-const pinia = createPinia()
+export const pinia = createPinia()
 
 app.use(pinia)
 app.use(router)

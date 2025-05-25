@@ -38,7 +38,7 @@ export const useAwnserTwoStore = defineStore("answerTwo", {
 
   actions: {
     async registerAnswer() {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("access_token")
       try {
         const payload = {
           usr_email: this.usr_email,

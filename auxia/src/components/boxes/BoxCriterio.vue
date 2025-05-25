@@ -45,8 +45,8 @@
   </Card>   -->
 
 
-  <Accordion :activeIndex="0" >
-    <AccordionPanel value="painel1">
+  <Accordion  :activeIndex="0" >
+    <AccordionPanel class="!border-transparent" value="painel1">
     <AccordionHeader class="acordionHeader">
       <i
           :class="[

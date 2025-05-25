@@ -93,6 +93,7 @@ import { useToast } from 'primevue/usetoast'
 import InputText from 'primevue/inputtext'
 import type { MenuItem } from 'primevue/menuitem'
 import { RouterLink } from 'vue-router'
+import api from '@/services/api'
 
 
 const userStore = useUserStore()
@@ -230,8 +231,23 @@ watchEffect(() => {
       icon: 'pi pi-sign-out',
       visible: true,
       command: async () => {
-        localStorage.removeItem('token')
-        await router.replace('/login')
+        localStorage.removeItem('access_token')
+        try {
+          const refresh_token = localStorage.getItem('refresh_token')
+          const form = new URLSearchParams()
+          if (refresh_token) {
+            form.append("refresh_token", refresh_token)
+            await api.post('/oauth/revoke', form, )
+            localStorage.removeItem('refresh_token')
+          }
+
+        } catch (error) {
+
+        }finally{
+          userStore.$reset()
+          return await router.replace({name:'login'})
+        }
+
       },
     },
   ]
