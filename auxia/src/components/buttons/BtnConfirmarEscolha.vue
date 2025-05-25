@@ -106,7 +106,7 @@ async function sendAwnsers() {
       life: 3000
     })
     setTimeout(() => {
-      router.push("/")
+      router.push("/conclusao")
     }, 3000)
   } else {
     //Toast de falha

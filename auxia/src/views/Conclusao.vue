@@ -4,7 +4,9 @@ import { ref } from 'vue';
 import { useToast } from 'primevue';
 import MenuUser from '@/components/menu/MenuUser.vue';
 import StepperLine from '@/components/menu/StepperLine.vue';
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 
 </script>
 
