@@ -38,9 +38,9 @@ const preferencia = computed({
 
 const preferenciaResposta = computed(() => {
   if (preferencia.value?.includes('LLM1')) {
-    return awnserOne.ans_llm_awnser;
+    return awnserOne.ans_llm_answer;
   } else if (preferencia.value?.includes('LLM2')) {
-    return awnserTwo.ans_llm_awnser;
+    return awnserTwo.ans_llm_answer;
   } else {
     return '';
   }
@@ -93,8 +93,8 @@ const handleClick = () => {
 
 async function sendAwnsers() {
 
-  const [responseOne, responseTwo] = await Promise.all([awnserOne.registerAwnser(),
-  awnserTwo.registerAwnser()])
+  const [responseOne, responseTwo] = await Promise.all([awnserOne.registerAnswer(),
+  awnserTwo.registerAnswer()])
   if (responseOne && responseTwo) {
     awnserOne.$reset()
     awnserTwo.$reset()

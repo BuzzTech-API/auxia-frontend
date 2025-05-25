@@ -12,13 +12,7 @@ import Button from 'primevue/button';
 
 <style scoped>
 .botao {
-  margin-top: 1rem;
-  margin-left: auto;
-  margin-right: 10px;
-  width: 40px; /* largura e altura iguais para deixar redondo */
-  height: 40px;
-  padding: 0; /* remove excesso */
-  font-size: 1.2rem; /* tamanho do ícone */
+  font-size: 1rem;
   background-color: black;
   color: white;
   border: none;
@@ -26,8 +20,12 @@ import Button from 'primevue/button';
   border-radius: 50%; /* deixa redondo */
   transition: background-color 0.3s;
   display: flex;
-  align-items: center;
   justify-content: center;
+  /*gap: 0.7rem;*/
+  width: 45px;
+  height: 45px;
+  align-items: center;
+  white-space: nowrap;  
 }
 
 .botao:hover {

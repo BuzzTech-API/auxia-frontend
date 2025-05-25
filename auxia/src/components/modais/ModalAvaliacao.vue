@@ -18,22 +18,21 @@ const awnserTwo = useAwnserTwoStore()
 
 const respostaTexto = computed(() => {
   if (props.awnserNumber === 1) {
-    return awnserOne.ans_llm_awnser;
+    return awnserOne.ans_llm_answer;
   } else if (props.awnserNumber === 2) {
-    return awnserTwo.ans_llm_awnser;
+    return awnserTwo.ans_llm_answer;
   }
   return '';
 });
 
 
 const criterios = [
-  { numero: 1, awnserNumber: props.awnserNumber, descricao: 'A resposta atende à intenção do usuário e está diretamente relacionada ao prompt fornecido?', criterioNome: 'Relevância da Resposta' },
+  { numero: 1, awnserNumber: props.awnserNumber, descricao: 'A resposta está diretamente relacionada à intenção do usuário? O modelo compreendeu corretamente as instruções do prompt e respondeu de forma pertinente, sem fugir do tema ou omitir comandos importantes?', criterioNome: 'Aderência ao Prompt' },
   { numero: 2, awnserNumber: props.awnserNumber, descricao: 'A resposta é bem estruturada, gramaticalmente correta e de fácil compreensão?', criterioNome: 'Coerência e Clareza' },
   { numero: 3, awnserNumber: props.awnserNumber, descricao: 'As informações apresentadas são corretas e baseadas em fontes confiáveis?', criterioNome: 'Exatidão e Confiabilidade (Veracidade da Resposta)' },
   { numero: 4, awnserNumber: props.awnserNumber, descricao: 'A resposta fornece explicações ou justificativas adequadas para embasar seu conteúdo?', criterioNome: 'Exposição e Justificativa' },
-  { numero: 5, awnserNumber: props.awnserNumber, descricao: 'O modelo seguiu exatamente as instruções fornecidas no prompt? Se houve alguma falha, qual foi?', criterioNome: 'Seguiu as Instruções?' },
-  { numero: 6, awnserNumber: props.awnserNumber, descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterioNome: 'Idioma da Resposta é o Mesmo da Pergunta' },
-  { numero: 7, awnserNumber: props.awnserNumber, descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterioNome: 'Resposta Agressiva ou Ofensiva?' },
+  { numero: 5, awnserNumber: props.awnserNumber, descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterioNome: 'Idioma da Resposta é o Mesmo da Pergunta' },
+  { numero: 6, awnserNumber: props.awnserNumber, descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterioNome: 'Resposta Agressiva ou Ofensiva?' },
 ];
 
 

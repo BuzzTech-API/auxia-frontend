@@ -64,9 +64,9 @@ watch(respostaSelecionada, (newValue) => {
 
       </div>
       <div class="respostas">
-        <BoxRespostaIA class="boxResposta1" :llm="1" :resposta="awnserOne.ans_llm_awnser" @click="abrirModal(1)" />
+        <BoxRespostaIA class="boxResposta1" :llm="1" :resposta="awnserOne.ans_llm_answer" @click="abrirModal(1)" />
 
-        <BoxRespostaIA class="boxResposta2" :llm="2" :resposta="awnserTwo.ans_llm_awnser" @click="abrirModal(2)" />
+        <BoxRespostaIA class="boxResposta2" :llm="2" :resposta="awnserTwo.ans_llm_answer" @click="abrirModal(2)" />
       </div>
       <div class="confirmar">
         <BtnConfirmarAvaliacao :disabled="!(awnserOne.allStandardIsJustifyAndPontuated() &&

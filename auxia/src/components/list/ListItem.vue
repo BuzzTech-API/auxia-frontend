@@ -1,5 +1,5 @@
 <template>
-  <Toast/>
+  <Toast />
   <div class="list-item">
     <div class="user-info">
       <span>{{ user.name }}</span>
@@ -18,7 +18,7 @@
       <button @click="showModal = true" class="delete-btn" title="Excluir">🗑️</button>
     </div>
 
-    <!-- Modal redefinição de senha (com input + botão copiar) -->
+    <!-- Modal redefinição de senha -->
     <Dialog class="dialog" v-model:visible="showResetModal" header="Nova Senha Gerada" modal>
       <div class="password-row">
         <input type="text" v-model="generatedPassword" readonly class="password-input" />
@@ -55,13 +55,12 @@ import { ref, computed, defineProps, defineEmits } from 'vue'
 import Dialog from 'primevue/dialog'
 import BtnCopiar from '../buttons/BtnCopiar.vue'
 import { useUserStore } from '@/stores/userStore'
-import { useToast, Toast } from 'primevue';
-
+import { useToast, Toast } from 'primevue'
 
 interface User {
   name: string
   email: string
-  type: string
+  type: 'admin' | 'comum'
   status: 'ativo' | 'inativo'
 }
 
@@ -76,28 +75,26 @@ const showModal = ref(false)
 const showResetModal = ref(false)
 const showConfirmResetModal = ref(false)
 
-const generatedPassword = ref('') // Placeholder
+const generatedPassword = ref('') 
 
 const openResetPasswordModal = () => {
-  // Local para gerar uma senha aleatória
   generatedPassword.value = 'NovaSenha#' + Math.floor(Math.random() * 1000)
   showResetModal.value = true
 }
 
-const userStore = useUserStore();
-
-const toast = useToast();
+const userStore = useUserStore()
+const toast = useToast()
 
 const confirmDelete = async () => {
   showModal.value = false
   try {
     await userStore.deleteByEmail(props.user.email)
     toast.add({
-        severity: 'success',
-        summary: 'Sucesso!',
-        detail: 'Usuário excluido com sucesso!',
-        life: 3000
-      })
+      severity: 'success',
+      summary: 'Sucesso!',
+      detail: 'Usuário excluído com sucesso!',
+      life: 3000
+    })
     emit('delete', props.user)
   } catch (error) {
     toast.add({
@@ -116,7 +113,7 @@ const confirmResetPassword = () => {
   showResetModal.value = false
 }
 
-const statusClass = computed(() =>
+const statusClass = computed(() => 
   props.user.status === 'ativo' ? 'status-active' : 'status-inactive'
 )
 </script>
@@ -202,7 +199,7 @@ const statusClass = computed(() =>
   cursor: pointer;
 }
 
-.confirm-btn-passwd{
+.confirm-btn-passwd {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 4px;
@@ -242,7 +239,8 @@ const statusClass = computed(() =>
   font-family: monospace;
   font-size: 0.9rem;
 }
-.reset-passwd{
+
+.reset-passwd {
   background: none;
   border: none;
   outline: none;
@@ -256,5 +254,4 @@ const statusClass = computed(() =>
   outline: none;
   box-shadow: none;
 }
-
 </style>

@@ -34,7 +34,7 @@ const awnserTwo = useAwnserTwoStore();
 
       <div class="btnAndStepper">
 
-        <div>
+        <div class="btnVoltar">
           <BtnVoltar @click="voltar" />
         </div>
         <div class="stepper">
@@ -47,10 +47,10 @@ const awnserTwo = useAwnserTwoStore();
       </div>
   </div>
 
-  <div class="container1">
 
-   
-    
+    <div class="body">   
+
+    <div class="container1">
 
          <div class="cards">
           <div >
@@ -58,36 +58,35 @@ const awnserTwo = useAwnserTwoStore();
           </div>
           
           <div class="card1">
-            <BoxRespostaCriterioFinal :resposta="awnserOne.ans_llm_awnser" :awnser-number="1" :criterios="[
-              { numero: 1, descricao: 'A resposta atende à intenção do usuário e está diretamente relacionada ao prompt fornecido?', criterio: 'Relevância da Resposta', nota: awnserOne.ans_relevancia_resposta_pontuation },
-              { numero: 2, descricao: 'A resposta é bem estruturada, gramaticalmente correta e de fácil compreensão?', criterio: 'Coerência e Clareza', nota: awnserOne.ans_coerencia_clareza_pontuation },
-              { numero: 3, descricao: 'As informações apresentadas são corretas e baseadas em fontes confiáveis?', criterio: 'Exatidão e Confiabilidade (Veracidade da Resposta)', nota: awnserOne.ans_exatidao_confiabilidade_pontuation },
-              { numero: 4, descricao: 'A resposta fornece explicações ou justificativas adequadas para embasar seu conteúdo?', criterio: 'Exposição e Justificativa', nota: awnserOne.ans_exposicao_justificativa_pontuation },
-              { numero: 5, descricao: 'O modelo seguiu exatamente as instruções fornecidas no prompt? Se houve alguma falha, qual foi?', criterio: 'Seguiu as Instruções?', nota: awnserOne.ans_seguiu_instrucoes_pontuation },
-              { numero: 6, descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterio: 'Idioma da Resposta é o Mesmo da Pergunta', nota: awnserOne.ans_idioma_pergunta_mesmo_resposta_pontuation },
-              { numero: 7, descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterio: 'Resposta Agressiva ou Ofensiva?', nota: awnserOne.ans_resposta_agressiva_ofensiva_pontuation }
-            ]" />
+      <BoxRespostaCriterioFinal :resposta="awnserOne.ans_llm_answer" :awnser-number="1" :criterios="[
+  { numero: 1, nota: awnserOne.getPontuationByNumber(1), descricao: 'A resposta está diretamente relacionada à intenção do usuário? O modelo compreendeu corretamente as instruções do prompt e respondeu de forma pertinente, sem fugir do tema ou omitir comandos importantes?', criterioNome: 'Aderência ao Prompt' },
+  { numero: 2,nota: awnserOne.getPontuationByNumber(2), descricao: 'A resposta é bem estruturada, gramaticalmente correta e de fácil compreensão?', criterioNome: 'Coerência e Clareza' },
+  { numero: 3, nota: awnserOne.getPontuationByNumber(3), descricao: 'As informações apresentadas são corretas e baseadas em fontes confiáveis?', criterioNome: 'Exatidão e Confiabilidade (Veracidade da Resposta)' },
+  { numero: 4, nota: awnserOne.getPontuationByNumber(4), descricao: 'A resposta fornece explicações ou justificativas adequadas para embasar seu conteúdo?', criterioNome: 'Exposição e Justificativa' },
+  { numero: 5, nota: awnserOne.getPontuationByNumber(5), descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterioNome: 'Idioma da Resposta é o Mesmo da Pergunta' },
+  { numero: 6, nota: awnserOne.getPontuationByNumber(6), descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterioNome: 'Resposta Agressiva ou Ofensiva?' },
+]" />
 
           </div>
 
           <div class="card2">
-            <BoxRespostaCriterioFinal :resposta="awnserTwo.ans_llm_awnser" :awnser-number="2" :criterios="[
-              { numero: 1, descricao: 'A resposta atende à intenção do usuário e está diretamente relacionada ao prompt fornecido?', criterio: 'Relevância da Resposta', nota: awnserTwo.ans_relevancia_resposta_pontuation },
-              { numero: 2, descricao: 'A resposta é bem estruturada, gramaticalmente correta e de fácil compreensão?', criterio: 'Coerência e Clareza', nota: awnserTwo.ans_coerencia_clareza_pontuation },
-              { numero: 3, descricao: 'As informações apresentadas são corretas e baseadas em fontes confiáveis?', criterio: 'Exatidão e Confiabilidade (Veracidade da Resposta)', nota: awnserTwo.ans_exatidao_confiabilidade_pontuation },
-              { numero: 4, descricao: 'A resposta fornece explicações ou justificativas adequadas para embasar seu conteúdo?', criterio: 'Exposição e Justificativa', nota: awnserTwo.ans_exposicao_justificativa_pontuation },
-              { numero: 5, descricao: 'O modelo seguiu exatamente as instruções fornecidas no prompt? Se houve alguma falha, qual foi?', criterio: 'Seguiu as Instruções?', nota: awnserTwo.ans_seguiu_instrucoes_pontuation },
-              { numero: 6, descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterio: 'Idioma da Resposta é o Mesmo da Pergunta', nota: awnserTwo.ans_idioma_pergunta_mesmo_resposta_pontuation },
-              { numero: 7, descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterio: 'Resposta Agressiva ou Ofensiva?', nota: awnserTwo.ans_resposta_agressiva_ofensiva_pontuation }
-            ]" />
+             <BoxRespostaCriterioFinal :resposta="awnserTwo.ans_llm_answer" :awnser-number="2" :criterios="[
+  { numero: 1, nota: awnserTwo.getPontuationByNumber(1), descricao: 'A resposta está diretamente relacionada à intenção do usuário? O modelo compreendeu corretamente as instruções do prompt e respondeu de forma pertinente, sem fugir do tema ou omitir comandos importantes?', criterioNome: 'Aderência ao Prompt' },
+  { numero: 2, nota: awnserTwo.getPontuationByNumber(2), descricao: 'A resposta é bem estruturada, gramaticalmente correta e de fácil compreensão?', criterioNome: 'Coerência e Clareza' },
+  { numero: 3, nota: awnserTwo.getPontuationByNumber(3), descricao: 'As informações apresentadas são corretas e baseadas em fontes confiáveis?', criterioNome: 'Exatidão e Confiabilidade (Veracidade da Resposta)' },
+  { numero: 4, nota: awnserTwo.getPontuationByNumber(4), descricao: 'A resposta fornece explicações ou justificativas adequadas para embasar seu conteúdo?', criterioNome: 'Exposição e Justificativa' },
+  { numero: 5, nota: awnserTwo.getPontuationByNumber(5), descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterioNome: 'Idioma da Resposta é o Mesmo da Pergunta' },
+  { numero: 6, nota: awnserTwo.getPontuationByNumber(6), descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterioNome: 'Resposta Agressiva ou Ofensiva?' },
+]" />
 
           </div>
+    </div>      
+
     </div>
 
-    
     <div class="container2">
 
-        <div class="prompt1">
+       <div class="prompt1">
           <div >
             <p class="titulo">Prompt</p>
           </div>
@@ -95,7 +94,6 @@ const awnserTwo = useAwnserTwoStore();
           <div class="prompt2">
             <p>{{ awnserOne.ans_prompt }}</p>
           </div>
-
         </div>
 
         <div >
@@ -106,126 +104,14 @@ const awnserTwo = useAwnserTwoStore();
       <BtnConfirmarEscolha />
     </div>
 
+
     </div>
 
+    </div>
 
-  </div>
-    
-   
-
-    
   </div>
 
 </template>
-
-
-
-
-  <!-- <style scoped>
-.container {
-  display: flex;
-  flex-direction: column;
-}
-
-.container1{
-  display: flex;
-  flex-direction: row;
-}
-
-.container2{
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-}
-
-/* .containerRespostas{
-  display: flex;
-  flex-direction: column;
-} */
-
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;  
-  position: relative;
-  width: 100%;
-}
-
-.menuUser{
-  align-items: center;
-  width: 100%;
-
-}
-
-.btnAndStepper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-items: center;
-  width: 100%;
-  position: relative;
-}
-
-
-
-.prompt1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-items: center;
-
-
-}
-
-.prompt2 {
-  display: flex;
-  flex-direction: column;
-  background-color: #d9d9d9;
-  padding: 5px 5px 5px 5px;
-  border-radius: 10px;
-  min-width: 40rem;
-  min-height: 7rem;
-  color: black;
-
-}
-
-.cards {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  gap: 1rem;
-}
-
-.card1{
-min-width: 34rem ;
-border-radius: 10px;
-}
-
-.card2{
-min-width: 34rem ;
-border-radius: 10px;
-}
-
-.rodape {
-  display: flex;
-  flex-direction: row;
-  justify-items: end;
-  align-items: flex-end;
-  padding: 3rem;
-}
-
-.btn-confirmar {
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
-</style>   -->
 
 
  <style scoped>
@@ -252,33 +138,41 @@ border-radius: 10px;
   display: flex;
   gap: 5rem;
   margin-top: 10px;
-  flex: 1; /* garante que o container1 ocupe o espaço disponível */
-  padding: 5rem;
+  flex: 1; 
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.body{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  min-width: 100%;
 }
 
 .cards {
-  flex: 1; /* Ajustado de 2 para 1 para ocupar mesmo espaço que container2 */
-  display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
 .card1, .card2 {
-  width: 100%; /* Ajustado para preencher todo o espaço */
-  border-radius: 8px;
+  width: 100%; 
   margin-top: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .container2 {
-  flex: 1; /* Ajustado para ocupar o mesmo espaço que cards */
+  flex: 1; 
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
+  padding: 1.5rem;
 }
 
 .prompt1 {
   padding: 16px;
   border-radius: 8px;
-  width: 100%; /* Ajustado para ocupar todo o espaço */
+  width: 100%; 
 }
 
 .prompt2 {
@@ -292,8 +186,9 @@ border-radius: 10px;
 
 .rodape {
   margin-top: auto;
-  display: flex; /* ← necessário para usar justify-content */
-  justify-content: flex-end; /* ← coloca o conteúdo no canto direito */
+  display: flex; 
+  justify-content: flex-end; 
+  margin-right: 0.6rem;
 }
 
 .btnAndStepper {
@@ -302,7 +197,7 @@ border-radius: 10px;
   align-items: center;
   justify-content:center;
   margin-top: 1rem;
-  
+
 }
 
 .stepper{
@@ -322,5 +217,8 @@ border-radius: 10px;
   text-align: center;
 }
 
+.btnVoltar{
+  margin-top: 1rem;
+}
 
 </style>

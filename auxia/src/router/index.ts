@@ -10,8 +10,10 @@ const router = createRouter({
   routes: [
     { path: '/', name: 'Chat', component: () => import('../views/ChatView.vue') },
     { path: '/norag', name: 'norag', component: () => import('../views/ChatViewNoRag.vue') },
-    { path: '/resposta', name: 'resposta', component: () => import('../views/RespostasView.vue') },
+    { path: '/resposta', name: 'resposta', component: () => import('../views/RespostasView1.vue') },
+    { path: '/resposta2', name: 'resposta2', component: () => import('../views/RespostasView2.vue') },
     { path: '/avaliacaoFinal', name: 'avaliacaoFinal', component: () => import('../views/AvaliacaoFinal.vue') },
+    { path: '/conclusao', name: 'Conclusão', component: () => import('../views/Conclusao.vue') },
     { path: '/AdminView', name: 'Painel Administrativo', component: () => import('../views/AdminView.vue') },
     { path: '/login', name: 'login', component: () => import('../views/LoginView.vue') },
     { path: '/cadastroUsuario', name: 'CadastroUsuario', component: () => import('../views/CadastroUsuario.vue') },
@@ -68,4 +70,3 @@ router.beforeEach(async (to, from, next) => {
 })
 
 export default router
-
