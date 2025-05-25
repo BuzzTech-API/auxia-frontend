@@ -68,7 +68,7 @@ const awnserTwo = useAwnserTwoStore();
 
     <div class="rodape">
       <BoxAvaliacaoJustificativaFinal />
-      <BtnConfirmarEscolha />
+      <BtnConfirmarEscolha @click="router.push('/')"/>
     </div>
   </div>
 
