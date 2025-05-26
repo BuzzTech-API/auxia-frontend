@@ -71,12 +71,12 @@ const awnserTwo = useAwnserTwoStore();
 
           <div class="card2">
              <BoxRespostaCriterioFinal :resposta="awnserTwo.ans_llm_answer" :awnser-number="2" :criterios="[
-  { numero: 1, nota: awnserOne.getPontuationByNumber(1), descricao: 'A resposta está diretamente relacionada à intenção do usuário? O modelo compreendeu corretamente as instruções do prompt e respondeu de forma pertinente, sem fugir do tema ou omitir comandos importantes?', criterio: 'Aderência ao Prompt' },
-  { numero: 2,nota: awnserOne.getPontuationByNumber(2), descricao: 'A resposta é bem estruturada, gramaticalmente correta e de fácil compreensão?', criterio: 'Coerência e Clareza' },
-  { numero: 3, nota: awnserOne.getPontuationByNumber(3), descricao: 'As informações apresentadas são corretas e baseadas em fontes confiáveis?', criterio: 'Exatidão e Confiabilidade (Veracidade da Resposta)' },
-  { numero: 4, nota: awnserOne.getPontuationByNumber(4), descricao: 'A resposta fornece explicações ou justificativas adequadas para embasar seu conteúdo?', criterio: 'Exposição e Justificativa' },
-  { numero: 5, nota: awnserOne.getPontuationByNumber(5), descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterio: 'Idioma da Resposta é o Mesmo da Pergunta' },
-  { numero: 6, nota: awnserOne.getPontuationByNumber(6), descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterio: 'Resposta Agressiva ou Ofensiva?' },
+  { numero: 1, nota: awnserTwo.getPontuationByNumber(1), descricao: 'A resposta está diretamente relacionada à intenção do usuário? O modelo compreendeu corretamente as instruções do prompt e respondeu de forma pertinente, sem fugir do tema ou omitir comandos importantes?', criterio: 'Aderência ao Prompt' },
+  { numero: 2,nota: awnserTwo.getPontuationByNumber(2), descricao: 'A resposta é bem estruturada, gramaticalmente correta e de fácil compreensão?', criterio: 'Coerência e Clareza' },
+  { numero: 3, nota: awnserTwo.getPontuationByNumber(3), descricao: 'As informações apresentadas são corretas e baseadas em fontes confiáveis?', criterio: 'Exatidão e Confiabilidade (Veracidade da Resposta)' },
+  { numero: 4, nota: awnserTwo.getPontuationByNumber(4), descricao: 'A resposta fornece explicações ou justificativas adequadas para embasar seu conteúdo?', criterio: 'Exposição e Justificativa' },
+  { numero: 5, nota: awnserTwo.getPontuationByNumber(5), descricao: 'A resposta foi gerada no idioma correto, conforme solicitado no prompt?', criterio: 'Idioma da Resposta é o Mesmo da Pergunta' },
+  { numero: 6, nota: awnserTwo.getPontuationByNumber(6), descricao: 'A resposta contém linguagem inadequada, ofensiva, preconceituosa ou potencialmente prejudicial?', criterio: 'Resposta Agressiva ou Ofensiva?' },
 ]" />
 
           </div>

@@ -49,7 +49,7 @@ const isReadyToSubmit = computed(() => awnserTwo.allStandardIsJustifyAndPontuate
             <!-- <BoxResposta :resposta="respostaTexto" /> -->
         </div>
         <div class="resp">
-            <h2 class="title">Resposta 1</h2>
+            <h2 class="title">Resposta 2</h2>
             <div class="avaliacao">
                 <BoxAvaliacao
                 v-for="(criterio, index) in criterios"
