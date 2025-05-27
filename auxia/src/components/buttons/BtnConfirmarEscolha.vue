@@ -10,11 +10,13 @@ import BtnVoltarModal from '@/components/buttons/BtnVoltarModal.vue';
 import Toast from 'primevue/toast';
 import { marked } from 'marked';
 import { useToast } from 'primevue/usetoast';
+import { useUserStore } from '@/stores/userStore';
 
 
 
 const awnserOne = useAwnserOneStore();
 const awnserTwo = useAwnserTwoStore();
+const userStore = useUserStore()
 
 const visible = ref(false);
 const showModal = ref(false)
@@ -25,7 +27,11 @@ const toast = useToast()
 
 function confirmarEscolha() {
   showModal.value = false;
-  sendAwnsers();
+  if (isIncoerente.value === true) {
+
+  }else{
+    sendAwnsers();
+  }
 }
 
 const preferencia = computed({
@@ -59,19 +65,19 @@ watch(awnserOne, () => {
   isEmpty.value = !(awnserOne.ans_prefered_answer.length > 0 &&
     awnserOne.ans_prefered_answer_justify.length > 0 && awnserTwo.ans_prefered_answer.length > 0 &&
     awnserTwo.ans_prefered_answer_justify.length > 0)
-  if (awnserOne.potuantionTotal > awnserTwo.potuantionTotal) {
+  if (awnserOne.totalPontuation > awnserTwo.totalPontuation) {
     if (awnserOne.ans_prefered_answer === "Prefere muito a resposta da LLM1" || awnserOne.ans_prefered_answer === "Prefere a resposta da LLM1") {
       isIncoerente.value = false;
       return;
     }
   }
 
-  if (awnserOne.potuantionTotal === awnserTwo.potuantionTotal) {
+  if (awnserOne.totalPontuation === awnserTwo.totalPontuation) {
     isIncoerente.value = false;
     return;
   }
 
-  if (awnserOne.potuantionTotal < awnserTwo.potuantionTotal) {
+  if (awnserOne.totalPontuation < awnserTwo.totalPontuation) {
     if (awnserOne.ans_prefered_answer === "Prefere muito a resposta da LLM2" || awnserOne.ans_prefered_answer === "Prefere a resposta da LLM2") {
       isIncoerente.value = false;
       return;
@@ -92,6 +98,9 @@ const handleClick = () => {
 
 
 async function sendAwnsers() {
+  await userStore.getMe()
+    awnserTwo.usr_email = userStore.usr_email
+  awnserOne.usr_email = userStore.usr_email
 
   const [responseOne, responseTwo] = await Promise.all([awnserOne.registerAnswer(),
   awnserTwo.registerAnswer()])

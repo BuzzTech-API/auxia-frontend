@@ -20,8 +20,13 @@ const awnserOne = useAwnserOneStore()
 const awnserTwo = useAwnserTwoStore()
 const toast = useToast()
 
+  awnserOne.$reset()
+  awnserTwo.$reset()
+
 async function enviarPergunta() {
 
+  awnserOne.$reset()
+  awnserTwo.$reset()
   carregando.value = true;
 
   try {

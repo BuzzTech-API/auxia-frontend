@@ -21,7 +21,11 @@ const awnserTwo = useAwnserTwoStore()
 const toast = useToast()
 const router = useRouter()
 
+  awnserOne.$reset()
+  awnserTwo.$reset()
 async function enviarPergunta() {
+  awnserOne.$reset()
+  awnserTwo.$reset()
 
   carregando.value = true;
 
