@@ -120,7 +120,7 @@ const awnserOne = useAwnserOneStore()
 const awnserTwo = useAwnserTwoStore()
 
 const isRespondido = computed(() => {
-  return criterioNote.value !== null && justify.value.trim().length > 0;
+  return criterioNote.value !== 0 && justify.value.trim().length > 0;
 });
 
 
