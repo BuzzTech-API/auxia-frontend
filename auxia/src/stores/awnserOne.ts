@@ -21,6 +21,7 @@ export const useAwnserOneStore = defineStore("answerOne", {
     ans_resposta_agressiva_ofensiva_pontuation: 0,
     ans_prefered_answer: "",
     ans_prefered_answer_justify: "",
+    ans_is_rag: false,
   }),
 
   getters: {
@@ -59,6 +60,7 @@ export const useAwnserOneStore = defineStore("answerOne", {
           ans_resposta_agressiva_ofensiva_pontuation: this.ans_resposta_agressiva_ofensiva_pontuation,
           ans_prefered_answer: this.ans_prefered_answer,
           ans_prefered_answer_justify: this.ans_prefered_answer_justify,
+          ans_is_rag: this.ans_is_rag,
         };
 
         const res = await api.post("/answer", payload, {

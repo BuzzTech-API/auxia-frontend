@@ -19,7 +19,7 @@ const voltar = () => {
 };
 
 const irParaPagina = () => {
-  router.push({name : 'Avaliação Final'});
+  return router.push({path : '/avaliacaoFinal'});
 };
 
 const criterios = [

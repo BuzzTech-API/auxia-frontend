@@ -34,9 +34,11 @@ async function enviarPergunta() {
     awnserOne.ans_prompt = prompt.value
     awnserOne.ans_llm_answer = request.data.response1
     awnserOne.ans_llm_model = request.data.modelLlm1
+    awnserOne.ans_is_rag = request.data.is_rag1
     awnserTwo.ans_prompt = prompt.value
     awnserTwo.ans_llm_answer = request.data.response2
     awnserTwo.ans_llm_model = request.data.modelLlm2
+    awnserTwo.ans_is_rag = request.data.is_rag2
 
     toast.add({
       severity: 'success',
