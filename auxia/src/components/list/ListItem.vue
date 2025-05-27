@@ -58,6 +58,7 @@ import { useUserStore } from '@/stores/userStore'
 import { useToast, Toast } from 'primevue'
 
 interface User {
+  id?: number
   name: string
   email: string
   type: 'admin' | 'comum'
@@ -107,8 +108,30 @@ const confirmDelete = async () => {
   }
 }
 
-const confirmResetPassword = () => {
-  emit('edit', props.user)
+const resetUserPassword = async () => {
+  try {
+    await userStore.resetPassword(
+      props.user.email, generatedPassword.value
+    )
+    toast.add({
+      severity: 'success',
+      summary: 'Sucesso!',
+      detail: 'Senha redefinida com sucesso!',
+      life: 3000
+    })
+  } catch (error) {
+    toast.add({
+      severity: 'error',
+      summary: 'Erro!',
+      detail: 'Falha ao redefinir a senha!',
+      life: 3000
+    })
+  }
+}
+
+
+const confirmResetPassword = async () => {
+  await resetUserPassword()
   showConfirmResetModal.value = false
   showResetModal.value = false
 }

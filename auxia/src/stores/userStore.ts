@@ -128,7 +128,22 @@ export const useUserStore = defineStore('user', {
       if (del.status === 200) {
         this.getAll();
       }
+    },
+
+    async resetPassword(userEmail: string, newPassword: string) {
+      const token = localStorage.getItem('access_token');
+      const res = await api.patch(`/user/reset-password`,  // Remova o email da URL
+        { 
+          usr_email: userEmail,  // Email agora vai no body
+          new_password: newPassword 
+        }, 
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+      return res;
     }
+
 
     //Simular resposta da requisição para testar fluxo de atualizar a lista ao deletar usuário
     /*async deleteByEmail(email: string) {
