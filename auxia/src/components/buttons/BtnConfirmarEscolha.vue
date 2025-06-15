@@ -3,7 +3,6 @@ import { computed } from 'vue';
 import { useAwnserOneStore } from '@/stores/awnserOne';
 import { useAwnserTwoStore } from '@/stores/awnserTwo';
 import { ref, watch } from 'vue';
-import router from '@/router';
 import ModalRespostaIncoerente from '../modais/ModalRespostaIncoerente.vue';
 import Dialog from 'primevue/dialog';
 import BtnVoltarModal from '@/components/buttons/BtnVoltarModal.vue';
@@ -11,6 +10,7 @@ import Toast from 'primevue/toast';
 import { marked } from 'marked';
 import { useToast } from 'primevue/usetoast';
 import { useUserStore } from '@/stores/userStore';
+import { useRouter } from 'vue-router';
 
 
 
@@ -18,6 +18,7 @@ const awnserOne = useAwnserOneStore();
 const awnserTwo = useAwnserTwoStore();
 const userStore = useUserStore()
 
+const router = useRouter()
 const visible = ref(false);
 const showModal = ref(false)
 const isIncoerente = ref(false);
@@ -29,7 +30,7 @@ function confirmarEscolha() {
   showModal.value = false;
   if (isIncoerente.value === true) {
 
-  }else{
+  } else {
     sendAwnsers();
   }
 }
@@ -99,12 +100,11 @@ const handleClick = () => {
 
 async function sendAwnsers() {
   await userStore.getMe()
-    awnserTwo.usr_email = userStore.usr_email
+  awnserTwo.usr_email = userStore.usr_email
   awnserOne.usr_email = userStore.usr_email
 
-  const [responseOne, responseTwo] = await Promise.all([awnserOne.registerAnswer(),
-  awnserTwo.registerAnswer()])
-  if (responseOne && responseTwo) {
+  const responseOne = await awnserOne.registerAnswer()
+  if (responseOne) {
     awnserOne.$reset()
     awnserTwo.$reset()
     //Toast de Sucesso

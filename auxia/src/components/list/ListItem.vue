@@ -14,7 +14,6 @@
 
     <div class="actions">
       <button @click="openResetPasswordModal" class="reset-passwd" title="Redefinir senha">🔑</button>
-      <button @click="$emit('edit', user)" class="edit-btn" title="Editar">✏️</button>
       <button @click="showModal = true" class="delete-btn" title="Excluir">🗑️</button>
     </div>
 
@@ -76,7 +75,7 @@ const showModal = ref(false)
 const showResetModal = ref(false)
 const showConfirmResetModal = ref(false)
 
-const generatedPassword = ref('') 
+const generatedPassword = ref('')
 
 const openResetPasswordModal = () => {
   generatedPassword.value = 'NovaSenha#' + Math.floor(Math.random() * 1000)
@@ -136,7 +135,7 @@ const confirmResetPassword = async () => {
   showResetModal.value = false
 }
 
-const statusClass = computed(() => 
+const statusClass = computed(() =>
   props.user.status === 'ativo' ? 'status-active' : 'status-inactive'
 )
 </script>

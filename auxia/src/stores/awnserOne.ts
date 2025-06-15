@@ -1,6 +1,8 @@
 import api from "@/services/api";
 import { defineStore } from "pinia";
+import { useAwnserTwoStore } from "./awnserTwo";
 
+const answerTwoStore = useAwnserTwoStore()
 export const useAwnserOneStore = defineStore("answerOne", {
   state: () => ({
     usr_email: "adm@adm.com",
@@ -42,25 +44,48 @@ export const useAwnserOneStore = defineStore("answerOne", {
       const token = localStorage.getItem("access_token")
       try {
         const payload = {
-          usr_email: this.usr_email,
-          ans_prompt: this.ans_prompt,
-          ans_llm_answer: this.ans_llm_answer,
-          ans_llm_model: this.ans_llm_model,
-          ans_aderencia_prompt_justify: this.ans_aderencia_prompt_justify,
-          ans_aderencia_prompt_pontuation: this.ans_aderencia_prompt_pontuation,
-          ans_coerencia_clareza_justify: this.ans_coerencia_clareza_justify,
-          ans_coerencia_clareza_pontuation: this.ans_coerencia_clareza_pontuation,
-          ans_exatidao_confiabilidade_justify: this.ans_exatidao_confiabilidade_justify,
-          ans_exatidao_confiabilidade_pontuation: this.ans_exatidao_confiabilidade_pontuation,
-          ans_exposicao_justificativa_justify: this.ans_exposicao_justificativa_justify,
-          ans_exposicao_justificativa_pontuation: this.ans_exposicao_justificativa_pontuation,
-          ans_idioma_pergunta_mesmo_resposta_justify: this.ans_idioma_pergunta_mesmo_resposta_justify,
-          ans_idioma_pergunta_mesmo_resposta_pontuation: this.ans_idioma_pergunta_mesmo_resposta_pontuation,
-          ans_resposta_agressiva_ofensiva_justify: this.ans_resposta_agressiva_ofensiva_justify,
-          ans_resposta_agressiva_ofensiva_pontuation: this.ans_resposta_agressiva_ofensiva_pontuation,
-          ans_prefered_answer: this.ans_prefered_answer,
-          ans_prefered_answer_justify: this.ans_prefered_answer_justify,
-          ans_is_rag: this.ans_is_rag,
+          awnserOne: {
+            usr_email: this.usr_email,
+            ans_prompt: this.ans_prompt,
+            ans_llm_answer: this.ans_llm_answer,
+            ans_llm_model: this.ans_llm_model,
+            ans_aderencia_prompt_justify: this.ans_aderencia_prompt_justify,
+            ans_aderencia_prompt_pontuation: this.ans_aderencia_prompt_pontuation,
+            ans_coerencia_clareza_justify: this.ans_coerencia_clareza_justify,
+            ans_coerencia_clareza_pontuation: this.ans_coerencia_clareza_pontuation,
+            ans_exatidao_confiabilidade_justify: this.ans_exatidao_confiabilidade_justify,
+            ans_exatidao_confiabilidade_pontuation: this.ans_exatidao_confiabilidade_pontuation,
+            ans_exposicao_justificativa_justify: this.ans_exposicao_justificativa_justify,
+            ans_exposicao_justificativa_pontuation: this.ans_exposicao_justificativa_pontuation,
+            ans_idioma_pergunta_mesmo_resposta_justify: this.ans_idioma_pergunta_mesmo_resposta_justify,
+            ans_idioma_pergunta_mesmo_resposta_pontuation: this.ans_idioma_pergunta_mesmo_resposta_pontuation,
+            ans_resposta_agressiva_ofensiva_justify: this.ans_resposta_agressiva_ofensiva_justify,
+            ans_resposta_agressiva_ofensiva_pontuation: this.ans_resposta_agressiva_ofensiva_pontuation,
+            ans_prefered_answer: this.ans_prefered_answer,
+            ans_prefered_answer_justify: this.ans_prefered_answer_justify,
+            ans_is_rag: this.ans_is_rag,
+          },
+          awnserTwo: {
+            usr_email: answerTwoStore.usr_email,
+            ans_prompt: answerTwoStore.ans_prompt,
+            ans_llm_answer: answerTwoStore.ans_llm_answer,
+            ans_llm_model: answerTwoStore.ans_llm_model,
+            ans_aderencia_prompt_justify: answerTwoStore.ans_aderencia_prompt_justify,
+            ans_aderencia_prompt_pontuation: answerTwoStore.ans_aderencia_prompt_pontuation,
+            ans_coerencia_clareza_justify: answerTwoStore.ans_coerencia_clareza_justify,
+            ans_coerencia_clareza_pontuation: answerTwoStore.ans_coerencia_clareza_pontuation,
+            ans_exatidao_confiabilidade_justify: answerTwoStore.ans_exatidao_confiabilidade_justify,
+            ans_exatidao_confiabilidade_pontuation: answerTwoStore.ans_exatidao_confiabilidade_pontuation,
+            ans_exposicao_justificativa_justify: answerTwoStore.ans_exposicao_justificativa_justify,
+            ans_exposicao_justificativa_pontuation: answerTwoStore.ans_exposicao_justificativa_pontuation,
+            ans_idioma_pergunta_mesmo_resposta_justify: answerTwoStore.ans_idioma_pergunta_mesmo_resposta_justify,
+            ans_idioma_pergunta_mesmo_resposta_pontuation: answerTwoStore.ans_idioma_pergunta_mesmo_resposta_pontuation,
+            ans_resposta_agressiva_ofensiva_justify: answerTwoStore.ans_resposta_agressiva_ofensiva_justify,
+            ans_resposta_agressiva_ofensiva_pontuation: answerTwoStore.ans_resposta_agressiva_ofensiva_pontuation,
+            ans_prefered_answer: answerTwoStore.ans_prefered_answer,
+            ans_prefered_answer_justify: answerTwoStore.ans_prefered_answer_justify,
+            ans_is_rag: answerTwoStore.ans_is_rag,
+          }
         };
 
         const res = await api.post("/answer", payload, {
